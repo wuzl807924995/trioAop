@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+
+	<context:component-scan base-package="com.zh.cn.trio.cache">
+	</context:component-scan>
+
+
+	<!-- 自动代理 和注解缓存一起使用 -->
+	<aop:aspectj-autoproxy proxy-target-class="true">
+	</aop:aspectj-autoproxy>
+
+
+
+
+	<!-- =============================注解 配置缓存开始========================================= -->
+	<!-- 开启注册缓存配置 -->
+	<bean class="com.zh.cn.trio.cache.aop.TrioCacheAnnotationAspect"></bean>
+	<!-- =============================注解 配置缓存开始========================================= -->
+
+
+	<!-- ======================注解 xml 可二者选其一 也可以多个混合使用================================== -->
+
+
+
+	<!-- =============================xml 配置缓存开始========================================= -->
+	<bean id="xmlBean" class="com.zh.cn.trio.cache.bean.TrioCacheBean">
+		<property name="cacheTime" value="1000">
+		</property>
+	</bean>
+
+	<bean id="xmlCache" class="com.zh.cn.trio.cache.aop.TrioCacheXmlAspect">
+		<property name="trioCacheBean" ref="xmlBean">
+		</property>
+	</bean>
+
+	<aop:config>
+		<aop:aspect ref="xmlCache">
+			<aop:pointcut expression="execution(* test.path.business.*.*_xml(..))"
+				id="auto" />
+			<aop:around method="proxy" pointcut-ref="auto" />
+		</aop:aspect>
+	</aop:config>
+	<!-- =============================xml 配置缓存结束========================================== -->
+
+	<!-- =============================以下为测试工程配置========================================== -->
+
+	<context:property-placeholder location="classpath*:*.properties" />
+
+	<!-- 测试接口 -->
+	<bean class="test.path.business.FaceImpl"></bean>
+
+</beans>
