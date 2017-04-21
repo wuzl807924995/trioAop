@@ -39,14 +39,14 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 		try {
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);
 			Object rs = null;
-			if (aopUtilContext.getAopUtilConfig() != null
-					&& aopUtilContext.getAopUtilConfig().isEnableAround()) {
+			if (aopUtilContext.getAopUtilConfig() != null && aopUtilContext.getAopUtilConfig().isEnableAround()
+					&& aopUtilContext.getResultObject() != null) {
 				rs = aopUtilContext.getResultObject();
 			} else {
 				rs = proceedingJoinPoint.proceed();
+				aopUtilContext.setResultObject(rs);
 			}
 
-			aopUtilContext.setResultObject(rs);
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_AFTER);
 
 			return aopUtilContext.getResultObject();

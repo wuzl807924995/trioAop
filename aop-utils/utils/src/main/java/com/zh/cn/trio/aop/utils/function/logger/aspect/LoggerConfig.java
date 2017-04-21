@@ -27,9 +27,9 @@ public class LoggerConfig extends AopUtilConfig {
 	public String getLoggerFace() {
 		return loggerFace;
 	}
-	
+
 	public void setLoggerFace(String loggerFace) {
 		this.loggerFace = loggerFace;
 	}
-	
+
 }

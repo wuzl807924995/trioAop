@@ -7,6 +7,20 @@ public class LoggerXmlAspect extends AbstractAopAspect<LoggerConfig> {
 
 	private LoggerConfig loggerConfig;
 
+	
+	
+	public LoggerConfig getLoggerConfig() {
+		return loggerConfig;
+	}
+
+
+
+	public void setLoggerConfig(LoggerConfig loggerConfig) {
+		this.loggerConfig = loggerConfig;
+	}
+
+
+
 	@Override
 	public LoggerConfig createBean(AopUtilContext<LoggerConfig> aopUtilContext) {
 		return loggerConfig;

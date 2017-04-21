@@ -11,10 +11,10 @@ public abstract class AbstartAopListener<T extends AopUtilConfig> implements App
 			onEvent(event);
 		}
 	}
-	
+
 	@Override
 	public void onApplicationEvent(AopEvent<T> event) {
-		onEvent(event);
+		onEvent(event, false);
 	}
 
 	public abstract void onEvent(AopEvent<T> event);

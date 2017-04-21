@@ -11,6 +11,16 @@ public class CacheConfig extends AopUtilConfig {
 
 	private String cacheModel;
 
+	private String cacheFace;
+
+	public String getCacheFace() {
+		return cacheFace;
+	}
+
+	public void setCacheFace(String cacheFace) {
+		this.cacheFace = cacheFace;
+	}
+
 	public int getCacheTime() {
 		return cacheTime;
 	}

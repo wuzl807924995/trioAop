@@ -37,4 +37,14 @@ public class SpelFromat implements Format {
 		return object;
 	}
 
+	@Override
+	public String formatContextToString(AopUtilContext<? extends AopUtilConfig> aopContext) {
+		Object object = formatContext(aopContext);
+		if (object == null) {
+			return null;
+		} else {
+			return object.toString();
+		}
+	}
+
 }

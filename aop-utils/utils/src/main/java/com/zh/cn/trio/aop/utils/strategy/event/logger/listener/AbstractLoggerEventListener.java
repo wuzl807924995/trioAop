@@ -15,10 +15,11 @@ public abstract class AbstractLoggerEventListener extends AbstartAopListener<Log
 		Map<String, String> config = loggerConfig.get(event.getTargetTime());
 		Format format = event.getAopUtilContext().getFormat();
 		Object object = format.formatContext(event.getAopUtilContext());
-		LoggerFace loggerFace=event.getApplicationContext().getBean(LoggerFace.class, event.getAopUtilContext().getAopUtilConfig().getLoggerFace());
+		LoggerFace loggerFace = event.getApplicationContext().getBean(LoggerFace.class,
+				event.getAopUtilContext().getAopUtilConfig().getLoggerFace());
 
 		for (String level : config.keySet()) {
-			logger(loggerFace,level, config.get(level), object, event.getAopUtilContext().getThrowable());
+			logger(loggerFace, level, config.get(level), object, event.getAopUtilContext().getThrowable());
 		}
 	}
 
