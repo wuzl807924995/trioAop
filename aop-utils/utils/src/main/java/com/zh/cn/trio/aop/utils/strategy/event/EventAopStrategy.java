@@ -5,21 +5,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
-public class EventAopStrategy implements AopStrategy,ApplicationContextAware{
+public class EventAopStrategy implements AopStrategy, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
-	
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext=applicationContext;
+		this.applicationContext = applicationContext;
 	}
+
 	@Override
-	public <T> void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
-		ApplicationEvent event=new AopEvent<T>(this.applicationContext, aopUtilContext, targetTime);
+	public <T extends AopUtilConfig> void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
+		ApplicationEvent event = new AopEvent<T>(this.applicationContext, aopUtilContext, targetTime);
 		this.applicationContext.publishEvent(event);
 	}
 

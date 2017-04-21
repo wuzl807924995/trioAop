@@ -1,14 +1,17 @@
-package com.zh.cn.trio.aop.utils.context;
+package com.zh.cn.trio.aop.utils.aspect;
 
 import java.lang.reflect.Method;
 
-import com.zh.cn.trio.aop.utils.bean.AopUtilBean;
-import com.zh.cn.trio.aop.utils.format.Format;
+import org.aspectj.lang.ProceedingJoinPoint;
+
+import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
-public class AopUtilContext<T> {
+public class AopUtilContext<T extends AopUtilConfig> {
 
-	private AopUtilBean<T> aopUtilBean;
+	private T aopUtilConfig;
+
+	private ProceedingJoinPoint proceedingJoinPoint;
 	/**
 	 * 返回值
 	 */
@@ -30,12 +33,14 @@ public class AopUtilContext<T> {
 
 	private Format format;
 
-	public AopUtilBean<T> getAopUtilBean() {
-		return aopUtilBean;
+	private Throwable throwable;
+
+	public T getAopUtilConfig() {
+		return aopUtilConfig;
 	}
 
-	public void setAopUtilBean(AopUtilBean<T> aopUtilBean) {
-		this.aopUtilBean = aopUtilBean;
+	public void setAopUtilConfig(T aopUtilConfig) {
+		this.aopUtilConfig = aopUtilConfig;
 	}
 
 	public Object getResultObject() {
@@ -44,6 +49,14 @@ public class AopUtilContext<T> {
 
 	public void setResultObject(Object resultObject) {
 		this.resultObject = resultObject;
+	}
+
+	public Throwable getThrowable() {
+		return throwable;
+	}
+
+	public void setThrowable(Throwable throwable) {
+		this.throwable = throwable;
 	}
 
 	public Object[] getTargetArgs() {
@@ -94,8 +107,16 @@ public class AopUtilContext<T> {
 		this.format = format;
 	}
 
+	public ProceedingJoinPoint getProceedingJoinPoint() {
+		return proceedingJoinPoint;
+	}
+
+	public void setProceedingJoinPoint(ProceedingJoinPoint proceedingJoinPoint) {
+		this.proceedingJoinPoint = proceedingJoinPoint;
+	}
+
 	public void operAop(String targetTime) {
-		boolean enable = this.getAopUtilBean().checkEnable(targetTime);
+		boolean enable = this.aopUtilConfig.checkEnable(targetTime);
 		if (enable) {
 			this.getAopStrategy().operAop(this, targetTime);
 		}

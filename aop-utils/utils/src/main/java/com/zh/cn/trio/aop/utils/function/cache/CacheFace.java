@@ -1,11 +1,12 @@
-package com.zh.cn.trio.aop.utils.strategy.function.cache;
+package com.zh.cn.trio.aop.utils.function.cache;
 
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
-import com.zh.cn.trio.aop.utils.strategy.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
 
 public interface CacheFace {
 	/**
 	 * 是否含有缓存信息
+	 * 
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
@@ -13,13 +14,15 @@ public interface CacheFace {
 
 	/**
 	 * 读取缓存信息
+	 * 
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
 	Object getCache(AopUtilContext<CacheConfig> aopUtilContext);
 
 	/**
-	 *	写入缓存信息
+	 * 写入缓存信息
+	 * 
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
@@ -27,6 +30,7 @@ public interface CacheFace {
 
 	/**
 	 * 删除缓存信息
+	 * 
 	 * @param cacheStrategyInfo
 	 */
 	boolean removeCache(AopUtilContext<CacheConfig> aopUtilContext);

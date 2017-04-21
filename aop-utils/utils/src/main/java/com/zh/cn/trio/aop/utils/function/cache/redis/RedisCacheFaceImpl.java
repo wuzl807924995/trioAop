@@ -1,10 +1,10 @@
-package com.zh.cn.trio.aop.utils.strategy.function.cache.redis;
+package com.zh.cn.trio.aop.utils.function.cache.redis;
 
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
-import com.zh.cn.trio.aop.utils.strategy.function.cache.CacheFace;
-import com.zh.cn.trio.aop.utils.strategy.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
+import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
 
-public class CacheFaceImpl implements CacheFace{
+public class RedisCacheFaceImpl implements CacheFace {
 
 	@Override
 	public boolean hasCache(AopUtilContext<CacheConfig> aopUtilContext) {

@@ -1,8 +1,8 @@
-package com.zh.cn.trio.aop.utils.bean;
+package com.zh.cn.trio.aop.utils.aspect;
 
 import org.springframework.util.StringUtils;
 
-public class AopUtilBean<T> {
+public abstract class AopUtilConfig {
 
 	public static final String TIME_BEFORE = "BEFORE";
 	public static final String TIME_AFTER = "AFTER";
@@ -17,8 +17,25 @@ public class AopUtilBean<T> {
 	private String formatString;
 
 	private String[] targetTimes;
+	private boolean async;
 
-	private T config;
+	public boolean isAsync() {
+		return async;
+	}
+
+	public void setAsync(boolean async) {
+		this.async = async;
+	}
+
+	private boolean enableAround;
+
+	public boolean isEnableAround() {
+		return enableAround;
+	}
+
+	public void setEnableAround(boolean enableAround) {
+		this.enableAround = enableAround;
+	}
 
 	public String getStrategy() {
 		return strategy;
@@ -50,14 +67,6 @@ public class AopUtilBean<T> {
 
 	public void setTargetTimes(String[] targetTimes) {
 		this.targetTimes = targetTimes;
-	}
-
-	public T getConfig() {
-		return config;
-	}
-
-	public void setConfig(T config) {
-		this.config = config;
 	}
 
 	public boolean checkEnable(String time) {

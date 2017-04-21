@@ -1,10 +1,7 @@
-package com.zh.cn.trio.aop.utils.strategy.function.cache.model;
+package com.zh.cn.trio.aop.utils.function.cache.model;
 
-
-import org.aspectj.lang.ProceedingJoinPoint;
-
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
-import com.zh.cn.trio.aop.utils.strategy.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
 
 /**
  * 缓存读写模式的接口
@@ -12,7 +9,7 @@ import com.zh.cn.trio.aop.utils.strategy.function.cache.aspect.CacheConfig;
  * @author wuzl
  *
  */
-public interface CacheModel  {
+public interface CacheModel {
 
 	/**
 	 * 只读 如果有缓存则读缓存 没有缓存则执行目标方法 但是不缓存本次结果
@@ -34,15 +31,7 @@ public interface CacheModel  {
 	 */
 	public static final String REMOVE = "REMOVE";
 
-	/**
-	 * 根据模板执行缓存策略
-	 * 
-	 * @param proceedingJoinPoint
-	 * @param cacheStrategy
-	 * @param cacheStrategyInfo
-	 * @return
-	 * @throws Throwable
-	 */
-	Object exec(ProceedingJoinPoint proceedingJoinPoint,AopUtilContext<CacheConfig> aopUtilContext) throws Throwable;
+	Object execBefore(AopUtilContext<CacheConfig> aopUtilContext) throws Throwable;
 
+	Object execAfter(AopUtilContext<CacheConfig> aopUtilContext) throws Throwable;
 }

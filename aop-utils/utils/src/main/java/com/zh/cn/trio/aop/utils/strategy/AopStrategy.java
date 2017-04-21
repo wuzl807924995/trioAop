@@ -1,8 +1,9 @@
 package com.zh.cn.trio.aop.utils.strategy;
 
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 
 public interface AopStrategy {
 
-	<T> void operAop(AopUtilContext<T> aopUtilContext, String targetTime);
+	<T extends AopUtilConfig> void operAop(AopUtilContext<T> aopUtilContext, String targetTime);
 }
