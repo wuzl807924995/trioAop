@@ -10,9 +10,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.zh.cn.trio.aop.utils.base.format.Format;
-import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
-
 public abstract class AbstractAopAspect<T extends AopUtilConfig> implements ApplicationContextAware {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -21,6 +18,10 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
 	}
 
 	/**
@@ -39,7 +40,7 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 		try {
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);
 			Object rs = null;
-			if (aopUtilContext.getAopUtilConfig() != null && aopUtilContext.getAopUtilConfig().isEnableAround()
+			if (aopUtilContext.getAopUtilConfig() != null && aopUtilContext.getAopUtilConfig().isAround()
 					&& aopUtilContext.getResultObject() != null) {
 				rs = aopUtilContext.getResultObject();
 			} else {
@@ -75,14 +76,10 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 			Method method = getTargetMethod(proceedingJoinPoint);
 			Object[] args = proceedingJoinPoint.getArgs();
 			T aopUtilConfig = createBean(aopUtilContext);
-			AopStrategy aopStrategy = applicationContext.getBean(aopUtilConfig.getStrategy(), AopStrategy.class);
-			Format format = applicationContext.getBean(aopUtilConfig.getFormatModel(), Format.class);
 
 			aopUtilContext.setTargetMethod(method);
 			aopUtilContext.setTargetArgs(args);
 			aopUtilContext.setAopUtilConfig(aopUtilConfig);
-			aopUtilContext.setAopStrategy(aopStrategy);
-			aopUtilContext.setFormat(format);
 			aopUtilContext.setProceedingJoinPoint(proceedingJoinPoint);
 
 			return aopUtilContext;

@@ -3,6 +3,7 @@ package com.zh.cn.trio.aop.utils.function.logger.aspect;
 import java.util.Map;
 
 import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 
 public class LoggerConfig extends AopUtilConfig {
 
@@ -11,7 +12,7 @@ public class LoggerConfig extends AopUtilConfig {
 	public static final String LEVEL_DEBUG = "DEBUG";
 	public static final String LEVEL_WARN = "WARN";
 
-	private String loggerFace;
+	private LoggerFace loggerFace;
 
 	/** time->levels->name */
 	private Map<String, Map<String, String>> config;
@@ -24,11 +25,11 @@ public class LoggerConfig extends AopUtilConfig {
 		this.config = config;
 	}
 
-	public String getLoggerFace() {
+	public LoggerFace getLoggerFace() {
 		return loggerFace;
 	}
 
-	public void setLoggerFace(String loggerFace) {
+	public void setLoggerFace(LoggerFace loggerFace) {
 		this.loggerFace = loggerFace;
 	}
 

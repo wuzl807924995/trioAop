@@ -13,8 +13,7 @@ public class CacheEventListener extends AbstartAopListener<CacheConfig> {
 		try {
 			if (AopUtilConfig.TIME_BEFORE.equals(event.getTargetTime())
 					|| AopUtilConfig.TIME_AFTER.equals(event.getTargetTime())) {
-				CacheModel cacheModel = event.getApplicationContext().getBean(CacheModel.class,
-						event.getAopUtilContext().getAopUtilConfig().getCacheModel());
+				CacheModel cacheModel = event.getAopUtilContext().getAopUtilConfig().getCacheModel();
 				if (AopUtilConfig.TIME_BEFORE.equals(event.getTargetTime())) {
 					cacheModel.execBefore(event.getAopUtilContext());
 				} else {

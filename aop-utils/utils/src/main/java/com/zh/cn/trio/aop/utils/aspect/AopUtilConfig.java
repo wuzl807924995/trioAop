@@ -2,6 +2,9 @@ package com.zh.cn.trio.aop.utils.aspect;
 
 import org.springframework.util.StringUtils;
 
+import com.zh.cn.trio.aop.utils.base.format.Format;
+import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
+
 public abstract class AopUtilConfig {
 
 	public static final String TIME_BEFORE = "BEFORE";
@@ -10,64 +13,17 @@ public abstract class AopUtilConfig {
 	public static final String TIME_AROUND_STARAT = "AROUND_SATART";
 	public static final String TIME_AROUND_END = "AROUND_END";
 
-	private String strategy;
-
-	private String formatModel;
-
-	private String formatString;
-
-	private String[] targetTimes;
 	private boolean async;
 
-	public boolean isAsync() {
-		return async;
-	}
+	private boolean around;
 
-	public void setAsync(boolean async) {
-		this.async = async;
-	}
+	private String[] targetTimes;
 
-	private boolean enableAround;
+	private AopStrategy aopStrategy;
 
-	public boolean isEnableAround() {
-		return enableAround;
-	}
+	private Format format;
 
-	public void setEnableAround(boolean enableAround) {
-		this.enableAround = enableAround;
-	}
-
-	public String getStrategy() {
-		return strategy;
-	}
-
-	public void setStrategy(String strategy) {
-		this.strategy = strategy;
-	}
-
-	public String getFormatModel() {
-		return formatModel;
-	}
-
-	public void setFormatModel(String formatModel) {
-		this.formatModel = formatModel;
-	}
-
-	public String getFormatString() {
-		return formatString;
-	}
-
-	public void setFormatString(String formatString) {
-		this.formatString = formatString;
-	}
-
-	public String[] getTargetTimes() {
-		return targetTimes;
-	}
-
-	public void setTargetTimes(String[] targetTimes) {
-		this.targetTimes = targetTimes;
-	}
+	private String formatString;
 
 	public boolean checkEnable(String time) {
 		if (targetTimes == null || StringUtils.isEmpty(time)) {
@@ -79,5 +35,53 @@ public abstract class AopUtilConfig {
 			}
 		}
 		return false;
+	}
+
+	public boolean isAsync() {
+		return async;
+	}
+
+	public void setAsync(boolean async) {
+		this.async = async;
+	}
+
+	public boolean isAround() {
+		return around;
+	}
+
+	public void setAround(boolean around) {
+		this.around = around;
+	}
+
+	public String[] getTargetTimes() {
+		return targetTimes;
+	}
+
+	public void setTargetTimes(String[] targetTimes) {
+		this.targetTimes = targetTimes;
+	}
+
+	public AopStrategy getAopStrategy() {
+		return aopStrategy;
+	}
+
+	public void setAopStrategy(AopStrategy aopStrategy) {
+		this.aopStrategy = aopStrategy;
+	}
+
+	public Format getFormat() {
+		return format;
+	}
+
+	public void setFormat(Format format) {
+		this.format = format;
+	}
+
+	public String getFormatString() {
+		return formatString;
+	}
+
+	public void setFormatString(String formatString) {
+		this.formatString = formatString;
 	}
 }

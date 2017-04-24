@@ -4,9 +4,6 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import com.zh.cn.trio.aop.utils.base.format.Format;
-import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
-
 public class AopUtilContext<T extends AopUtilConfig> {
 
 	private T aopUtilConfig;
@@ -28,10 +25,6 @@ public class AopUtilContext<T extends AopUtilConfig> {
 	private long aroundTimeStarat;
 
 	private long aroundTimeEnd;
-
-	private AopStrategy aopStrategy;
-
-	private Format format;
 
 	private Throwable throwable;
 
@@ -91,22 +84,6 @@ public class AopUtilContext<T extends AopUtilConfig> {
 		this.aroundTimeEnd = aroundTimeEnd;
 	}
 
-	public AopStrategy getAopStrategy() {
-		return aopStrategy;
-	}
-
-	public void setAopStrategy(AopStrategy aopStrategy) {
-		this.aopStrategy = aopStrategy;
-	}
-
-	public Format getFormat() {
-		return format;
-	}
-
-	public void setFormat(Format format) {
-		this.format = format;
-	}
-
 	public ProceedingJoinPoint getProceedingJoinPoint() {
 		return proceedingJoinPoint;
 	}
@@ -118,7 +95,7 @@ public class AopUtilContext<T extends AopUtilConfig> {
 	public void operAop(String targetTime) {
 		boolean enable = this.aopUtilConfig.checkEnable(targetTime);
 		if (enable) {
-			this.getAopStrategy().operAop(this, targetTime);
+			this.getAopUtilConfig().getAopStrategy().operAop(this, targetTime);
 		}
 	}
 }

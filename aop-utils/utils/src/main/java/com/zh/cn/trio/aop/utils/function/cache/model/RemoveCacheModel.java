@@ -11,8 +11,7 @@ public class RemoveCacheModel extends AbstractCacheModel {
 
 	@Override
 	public void execBefore(AopUtilContext<CacheConfig> aopUtilContext) throws Throwable {
-		CacheFace cacheFace = getApplicationContext().getBean(CacheFace.class,
-				aopUtilContext.getAopUtilConfig().getCacheFace());
+		CacheFace cacheFace =aopUtilContext.getAopUtilConfig().getCacheFace();
 		cacheFace.removeCache(aopUtilContext);
 	}
 }

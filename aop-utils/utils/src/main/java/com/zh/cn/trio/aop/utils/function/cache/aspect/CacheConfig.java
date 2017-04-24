@@ -1,25 +1,20 @@
 package com.zh.cn.trio.aop.utils.function.cache.aspect;
 
 import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
+import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 
 public class CacheConfig extends AopUtilConfig {
 
-	/**
-	 * 缓存时间 根据不同的策略可以设置自己的默认时间
-	 */
+	public CacheConfig() {
+		setAround(true);
+	}
+
 	private int cacheTime;
 
-	private String cacheModel;
+	private CacheModel cacheModel;
 
-	private String cacheFace;
-
-	public String getCacheFace() {
-		return cacheFace;
-	}
-
-	public void setCacheFace(String cacheFace) {
-		this.cacheFace = cacheFace;
-	}
+	private CacheFace cacheFace;
 
 	public int getCacheTime() {
 		return cacheTime;
@@ -29,15 +24,20 @@ public class CacheConfig extends AopUtilConfig {
 		this.cacheTime = cacheTime;
 	}
 
-	public String getCacheModel() {
+	public CacheModel getCacheModel() {
 		return cacheModel;
 	}
 
-	public void setCacheModel(String cacheModel) {
+	public void setCacheModel(CacheModel cacheModel) {
 		this.cacheModel = cacheModel;
 	}
 
-	public CacheConfig() {
-		setEnableAround(true);
+	public CacheFace getCacheFace() {
+		return cacheFace;
 	}
+
+	public void setCacheFace(CacheFace cacheFace) {
+		this.cacheFace = cacheFace;
+	}
+
 }
