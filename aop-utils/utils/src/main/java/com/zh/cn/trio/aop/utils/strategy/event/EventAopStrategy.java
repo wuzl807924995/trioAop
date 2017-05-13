@@ -9,7 +9,7 @@ import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
-public class EventAopStrategy implements AopStrategy, ApplicationContextAware {
+public class EventAopStrategy<T extends AopUtilConfig<T>> implements AopStrategy<T>, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
@@ -19,7 +19,7 @@ public class EventAopStrategy implements AopStrategy, ApplicationContextAware {
 	}
 
 	@Override
-	public <T extends AopUtilConfig> void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
+	public void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
 		ApplicationEvent event = new AopEvent<T>(this.applicationContext, aopUtilContext, targetTime);
 		this.applicationContext.publishEvent(event);
 	}

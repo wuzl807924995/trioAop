@@ -6,7 +6,7 @@ import org.springframework.context.event.ApplicationContextEvent;
 import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 
-public class AopEvent<T extends AopUtilConfig> extends ApplicationContextEvent {
+public class AopEvent<T extends AopUtilConfig<T>> extends ApplicationContextEvent {
 
 	private static final long serialVersionUID = -2277036805614513916L;
 

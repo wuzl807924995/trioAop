@@ -5,7 +5,7 @@ import java.util.Map;
 import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 
-public class LoggerConfig extends AopUtilConfig {
+public class LoggerConfig extends AopUtilConfig<LoggerConfig> {
 
 	public static final String LEVEL_INFO = "INFO";
 	public static final String LEVEL_ERROR = "ERROR";

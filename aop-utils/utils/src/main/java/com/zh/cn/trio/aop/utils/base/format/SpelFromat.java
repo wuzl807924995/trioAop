@@ -12,12 +12,7 @@ import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 public class SpelFromat implements Format {
 
 	@Override
-	public Object formatContext(AopUtilContext<? extends AopUtilConfig> aopContext) {
-		Object[] args = aopContext.getTargetArgs();
-		if (args == null) {
-			// 沒有参数 直接返回
-			return aopContext.getAopUtilConfig().getFormatString();
-		}
+	public Object formatContext(AopUtilContext<? extends AopUtilConfig<?>> aopContext) {
 		String formatString = aopContext.getAopUtilConfig().getFormatString();
 
 		ExpressionParser parser = new SpelExpressionParser();
@@ -27,18 +22,14 @@ public class SpelFromat implements Format {
 		EvaluationContext context = new StandardEvaluationContext();
 
 		// 方法结果
-		context.setVariable("rs", aopContext.getResultObject());
-		// 方法参数
-		for (int i = 0; i < args.length; i++) {
-			context.setVariable("args" + i, args[i]);
-		}
+		context.setVariable("aopContext", aopContext);
 		// 解析
 		Object object = expression.getValue(context);
 		return object;
 	}
 
 	@Override
-	public String formatContextToString(AopUtilContext<? extends AopUtilConfig> aopContext) {
+	public String formatContextToString(AopUtilContext<? extends AopUtilConfig<?>> aopContext) {
 		Object object = formatContext(aopContext);
 		if (object == null) {
 			return null;

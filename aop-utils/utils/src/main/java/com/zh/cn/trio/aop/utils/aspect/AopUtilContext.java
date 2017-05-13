@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-public class AopUtilContext<T extends AopUtilConfig> {
+public class AopUtilContext<T extends AopUtilConfig<T>> {
 
 	private T aopUtilConfig;
 

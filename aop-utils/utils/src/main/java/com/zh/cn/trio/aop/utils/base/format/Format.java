@@ -5,7 +5,7 @@ import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 
 public interface Format {
 
-	Object formatContext(AopUtilContext<? extends AopUtilConfig> aopContext);
+	Object formatContext(AopUtilContext<? extends AopUtilConfig<?>> aopContext);
 
-	String formatContextToString(AopUtilContext<? extends AopUtilConfig> aopContext);
+	String formatContextToString(AopUtilContext<? extends AopUtilConfig<?>> aopContext);
 }

@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
-public abstract class AopUtilConfig {
+public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 
 	public static final String TIME_BEFORE = "BEFORE";
 	public static final String TIME_AFTER = "AFTER";
@@ -19,7 +19,7 @@ public abstract class AopUtilConfig {
 
 	private String[] targetTimes;
 
-	private AopStrategy aopStrategy;
+	private AopStrategy<T> aopStrategy;
 
 	private Format format;
 
@@ -61,11 +61,11 @@ public abstract class AopUtilConfig {
 		this.targetTimes = targetTimes;
 	}
 
-	public AopStrategy getAopStrategy() {
+	public AopStrategy<T> getAopStrategy() {
 		return aopStrategy;
 	}
 
-	public void setAopStrategy(AopStrategy aopStrategy) {
+	public void setAopStrategy(AopStrategy<T> aopStrategy) {
 		this.aopStrategy = aopStrategy;
 	}
 

@@ -99,6 +99,11 @@
 
 	<repositories>
 		<repository>
+			<id>alimaven</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+		
+		<repository>
 			<id>wuzlmaven</id>
 			<url>http://www.wuzl.online/nexus/content/groups/public/</url>
 			<snapshots>

@@ -4,7 +4,7 @@ import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 
-public class CacheConfig extends AopUtilConfig {
+public class CacheConfig extends AopUtilConfig<CacheConfig> {
 
 	public CacheConfig() {
 		setAround(true);

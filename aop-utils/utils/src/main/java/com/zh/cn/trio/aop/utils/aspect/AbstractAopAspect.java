@@ -9,11 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.Ordered;
 
-public abstract class AbstractAopAspect<T extends AopUtilConfig> implements ApplicationContextAware {
+public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements ApplicationContextAware, Ordered {
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected ApplicationContext applicationContext;
+
+	protected int order;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -22,6 +26,15 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	/**
@@ -40,8 +53,7 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 		try {
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);
 			Object rs = null;
-			if (aopUtilContext.getAopUtilConfig() != null && aopUtilContext.getAopUtilConfig().isAround()
-					&& aopUtilContext.getResultObject() != null) {
+			if (runAround(aopUtilContext)) {
 				rs = aopUtilContext.getResultObject();
 			} else {
 				rs = proceedingJoinPoint.proceed();
@@ -58,6 +70,11 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig> implements Appl
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_ERROR);
 			throw e;
 		}
+	}
+
+	protected boolean runAround(AopUtilContext<?> aopUtilContext) {
+		return aopUtilContext != null && aopUtilContext.getAopUtilConfig() != null
+				&& aopUtilContext.getAopUtilConfig().isAround();
 	}
 
 	public void warpErrorOperAop(AopUtilContext<T> aopUtilContext, String targetTime) {
