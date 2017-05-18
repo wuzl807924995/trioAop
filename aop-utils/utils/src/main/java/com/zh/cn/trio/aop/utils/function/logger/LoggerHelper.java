@@ -2,6 +2,8 @@ package com.zh.cn.trio.aop.utils.function.logger;
 
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
 import com.zh.cn.trio.aop.utils.function.logger.aspect.LoggerConfig;
 
@@ -13,8 +15,14 @@ public abstract class LoggerHelper {
 		String info = aopUtilContext.getAopUtilConfig().getFormat().formatContextToString(aopUtilContext);
 		LoggerFace loggerFace = aopUtilContext.getAopUtilConfig().getLoggerFace();
 
+		
+		
 		for (String level : config.keySet()) {
-			loggerFace.logger(level, config.get(level), info, aopUtilContext.getThrowable());
+			String name = config.get(level);
+			if (StringUtils.isEmpty(name)) {
+				name=aopUtilContext.getProceedingJoinPoint().getTarget().getClass().getName();
+			}
+			loggerFace.logger(level,name, info, aopUtilContext.getThrowable());
 		}
 	}
 }

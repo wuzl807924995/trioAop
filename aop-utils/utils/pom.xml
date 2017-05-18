@@ -95,6 +95,10 @@
 			<id>wuzlmaven</id>
 			<url>http://www.wuzl.online/nexus/content/repositories/releases/</url>
 		</repository>
+		<snapshotRepository>
+			<id>wuzlmaven</id>
+			<url>http://www.wuzl.online/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 	<repositories>
@@ -102,7 +106,7 @@
 			<id>alimaven</id>
 			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 		</repository>
-		
+
 		<repository>
 			<id>wuzlmaven</id>
 			<url>http://www.wuzl.online/nexus/content/groups/public/</url>
