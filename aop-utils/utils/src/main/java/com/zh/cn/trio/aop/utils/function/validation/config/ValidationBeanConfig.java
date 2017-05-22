@@ -8,6 +8,8 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig> {
 	private String[] validationExpression;
 
 	private String[] validationErrorMsg;
+	
+	private String validationErrorResult;
 
 	private ValidationFace validationFace;
 
@@ -25,6 +27,14 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig> {
 
 	public void setValidationErrorMsg(String[] validationErrorMsg) {
 		this.validationErrorMsg = validationErrorMsg;
+	}
+
+	public String getValidationErrorResult() {
+		return validationErrorResult;
+	}
+
+	public void setValidationErrorResult(String validationErrorResult) {
+		this.validationErrorResult = validationErrorResult;
 	}
 
 	public ValidationFace getValidationFace() {

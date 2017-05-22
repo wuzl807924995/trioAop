@@ -11,4 +11,10 @@ public class FormatConvertUtils {
 		formatBean.setTarget(aopUtilContext.getTarget());
 		return formatBean;
 	}
+	
+	public static FormatBean convertContext(AopUtilContext<?> aopUtilContext,Object... extension) {
+		FormatBean formatBean = convertContext(aopUtilContext);
+		formatBean.setExtension(extension);
+		return formatBean;
+	}
 }

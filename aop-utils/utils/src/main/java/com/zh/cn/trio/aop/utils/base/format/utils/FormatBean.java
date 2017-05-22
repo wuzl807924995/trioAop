@@ -7,6 +7,8 @@ public class FormatBean {
 	private Object target;
 	private Method targetMethod;
 	private Object[] targetArgs;
+	
+	private Object[] extension;
 
 	public Object getTarget() {
 		return target;
@@ -30,6 +32,14 @@ public class FormatBean {
 
 	public void setTargetArgs(Object[] targetArgs) {
 		this.targetArgs = targetArgs;
+	}
+
+	public Object[] getExtension() {
+		return extension;
+	}
+
+	public void setExtension(Object[] extension) {
+		this.extension = extension;
 	}
 
 }
