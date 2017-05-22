@@ -1,11 +1,9 @@
 package com.zh.cn.trio.aop.utils.base.format;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.base.format.utils.FormatBean;
 
 public interface Format {
 
-	Object formatContext(AopUtilContext<? extends AopUtilConfig<?>> aopContext);
+	<T> T format(FormatBean formatBean, String expressionString);
 
-	String formatContextToString(AopUtilContext<? extends AopUtilConfig<?>> aopContext);
 }

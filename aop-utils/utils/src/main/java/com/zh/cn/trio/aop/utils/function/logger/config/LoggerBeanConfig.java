@@ -1,11 +1,11 @@
-package com.zh.cn.trio.aop.utils.function.logger.aspect;
+package com.zh.cn.trio.aop.utils.function.logger.config;
 
 import java.util.Map;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 
-public class LoggerConfig extends AopUtilConfig<LoggerConfig> {
+public class LoggerBeanConfig extends AopUtilConfig<LoggerBeanConfig> {
 
 	public static final String LEVEL_INFO = "INFO";
 	public static final String LEVEL_ERROR = "ERROR";

@@ -1,4 +1,4 @@
-package com.zh.cn.trio.aop.utils.aspect;
+package com.zh.cn.trio.aop.utils.context;
 
 import org.springframework.util.StringUtils;
 
@@ -14,8 +14,6 @@ public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 	public static final String TIME_AROUND_END = "AROUND_END";
 
 	private boolean async;
-
-	private boolean around;
 
 	private String[] targetTimes;
 
@@ -43,14 +41,6 @@ public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 
 	public void setAsync(boolean async) {
 		this.async = async;
-	}
-
-	public boolean isAround() {
-		return around;
-	}
-
-	public void setAround(boolean around) {
-		this.around = around;
 	}
 
 	public String[] getTargetTimes() {

@@ -6,36 +6,39 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.base.format.utils.FormatBean;
 
 public class SpelFromat implements Format {
 
-	@Override
-	public Object formatContext(AopUtilContext<? extends AopUtilConfig<?>> aopContext) {
-		String formatString = aopContext.getAopUtilConfig().getFormatString();
-
+	public Expression createExpression(String expressionString) {
 		ExpressionParser parser = new SpelExpressionParser();
 		// 解析表达式
-		Expression expression = parser.parseExpression(formatString);
-		// 构造上下文
-		EvaluationContext context = new StandardEvaluationContext();
-
-		// 方法结果
-		context.setVariable("aopContext", aopContext);
-		// 解析
-		Object object = expression.getValue(context);
-		return object;
+		Expression expression = parser.parseExpression(expressionString);
+		return expression;
 	}
 
+	public EvaluationContext createContext(Object formatBean) {
+		EvaluationContext context = new StandardEvaluationContext();
+		// 方法结果
+		context.setVariable("root", formatBean);
+		return context;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T getVal(Expression expression, EvaluationContext context) {
+		Object object = expression.getValue(context);
+		return (T) object;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public String formatContextToString(AopUtilContext<? extends AopUtilConfig<?>> aopContext) {
-		Object object = formatContext(aopContext);
-		if (object == null) {
-			return null;
-		} else {
-			return object.toString();
-		}
+	public <T> T format(FormatBean formatBean, String expressionString) {
+		// 解析表达式
+		Expression expression = createExpression(expressionString);
+		// 构造上下文
+		EvaluationContext context = createContext(formatBean);
+		// 解析
+		return (T) getVal(expression, context);
 	}
 
 }

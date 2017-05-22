@@ -1,7 +1,7 @@
 package com.zh.cn.trio.aop.utils.function.cache.model;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
-import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilContext;
+import com.zh.cn.trio.aop.utils.function.cache.config.CacheBeanConfig;
 
 /**
  * 缓存读写模式的接口
@@ -31,7 +31,7 @@ public interface CacheModel {
 	 */
 	public static final String REMOVE = "REMOVE";
 
-	void execBefore(AopUtilContext<CacheConfig> aopUtilContext) throws Throwable;
+	void execBefore(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
 
-	void execAfter(AopUtilContext<CacheConfig> aopUtilContext) throws Throwable;
+	void execAfter(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
 }

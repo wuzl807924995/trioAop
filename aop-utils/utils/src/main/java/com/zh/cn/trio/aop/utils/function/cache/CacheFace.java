@@ -1,7 +1,7 @@
 package com.zh.cn.trio.aop.utils.function.cache;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
-import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilContext;
+import com.zh.cn.trio.aop.utils.function.cache.config.CacheBeanConfig;
 
 public interface CacheFace {
 	/**
@@ -10,7 +10,7 @@ public interface CacheFace {
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
-	boolean hasCache(AopUtilContext<CacheConfig> aopUtilContext);
+	boolean hasCache(AopUtilContext<CacheBeanConfig> aopUtilContext);
 
 	/**
 	 * 读取缓存信息
@@ -18,7 +18,7 @@ public interface CacheFace {
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
-	Object getCache(AopUtilContext<CacheConfig> aopUtilContext);
+	Object getCache(AopUtilContext<CacheBeanConfig> aopUtilContext);
 
 	/**
 	 * 写入缓存信息
@@ -26,12 +26,12 @@ public interface CacheFace {
 	 * @param cacheStrategyInfo
 	 * @return
 	 */
-	boolean setCache(AopUtilContext<CacheConfig> aopUtilContext);
+	boolean setCache(AopUtilContext<CacheBeanConfig> aopUtilContext);
 
 	/**
 	 * 删除缓存信息
 	 * 
 	 * @param cacheStrategyInfo
 	 */
-	boolean removeCache(AopUtilContext<CacheConfig> aopUtilContext);
+	boolean removeCache(AopUtilContext<CacheBeanConfig> aopUtilContext);
 }

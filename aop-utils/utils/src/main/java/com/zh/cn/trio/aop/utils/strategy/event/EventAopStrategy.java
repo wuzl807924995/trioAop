@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
 public class EventAopStrategy<T extends AopUtilConfig<T>> implements AopStrategy<T>, ApplicationContextAware {

@@ -1,14 +1,10 @@
-package com.zh.cn.trio.aop.utils.function.cache.aspect;
+package com.zh.cn.trio.aop.utils.function.cache.config;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 
-public class CacheConfig extends AopUtilConfig<CacheConfig> {
-
-	public CacheConfig() {
-		setAround(true);
-	}
+public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 
 	private int cacheTime;
 

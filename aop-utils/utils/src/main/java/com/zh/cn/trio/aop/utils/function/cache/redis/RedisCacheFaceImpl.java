@@ -1,10 +1,11 @@
 package com.zh.cn.trio.aop.utils.function.cache.redis;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilContext;
+import com.zh.cn.trio.aop.utils.base.format.utils.FormatConvertUtils;
 import com.zh.cn.trio.aop.utils.base.redis.operaction.RedisStringOperation;
 import com.zh.cn.trio.aop.utils.base.serialization.Serialization;
+import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
-import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.function.cache.config.CacheBeanConfig;
 
 public class RedisCacheFaceImpl implements CacheFace {
 
@@ -29,29 +30,33 @@ public class RedisCacheFaceImpl implements CacheFace {
 	}
 
 	@Override
-	public boolean hasCache(AopUtilContext<CacheConfig> aopUtilContext) {
+	public boolean hasCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 
-		String string = aopUtilContext.getAopUtilConfig().getFormat().formatContextToString(aopUtilContext);
+		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
+				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getFormatString());
 		return redisStringOperation.exists(string);
 	}
 
 	@Override
-	public Object getCache(AopUtilContext<CacheConfig> aopUtilContext) {
-		String string = aopUtilContext.getAopUtilConfig().getFormat().formatContextToString(aopUtilContext);
+	public Object getCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
+		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
+				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getFormatString());
 		return redisStringOperation.get(string);
 	}
 
 	@Override
-	public boolean setCache(AopUtilContext<CacheConfig> aopUtilContext) {
-		String string = aopUtilContext.getAopUtilConfig().getFormat().formatContextToString(aopUtilContext);
+	public boolean setCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
+		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
+				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getFormatString());
 		String val = serialization.serialization(aopUtilContext.getResultObject());
 		redisStringOperation.expireat(string, val, aopUtilContext.getAopUtilConfig().getCacheTime());
 		return true;
 	}
 
 	@Override
-	public boolean removeCache(AopUtilContext<CacheConfig> aopUtilContext) {
-		String string = aopUtilContext.getAopUtilConfig().getFormat().formatContextToString(aopUtilContext);
+	public boolean removeCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
+		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
+				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getFormatString());
 		redisStringOperation.del(string);
 		return true;
 	}

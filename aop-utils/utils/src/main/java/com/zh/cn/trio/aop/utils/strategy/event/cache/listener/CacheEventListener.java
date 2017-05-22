@@ -1,15 +1,15 @@
 package com.zh.cn.trio.aop.utils.strategy.event.cache.listener;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.function.cache.aspect.CacheConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.function.cache.config.CacheBeanConfig;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 import com.zh.cn.trio.aop.utils.strategy.event.AbstartAopListener;
 import com.zh.cn.trio.aop.utils.strategy.event.AopEvent;
 
-public class CacheEventListener extends AbstartAopListener<CacheConfig> {
+public class CacheEventListener extends AbstartAopListener<CacheBeanConfig> {
 
 	@Override
-	public void onEvent(AopEvent<CacheConfig> event) {
+	public void onEvent(AopEvent<CacheBeanConfig> event) {
 		try {
 			if (AopUtilConfig.TIME_BEFORE.equals(event.getTargetTime())
 					|| AopUtilConfig.TIME_AFTER.equals(event.getTargetTime())) {

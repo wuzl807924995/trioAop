@@ -2,7 +2,7 @@ package com.zh.cn.trio.aop.utils.strategy.event;
 
 import org.springframework.context.ApplicationListener;
 
-import com.zh.cn.trio.aop.utils.aspect.AopUtilConfig;
+import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 
 public abstract class AbstartAopListener<T extends AopUtilConfig<T>> implements ApplicationListener<AopEvent<T>> {
 
