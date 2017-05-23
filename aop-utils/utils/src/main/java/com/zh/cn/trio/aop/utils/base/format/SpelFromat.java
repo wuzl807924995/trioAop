@@ -1,44 +1,69 @@
 package com.zh.cn.trio.aop.utils.base.format;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-
-import com.zh.cn.trio.aop.utils.base.format.utils.FormatBean;
+import org.springframework.util.CollectionUtils;
 
 public class SpelFromat implements Format {
 
 	public Expression createExpression(String expressionString) {
 		ExpressionParser parser = new SpelExpressionParser();
-		// 解析表达式
 		Expression expression = parser.parseExpression(expressionString);
 		return expression;
 	}
 
-	public EvaluationContext createContext(Object formatBean) {
-		EvaluationContext context = new StandardEvaluationContext();
-		// 方法结果
-		context.setVariable("root", formatBean);
+	public EvaluationContext createContext(Object formatBean, Map<String, Object> map) {
+		EvaluationContext context = new StandardEvaluationContext(formatBean);
+		if (!CollectionUtils.isEmpty(map)) {
+			for (String key : map.keySet()) {
+				context.setVariable(key, map.get(key));
+			}
+		}
 		return context;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> T getVal(Expression expression, EvaluationContext context) {
-		Object object = expression.getValue(context);
-		return (T) object;
+	@Override
+	public <T> T format(Object formatBean, String expressionString) {
+		return format(formatBean, expressionString, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T format(FormatBean formatBean, String expressionString) {
+	public <T> T format(Object formatBean, String expressionString, Map<String, Object> map) {
 		// 解析表达式
 		Expression expression = createExpression(expressionString);
 		// 构造上下文
-		EvaluationContext context = createContext(formatBean);
+		EvaluationContext context = createContext(formatBean, map);
 		// 解析
-		return (T) getVal(expression, context);
+		T value = (T) expression.getValue(context);
+		return value;
 	}
+
+
+	@Override
+	public <T> T format(Object formatBean, ApplicationContext applicationContext, String expressionString) {
+		return format(formatBean, applicationContext, expressionString, null);
+	}
+
+	@Override
+	public <T> T format(Object formatBean, ApplicationContext applicationContext, String expressionString,
+			Map<String, Object> map) {
+		if (CollectionUtils.isEmpty(map)) {
+			map=new HashMap<>();
+		}
+		map.put("context", applicationContext);
+		return format(formatBean, expressionString, map);
+		
+	}
+
+	
+	
 
 }

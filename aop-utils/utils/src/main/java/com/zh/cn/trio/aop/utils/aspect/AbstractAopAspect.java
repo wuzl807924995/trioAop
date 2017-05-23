@@ -12,12 +12,24 @@ import org.springframework.core.Ordered;
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 
+/**
+ * 抽象拦截aop接口
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements ApplicationContextAware, Ordered {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * 容器
+	 */
 	protected ApplicationContext applicationContext;
 
+	/**
+	 * 拦截排序
+	 */
 	protected int order;
 
 	@Override
@@ -38,34 +50,50 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 		this.order = order;
 	}
 
-	public Object proxy(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		AopUtilContext<T> aopUtilContext = createContext(proceedingJoinPoint);
+	/**
+	 * 拦截aop的模板方法
+	 * @param proceedingJoinPoint
+	 * @return
+	 * @throws Throwable
+	 */
+	public final Object proxy(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		AopUtilContext<T> aopUtilContext = createContext(proceedingJoinPoint);//初始化配置
 		try {
-			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);
+			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);//前置通知
 			Object rs = null;
-			if (hasRs(aopUtilContext)) {
+			if (hasRs(aopUtilContext)) {//如果结果已经设置了，则直接读取结果
 				rs = aopUtilContext.getResultObject();
-			} else {
+			} else {//没有结果则执行目标方法
 				rs = proceedingJoinPoint.proceed(aopUtilContext.getTargetArgs());
 				aopUtilContext.setResultObject(rs);
 			}
 
-			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_AFTER);
+			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_AFTER);//后置通知
 
 			return aopUtilContext.getResultObject();
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			aopUtilContext.setThrowable(e);
-			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_ERROR);
+			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_ERROR);//异常通知
 			throw e;
 		}
 	}
 
+	/**
+	 * 拦截目标的结果值是否已经设置过
+	 * @param aopUtilContext
+	 * @return
+	 */
 	protected boolean hasRs(AopUtilContext<?> aopUtilContext) {
 		return aopUtilContext != null && aopUtilContext.isSetResult();
 	}
 
+	/**
+	 * 触发通知
+	 * @param aopUtilContext
+	 * @param targetTime
+	 */
 	public void warpErrorOperAop(AopUtilContext<T> aopUtilContext, String targetTime) {
 		try {
 			aopUtilContext.operAop(targetTime);
@@ -74,8 +102,18 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 		}
 	}
 
+	/**
+	 * 钩子方法  读取配置
+	 * @param aopUtilContext
+	 * @return
+	 */
 	public abstract T createBean(AopUtilContext<T> aopUtilContext);
 
+	/**
+	 * 创建配置
+	 * @param proceedingJoinPoint
+	 * @return
+	 */
 	public AopUtilContext<T> createContext(ProceedingJoinPoint proceedingJoinPoint) {
 		try {
 			AopUtilContext<T> aopUtilContext = new AopUtilContext<T>();

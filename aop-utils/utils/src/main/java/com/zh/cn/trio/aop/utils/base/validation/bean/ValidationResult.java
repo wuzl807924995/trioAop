@@ -1,4 +1,4 @@
-package com.zh.cn.trio.aop.utils.function.validation.bean;
+package com.zh.cn.trio.aop.utils.base.validation.bean;
 
 public class ValidationResult {
 

@@ -3,7 +3,7 @@ package com.zh.cn.trio.aop.utils.function.validation.config;
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.validation.ValidationFace;
 
-public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig> {
+public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 
 	private String[] validationExpression;
 
@@ -44,5 +44,6 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig> {
 	public void setValidationFace(ValidationFace validationFace) {
 		this.validationFace = validationFace;
 	}
+
 
 }
