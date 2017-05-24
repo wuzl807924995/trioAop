@@ -6,5 +6,71 @@
   <packaging>pom</packaging>
   <modules>
   	<module>utils</module>
+  	<module>logger</module>
   </modules>
+  
+  	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<skip>true</skip>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+	<distributionManagement>
+		<repository>
+			<id>wuzlmaven</id>
+			<url>http://www.wuzl.online/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>wuzlmaven</id>
+			<url>http://www.wuzl.online/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+
+		<repository>
+			<id>wuzlmaven</id>
+			<url>http://www.wuzl.online/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+  
 </project>
