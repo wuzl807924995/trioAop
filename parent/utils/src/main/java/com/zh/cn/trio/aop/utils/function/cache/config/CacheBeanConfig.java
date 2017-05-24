@@ -4,14 +4,31 @@ import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 
+/**
+ * 
+ * 缓存配置
+ *
+ */
 public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 
+	/**
+	 * 缓存时间
+	 */
 	private int cacheTime;
 
+	/**
+	 * 缓存模式
+	 */
 	private CacheModel cacheModel;
 
+	/**
+	 * 缓存实现接口
+	 */
 	private CacheFace cacheFace;
 	
+	/**
+	 * 缓存建 模板字符
+	 */
 	private String keyModelString;
 
 	public int getCacheTime() {

@@ -35,11 +35,15 @@ public abstract class ErrorReturnStrategy<T extends AopUtilConfig<T>> extends Ab
 	@Override
 	public void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
 		ValidationResult validationResult = this.validationData(aopUtilContext);
+		//验证失败
 		if (!validationResult.isSuccess()) {
+			//失败消息
 			Object msg=this.getErrorMsgFormatString(aopUtilContext);
 			FormatBean formatBean = FormatConvertUtils.convertContext(aopUtilContext,msg);
 			Format format = aopUtilContext.getAopUtilConfig().getFormat();
+			//解析失败消息
 			Object object = format.format(formatBean,applicationContext,this.getErrorMsgFormatString(aopUtilContext));
+			//返回失败
 			aopUtilContext.setResultObject(object);
 		}		
 	}

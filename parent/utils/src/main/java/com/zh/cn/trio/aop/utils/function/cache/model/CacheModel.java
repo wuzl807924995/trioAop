@@ -31,7 +31,17 @@ public interface CacheModel {
 	 */
 	public static final String REMOVE = "REMOVE";
 
+	/**
+	 * 前置执行
+	 * @param aopUtilContext
+	 * @throws Throwable
+	 */
 	void execBefore(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
 
+	/**
+	 * 后置执行
+	 * @param aopUtilContext
+	 * @throws Throwable
+	 */
 	void execAfter(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
 }

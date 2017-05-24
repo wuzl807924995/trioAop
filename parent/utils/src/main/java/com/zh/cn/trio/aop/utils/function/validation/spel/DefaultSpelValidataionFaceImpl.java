@@ -23,17 +23,19 @@ public class DefaultSpelValidataionFaceImpl implements ValidationFace,Applicatio
 	@Override
 	public ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
 		ValidationResult validationResult = new ValidationResult();
+		//填充模式
 		Format format = aopUtilContext.getAopUtilConfig().getFormat();
 		FormatBean formatBean = FormatConvertUtils.convertContext(aopUtilContext);
 		String[] expression = aopUtilContext.getAopUtilConfig().getValidationExpression();
 		String[] errorExpression = aopUtilContext.getAopUtilConfig().getValidationErrorMsg();
-		
 		boolean[] validationRs = new boolean[expression.length];
 		String[] validationError = new String[expression.length];
+		//遍历验证
 		for (int i = 0; i < expression.length; i++) {
 			boolean b = format.format(formatBean,applicationContext, expression[i]);
 			validationRs[i] = b;
 			if (!b) {
+				//失败加载错误消息
 				validationError[i] = format.format(formatBean,applicationContext, errorExpression[i]);
 				validationResult.setSuccess(false);
 			}

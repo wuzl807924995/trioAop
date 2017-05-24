@@ -17,6 +17,9 @@ public abstract class AbstractCacheModel implements CacheModel {
 
 	}
 
+	/**
+	 * 读缓存结果
+	 */
 	protected void getCacheResult(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 		CacheFace cacheFace =aopUtilContext.getAopUtilConfig().getCacheFace();
 		boolean hasCache = cacheFace.hasCache(aopUtilContext);
