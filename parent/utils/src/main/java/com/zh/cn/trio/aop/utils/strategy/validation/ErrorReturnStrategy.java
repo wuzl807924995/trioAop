@@ -11,6 +11,11 @@ import com.zh.cn.trio.aop.utils.base.validation.bean.ValidationResult;
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 
+/**
+ * 错误返回策略<br/>
+ *	在ValidationResult.isSuccess()=false的时候将会返回解析到的返回信息
+ * @param <T>
+ */
 public abstract class ErrorReturnStrategy<T extends AopUtilConfig<T>> extends AbstartValidationResultStrategy<T> implements ApplicationContextAware{
 
 	public abstract String getErrorMsgFormatString(AopUtilContext<T> aopUtilContext);

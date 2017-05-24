@@ -6,6 +6,11 @@ import org.slf4j.LoggerFactory;
 import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 import com.zh.cn.trio.aop.utils.function.logger.config.LoggerBeanConfig;
 
+/**
+ * 	
+ * slf4j 实现的日志
+ *
+ */
 public class Slf4jLoggerFaceImpl implements LoggerFace {
 
 	@Override

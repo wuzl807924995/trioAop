@@ -11,6 +11,8 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 	private CacheModel cacheModel;
 
 	private CacheFace cacheFace;
+	
+	private String keyModelString;
 
 	public int getCacheTime() {
 		return cacheTime;
@@ -34,6 +36,14 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 
 	public void setCacheFace(CacheFace cacheFace) {
 		this.cacheFace = cacheFace;
+	}
+
+	public String getKeyModelString() {
+		return keyModelString;
+	}
+
+	public void setKeyModelString(String keyModelString) {
+		this.keyModelString = keyModelString;
 	}
 
 }

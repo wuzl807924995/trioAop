@@ -5,22 +5,54 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 
+/**
+ * 上下文
+ */
 public class AopUtilContext<T extends AopUtilConfig<T>> {
 
+	/**
+	 * 泛型子类配置
+	 */
 	private T aopUtilConfig;
 
+	/**
+	 * 环绕开启时间
+	 */
 	private long aroundTimeStarat;
 
+	/**
+	 * 环绕结束时间
+	 */
 	private long aroundTimeEnd;
 
+	/**
+	 * 目标方法抛出的异常
+	 */
 	private Throwable throwable;
 
+	/**
+	 * 是否设置过目标结果
+	 */
 	private boolean setResult;
 
+	/**
+	 * 目标方法参数类类型
+	 */
 	private Class<?>[] targetArgsClass;
 
+	/**
+	 * 目标方法返回值类型
+	 */
+	private Class<?> returnClass;
+	
+	/**
+	 * aop切面
+	 */
 	private MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint;
 
+	/**
+	 * 目标实体
+	 */
 	private Object target;
 	/**
 	 * 拦截方法
@@ -109,7 +141,6 @@ public class AopUtilContext<T extends AopUtilConfig<T>> {
 
 	public Method getTargetMethod() {
 		if (targetMethod == null) {
-			// targetMethod=
 			MethodSignature signature = (MethodSignature) methodInvocationProceedingJoinPoint.getSignature();
 			targetMethod = signature.getMethod();
 		}
@@ -129,6 +160,17 @@ public class AopUtilContext<T extends AopUtilConfig<T>> {
 
 	public void setTargetArgsClass(Class<?>[] targetArgsClass) {
 		this.targetArgsClass = targetArgsClass;
+	}
+	
+	public Class<?> getReturnClass() {
+		if (returnClass==null) {
+			returnClass=getTargetMethod().getReturnType();
+		}
+		return returnClass;
+	}
+	
+	public void setReturnClass(Class<?> returnClass) {
+		this.returnClass = returnClass;
 	}
 
 	public boolean isSetResult() {

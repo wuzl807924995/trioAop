@@ -14,7 +14,6 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 
 /**
  * 抽象拦截aop接口
- * @author Administrator
  *
  * @param <T>
  */
@@ -60,6 +59,7 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 		AopUtilContext<T> aopUtilContext = createContext(proceedingJoinPoint);//初始化配置
 		try {
 			warpErrorOperAop(aopUtilContext, AopUtilConfig.TIME_BEFORE);//前置通知
+			
 			Object rs = null;
 			if (hasRs(aopUtilContext)) {//如果结果已经设置了，则直接读取结果
 				rs = aopUtilContext.getResultObject();
