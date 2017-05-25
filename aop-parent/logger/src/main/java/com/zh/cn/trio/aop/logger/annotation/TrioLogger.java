@@ -21,15 +21,6 @@ public @interface TrioLogger {
 	 */
 	 String targetTime() default LoggerBeanConfig.TIME_ERROR;
 	 
-	 /**
-	  * 触发等级 默认info
-	  */
-	 String targetLevel() default LoggerBeanConfig.LEVEL_INFO;
-	 
-	 /**
-	  * 日志名称 默认目标主日志
-	  */
-	 String targetName() default "";
 	 
 	 /**
 	  * 执行策略
@@ -40,6 +31,16 @@ public @interface TrioLogger {
 	  * 填充模式
 	  */
 	 String format() default "";
+	 
+	 /**
+	  * 触发等级 默认info
+	  */
+	 String targetLevel() default LoggerBeanConfig.LEVEL_INFO;
+	 
+	 /**
+	  * 日志名称 默认目标主日志
+	  */
+	 String targetName() default "";
 	 
 	 /**
 	  * 日志接口

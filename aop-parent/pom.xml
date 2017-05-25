@@ -7,6 +7,7 @@
   <modules>
   	<module>utils</module>
   	<module>logger</module>
+  	<module>cache</module>
   </modules>
   
   	<build>

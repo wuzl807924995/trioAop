@@ -6,21 +6,17 @@ import java.util.Map;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import com.zh.cn.trio.aop.logger.annotation.TrioLogger;
-import com.zh.cn.trio.aop.utils.aspect.AbstractAopBeanAspect;
+import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationAspect;
 import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 import com.zh.cn.trio.aop.utils.function.logger.config.LoggerBeanConfig;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
 @Aspect
-public class TrioLoggerAnnotationAspect extends AbstractAopBeanAspect<LoggerBeanConfig> {
+public class TrioLoggerAnnotationAspect extends AbstractAnnotationAspect<LoggerBeanConfig,TrioLogger> {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private AopStrategy<LoggerBeanConfig> defaultAopStrategy;
 
@@ -53,24 +49,25 @@ public class TrioLoggerAnnotationAspect extends AbstractAopBeanAspect<LoggerBean
 	}
 
 	@Around("@annotation(com.zh.cn.trio.aop.logger.annotation.TrioLogger)")
+	@Override
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		try {
-			TrioLogger trioLogger = super.getAnnotation(proceedingJoinPoint, TrioLogger.class);
-			LoggerBeanConfig loggerBeanConfig = this.crateConfig(trioLogger);
-			super.setConfigBean(loggerBeanConfig);
-		} catch (Exception e) {
-			logger.error("TrioLoggerAnnotationAspect init config error", e);
-		}
-		return super.proxy(proceedingJoinPoint);
+		return super.proxyAnnotation(proceedingJoinPoint);
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	protected LoggerBeanConfig crateConfig(TrioLogger trioLogger) {
+	@Override
+	public Class<TrioLogger> getAnnotationClass() {
+		return TrioLogger.class;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public LoggerBeanConfig crateConfig(TrioLogger trioLogger) {
 		LoggerBeanConfig loggerBeanConfig = new LoggerBeanConfig();
-		AopStrategy<LoggerBeanConfig> aopStrategy = this.getBean(trioLogger.aopStrategy(), AopStrategy.class,
-				defaultAopStrategy);
-		Format format = this.getBean(trioLogger.format(), Format.class, defaultFormat);
-		LoggerFace loggerFace = this.getBean(trioLogger.loggerFace(), LoggerFace.class, defaultLoggerFace);
+		
+		AopStrategy<LoggerBeanConfig> aopStrategy = getBean(trioLogger.aopStrategy(), AopStrategy.class,defaultAopStrategy);
+		Format format = getBean(trioLogger.format(), Format.class, defaultFormat);
+		LoggerFace loggerFace = getBean(trioLogger.loggerFace(), LoggerFace.class, defaultLoggerFace);
+		
 		Map<String, Map<String, String>> config = new HashMap<String, Map<String, String>>();
 		Map<String, String> levelName = new HashMap<String, String>();
 		levelName.put(trioLogger.targetLevel(), trioLogger.targetName());
@@ -86,16 +83,4 @@ public class TrioLoggerAnnotationAspect extends AbstractAopBeanAspect<LoggerBean
 		return loggerBeanConfig;
 	}
 
-	private <T> T getBean(String beanName, Class<T> tcls, T defaultT) {
-		if (StringUtils.isEmpty(beanName)) {
-			return defaultT;
-		} else {
-			try {
-				return getApplicationContext().getBean(beanName, tcls);
-			} catch (Exception e) {
-				logger.error("getBean has exception beanName:" + beanName + " class:" + tcls, e);
-				return defaultT;
-			}
-		}
-	}
 }

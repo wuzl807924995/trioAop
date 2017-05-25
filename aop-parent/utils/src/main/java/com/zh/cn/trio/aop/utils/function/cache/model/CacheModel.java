@@ -30,18 +30,22 @@ public interface CacheModel {
 	 * 删除 如果有缓存则执行再删除
 	 */
 	public static final String REMOVE = "REMOVE";
+	
+	String getModelName();
 
 	/**
 	 * 前置执行
+	 * 
 	 * @param aopUtilContext
 	 * @throws Throwable
 	 */
-	void execBefore(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
+	void execBefore(AopUtilContext<CacheBeanConfig> aopUtilContext);
 
 	/**
 	 * 后置执行
+	 * 
 	 * @param aopUtilContext
 	 * @throws Throwable
 	 */
-	void execAfter(AopUtilContext<CacheBeanConfig> aopUtilContext) throws Throwable;
+	void execAfter(AopUtilContext<CacheBeanConfig> aopUtilContext);
 }

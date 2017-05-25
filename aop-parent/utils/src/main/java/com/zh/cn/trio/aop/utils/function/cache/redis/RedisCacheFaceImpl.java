@@ -31,23 +31,27 @@ public class RedisCacheFaceImpl implements CacheFace {
 
 	@Override
 	public boolean hasCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
-
 		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
-				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getKeyModelString());
+				FormatConvertUtils.convertContext(aopUtilContext),
+				aopUtilContext.getAopUtilConfig().getKeyModelString());
 		return redisStringOperation.exists(string);
 	}
 
 	@Override
 	public Object getCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
-				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getKeyModelString());
-		return redisStringOperation.get(string);
+				FormatConvertUtils.convertContext(aopUtilContext),
+				aopUtilContext.getAopUtilConfig().getKeyModelString());
+		String val = redisStringOperation.get(string);
+		Object object = serialization.forSerialization(val, aopUtilContext.getReturnClass());
+		return object;
 	}
 
 	@Override
 	public boolean setCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
-				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getKeyModelString());
+				FormatConvertUtils.convertContext(aopUtilContext),
+				aopUtilContext.getAopUtilConfig().getKeyModelString());
 		String val = serialization.serialization(aopUtilContext.getResultObject());
 		redisStringOperation.expireat(string, val, aopUtilContext.getAopUtilConfig().getCacheTime());
 		return true;
@@ -56,7 +60,8 @@ public class RedisCacheFaceImpl implements CacheFace {
 	@Override
 	public boolean removeCache(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 		String string = aopUtilContext.getAopUtilConfig().getFormat().format(
-				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getKeyModelString());
+				FormatConvertUtils.convertContext(aopUtilContext),
+				aopUtilContext.getAopUtilConfig().getKeyModelString());
 		redisStringOperation.del(string);
 		return true;
 	}

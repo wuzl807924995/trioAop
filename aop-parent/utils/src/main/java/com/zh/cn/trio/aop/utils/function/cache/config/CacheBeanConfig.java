@@ -63,4 +63,6 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 		this.keyModelString = keyModelString;
 	}
 
+	
+	
 }
