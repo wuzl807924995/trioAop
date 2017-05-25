@@ -2,12 +2,15 @@ package com.zh.cn.trio.aop.utils.base.format.utils;
 
 import java.lang.reflect.Method;
 
+import org.springframework.context.ApplicationContext;
+
 public class FormatBean {
 
 	private Object target;
 	private Method targetMethod;
 	private Object[] targetArgs;
-	
+
+	private ApplicationContext applicationContext;
 	private Object[] extension;
 
 	public Object getTarget() {
@@ -42,4 +45,11 @@ public class FormatBean {
 		this.extension = extension;
 	}
 
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 }

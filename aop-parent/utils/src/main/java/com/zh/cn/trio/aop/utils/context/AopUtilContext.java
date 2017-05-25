@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
+import org.springframework.context.ApplicationContext;
 
 /**
  * 上下文
@@ -44,7 +45,9 @@ public class AopUtilContext<T extends AopUtilConfig<T>> {
 	 * 目标方法返回值类型
 	 */
 	private Class<?> returnClass;
-	
+
+	private ApplicationContext applicationContext;
+
 	/**
 	 * aop切面
 	 */
@@ -152,8 +155,8 @@ public class AopUtilContext<T extends AopUtilConfig<T>> {
 	}
 
 	public Class<?>[] getTargetArgsClass() {
-		if (targetArgsClass==null) {
-			targetArgsClass=getTargetMethod().getParameterTypes();
+		if (targetArgsClass == null) {
+			targetArgsClass = getTargetMethod().getParameterTypes();
 		}
 		return targetArgsClass;
 	}
@@ -161,20 +164,28 @@ public class AopUtilContext<T extends AopUtilConfig<T>> {
 	public void setTargetArgsClass(Class<?>[] targetArgsClass) {
 		this.targetArgsClass = targetArgsClass;
 	}
-	
+
 	public Class<?> getReturnClass() {
-		if (returnClass==null) {
-			returnClass=getTargetMethod().getReturnType();
+		if (returnClass == null) {
+			returnClass = getTargetMethod().getReturnType();
 		}
 		return returnClass;
 	}
-	
+
 	public void setReturnClass(Class<?> returnClass) {
 		this.returnClass = returnClass;
 	}
 
 	public boolean isSetResult() {
 		return setResult;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 	public void operAop(String targetTime) {

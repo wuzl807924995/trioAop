@@ -119,8 +119,10 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 			AopUtilContext<T> aopUtilContext = new AopUtilContext<T>();
 			MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
 			T aopUtilConfig = createBean(aopUtilContext);
+		
 			aopUtilContext.setAopUtilConfig(aopUtilConfig);
 			aopUtilContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
+			aopUtilContext.setApplicationContext(getApplicationContext());
 			return aopUtilContext;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

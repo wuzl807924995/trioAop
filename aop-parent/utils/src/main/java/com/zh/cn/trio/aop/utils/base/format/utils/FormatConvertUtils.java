@@ -9,6 +9,7 @@ public class FormatConvertUtils {
 		formatBean.setTargetMethod(aopUtilContext.getTargetMethod());
 		formatBean.setTargetArgs(aopUtilContext.getTargetArgs());
 		formatBean.setTarget(aopUtilContext.getTarget());
+		formatBean.setApplicationContext(aopUtilContext.getApplicationContext());
 		return formatBean;
 	}
 	

@@ -1,9 +1,5 @@
 package com.zh.cn.trio.aop.utils.function.validation.spel;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.base.format.utils.FormatBean;
 import com.zh.cn.trio.aop.utils.base.format.utils.FormatConvertUtils;
@@ -12,14 +8,8 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 import com.zh.cn.trio.aop.utils.function.validation.ValidationFace;
 import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
 
-public class DefaultSpelValidataionFaceImpl implements ValidationFace,ApplicationContextAware {
+public class DefaultSpelValidataionFaceImpl implements ValidationFace {
 
-	private ApplicationContext applicationContext;
-	
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext=applicationContext;
-	}
 	@Override
 	public ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
 		ValidationResult validationResult = new ValidationResult();
@@ -32,11 +22,11 @@ public class DefaultSpelValidataionFaceImpl implements ValidationFace,Applicatio
 		String[] validationError = new String[expression.length];
 		//遍历验证
 		for (int i = 0; i < expression.length; i++) {
-			boolean b = format.format(formatBean,applicationContext, expression[i]);
+			boolean b = format.format(formatBean, expression[i]);
 			validationRs[i] = b;
 			if (!b) {
 				//失败加载错误消息
-				validationError[i] = format.format(formatBean,applicationContext, errorExpression[i]);
+				validationError[i] = format.format(formatBean, errorExpression[i]);
 				validationResult.setSuccess(false);
 			}
 		}
