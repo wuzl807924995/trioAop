@@ -6,8 +6,13 @@ import com.zh.cn.trio.aop.utils.function.validation.ValidationFace;
 import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
 import com.zh.cn.trio.aop.utils.strategy.validation.ArgsReplaceStrategy;
 
-public class ArgsReplaceValidationStrategy extends ArgsReplaceStrategy<ValidationBeanConfig> {
+public class ArgsReplaceValidationStrategy extends ArgsReplaceStrategy<ValidationBeanConfig,ValidationResult> {
 
+	@Override
+	public Class<ValidationResult> getEClass() {
+		return ValidationResult.class;
+	}
+	
 	@Override
 	public ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
 		ValidationFace validationFace = aopUtilContext.getAopUtilConfig().getValidationFace();

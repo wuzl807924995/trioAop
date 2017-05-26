@@ -12,45 +12,58 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 	/**
 	 * 验证集合
 	 */
-	private String[] validationExpression;
+	private String[] expression;
 
+	/**
+	 * 错误编码
+	 */
+	private String[] errorCode;
+	
 	/**
 	 * 验证失败错误信息
 	 */
-	private String[] validationErrorMsg;
+	private String[] errorExpressionMsg;
 	
 	/**
 	 * 验证失败返回信息
 	 */
-	private String validationErrorResult;
+	private String errorResult;
 
 	/**
 	 * 验证接口
 	 */
 	private ValidationFace validationFace;
 
-	public String[] getValidationExpression() {
-		return validationExpression;
+	public String[] getExpression() {
+		return expression;
 	}
 
-	public void setValidationExpression(String[] validationExpression) {
-		this.validationExpression = validationExpression;
+	public void setExpression(String[] expression) {
+		this.expression = expression;
 	}
 
-	public String[] getValidationErrorMsg() {
-		return validationErrorMsg;
+	public String[] getErrorCode() {
+		return errorCode;
 	}
 
-	public void setValidationErrorMsg(String[] validationErrorMsg) {
-		this.validationErrorMsg = validationErrorMsg;
+	public void setErrorCode(String[] errorCode) {
+		this.errorCode = errorCode;
 	}
 
-	public String getValidationErrorResult() {
-		return validationErrorResult;
+	public String[] getErrorExpressionMsg() {
+		return errorExpressionMsg;
+	}
+	
+	public void setErrorExpressionMsg(String[] errorExpressionMsg) {
+		this.errorExpressionMsg = errorExpressionMsg;
+	}
+	
+	public String getErrorResult() {
+		return errorResult;
 	}
 
-	public void setValidationErrorResult(String validationErrorResult) {
-		this.validationErrorResult = validationErrorResult;
+	public void setErrorResult(String errorResult) {
+		this.errorResult = errorResult;
 	}
 
 	public ValidationFace getValidationFace() {

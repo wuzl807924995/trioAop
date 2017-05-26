@@ -13,11 +13,6 @@ import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 public @interface TrioCache {
 
 	/**
-	 * 是否异步
-	 */
-	boolean async() default false;
-
-	/**
 	 * 触发时间 默认异常触发
 	 */
 	String[] targetTime() default {CacheBeanConfig.TIME_BEFORE,CacheBeanConfig.TIME_AFTER};

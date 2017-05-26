@@ -8,6 +8,7 @@
   	<module>utils</module>
   	<module>logger</module>
   	<module>cache</module>
+  	<module>validation</module>
   </modules>
   
   	<build>

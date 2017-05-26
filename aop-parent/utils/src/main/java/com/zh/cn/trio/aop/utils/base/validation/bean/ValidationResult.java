@@ -4,7 +4,7 @@ package com.zh.cn.trio.aop.utils.base.validation.bean;
  * 验证结果
  *
  */
-public class ValidationResult {
+public class ValidationResult implements IValidationResult{
 
 	/**
 	 * 结果是否全部成功
@@ -15,11 +15,16 @@ public class ValidationResult {
 	 * 验证结果
 	 */
 	private boolean[] validation;
-
+	
+	/**
+	 * 验证失败返回错误码
+	 */
+	private String[] validationErrorCode;
+	
 	/**
 	 * 验证出错异常信息
 	 */
-	private String[] validationErrorMsg;
+	private Object[] validationErrorMsg;
 
 	public boolean isSuccess() {
 		return success;
@@ -37,12 +42,21 @@ public class ValidationResult {
 		this.validation = validation;
 	}
 
-	public String[] getValidationErrorMsg() {
+	public String[] getValidationErrorCode() {
+		return validationErrorCode;
+	}
+
+	public void setValidationErrorCode(String[] validationErrorCode) {
+		this.validationErrorCode = validationErrorCode;
+	}
+
+	public Object[] getValidationErrorMsg() {
 		return validationErrorMsg;
 	}
 
-	public void setValidationErrorMsg(String[] validationErrorMsg) {
+	public void setValidationErrorMsg(Object[] validationErrorMsg) {
 		this.validationErrorMsg = validationErrorMsg;
 	}
+
 
 }

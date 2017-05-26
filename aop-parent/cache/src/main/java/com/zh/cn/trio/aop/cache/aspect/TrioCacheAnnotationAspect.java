@@ -95,7 +95,6 @@ public class TrioCacheAnnotationAspect extends AbstractAnnotationAspect<CacheBea
 		}
 
 		cacheBeanConfig.setAopStrategy(aopStrategy);
-		cacheBeanConfig.setAsync(trioCache.async());
 		cacheBeanConfig.setCacheFace(cacheFace);
 		cacheBeanConfig.setCacheModel(cacheModel);
 		cacheBeanConfig.setCacheTime(trioCache.cacheTime());

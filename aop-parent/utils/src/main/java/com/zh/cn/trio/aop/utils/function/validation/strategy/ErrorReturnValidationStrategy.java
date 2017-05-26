@@ -17,7 +17,7 @@ public class ErrorReturnValidationStrategy extends ErrorReturnStrategy<Validatio
 
 	@Override
 	public String getErrorMsgFormatString(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
-		return aopUtilContext.getAopUtilConfig().getValidationErrorResult();
+		return aopUtilContext.getAopUtilConfig().getErrorResult();
 	}
 	
 }

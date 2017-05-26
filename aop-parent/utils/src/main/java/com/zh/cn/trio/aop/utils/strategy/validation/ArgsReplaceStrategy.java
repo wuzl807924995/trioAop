@@ -1,5 +1,6 @@
 package com.zh.cn.trio.aop.utils.strategy.validation;
 
+import com.zh.cn.trio.aop.utils.base.validation.bean.IValidationResult;
 import com.zh.cn.trio.aop.utils.base.validation.bean.ValidationResult;
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.context.AopUtilContext;
@@ -11,8 +12,10 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
  *
  * @param <T>
  */
-public abstract class ArgsReplaceStrategy<T extends AopUtilConfig<T>> extends AbstartValidationResultStrategy<T> {
+public abstract class ArgsReplaceStrategy<T extends AopUtilConfig<T>,E extends IValidationResult> extends AbstartValidationResultStrategy<T> {
 
+	public abstract Class<E> getEClass();
+	
 	@Override
 	public void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
 		ValidationResult validationResult = this.validationData(aopUtilContext);
@@ -20,8 +23,9 @@ public abstract class ArgsReplaceStrategy<T extends AopUtilConfig<T>> extends Ab
 		if (!validationResult.isSuccess()) {
 			Class<?>[] classes = aopUtilContext.getTargetArgsClass();
 			for (int i = 0; i < classes.length; i++) {
+				Class<E> ecls=getEClass();
 				//加载替换实参
-				if (ValidationResult.class.equals(classes[i])) {
+				if (ecls.equals(classes[i])) {
 					Object[] args = aopUtilContext.getTargetArgs();
 					args[i] = validationResult;
 					aopUtilContext.setTargetArgs(args);
