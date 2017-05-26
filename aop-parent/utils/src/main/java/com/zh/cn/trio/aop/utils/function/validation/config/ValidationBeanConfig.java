@@ -24,10 +24,16 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 	private String[] errorExpressionMsg;
 	
 	/**
-	 * 验证失败返回信息
+	 * 验证失败信息
 	 */
 	private String errorResult;
 
+	
+	/**
+	 * 验证失败返回结果
+	 */
+	private Object errorObject;
+	
 
 	public String[] getExpression() {
 		return expression;
@@ -59,6 +65,14 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 
 	public void setErrorResult(String errorResult) {
 		this.errorResult = errorResult;
+	}
+
+	public Object getErrorObject() {
+		return errorObject;
+	}
+
+	public void setErrorObject(Object errorObject) {
+		this.errorObject = errorObject;
 	}
 
 }

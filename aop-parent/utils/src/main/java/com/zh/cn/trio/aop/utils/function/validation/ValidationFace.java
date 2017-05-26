@@ -1,6 +1,6 @@
 package com.zh.cn.trio.aop.utils.function.validation;
 
-import com.zh.cn.trio.aop.utils.base.validation.bean.ValidationResult;
+import com.zh.cn.trio.aop.utils.base.validation.bean.IValidationResult;
 import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
 
@@ -9,7 +9,7 @@ import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
  * 验证接口
  *
  */
-public interface ValidationFace {
+public interface ValidationFace<T extends IValidationResult> {
 
-	ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext);
+	T validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext);
 }

@@ -9,6 +9,7 @@
   	<module>logger</module>
   	<module>cache</module>
   	<module>validation</module>
+  	<module>hystrix</module>
   </modules>
   
   	<build>

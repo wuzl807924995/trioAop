@@ -24,7 +24,7 @@ public class ValidationResult implements IValidationResult{
 	/**
 	 * 验证出错异常信息
 	 */
-	private Object[] validationErrorMsg;
+	private Object[] validationError;
 
 	public boolean isSuccess() {
 		return success;
@@ -50,12 +50,12 @@ public class ValidationResult implements IValidationResult{
 		this.validationErrorCode = validationErrorCode;
 	}
 
-	public Object[] getValidationErrorMsg() {
-		return validationErrorMsg;
+	public Object[] getValidationError() {
+		return validationError;
 	}
 
-	public void setValidationErrorMsg(Object[] validationErrorMsg) {
-		this.validationErrorMsg = validationErrorMsg;
+	public void setValidationError(Object[] validationErrorMsg) {
+		this.validationError = validationErrorMsg;
 	}
 
 

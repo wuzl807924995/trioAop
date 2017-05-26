@@ -3,7 +3,7 @@ package com.zh.cn.trio.aop.utils.strategy.validation;
 import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.base.format.utils.FormatBean;
 import com.zh.cn.trio.aop.utils.base.format.utils.FormatConvertUtils;
-import com.zh.cn.trio.aop.utils.base.validation.bean.ValidationResult;
+import com.zh.cn.trio.aop.utils.base.validation.bean.IValidationResult;
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
 import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 
@@ -19,9 +19,13 @@ public abstract class ErrorReturnStrategy<T extends AopUtilConfig<T>> extends Ab
 	
 	@Override
 	public void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
-		ValidationResult validationResult = this.validationData(aopUtilContext);
+		IValidationResult validationResult = this.validationData(aopUtilContext);
 		//验证失败
 		if (!validationResult.isSuccess()) {
+			if (aopUtilContext.getResultObject()!=null) {
+				//已经设置过返回结果
+				aopUtilContext.setResultObject(aopUtilContext.getResultObject());
+			}
 			//失败消息
 			Object msg=this.getErrorMsgFormatString(aopUtilContext);
 			FormatBean formatBean = FormatConvertUtils.convertContext(aopUtilContext,msg);

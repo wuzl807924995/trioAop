@@ -1,11 +1,14 @@
 package com.zh.cn.trio.aop.validation.aspect;
 
+import org.aspectj.lang.annotation.Aspect;
+
 import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationConfigAspect;
 import com.zh.cn.trio.aop.utils.base.format.Format;
 import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 import com.zh.cn.trio.aop.validation.annotation.SignValidation;
 
+@Aspect
 public class TrioSignValidationAnnotationAspect  extends AbstractAnnotationConfigAspect<ValidationBeanConfig, SignValidation>{
 
 	@Override

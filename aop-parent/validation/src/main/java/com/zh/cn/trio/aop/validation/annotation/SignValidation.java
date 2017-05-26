@@ -21,11 +21,6 @@ public @interface SignValidation {
 	 String format() default "";
 	 
 	 /**
-	  * 验证接口
-	  */
-	 String ValidationFace() default "";
-	 
-	 /**
 	  * 验证表达式
 	  */
 	 String validationExpress();
