@@ -12,7 +12,7 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
  * @param <T>
  */
 public abstract class ArgsReplaceStrategy<T extends AopUtilConfig<T>, E extends IValidationResult>
-		extends AbstartValidationResultStrategy<T> {
+		extends AbstartValidationResultStrategy<T,E> {
 
 	public abstract Class<E> getEClass();
 

@@ -35,11 +35,6 @@ public class TrioHystrixAnnotationAspect extends AbstractAnnotationConfigAspect<
 		return validationBeanConfig;
 	}
 
-	protected String getHystrixExpress(String beanName) {
-		return "getApplicationContext().getBean(" + beanName
-				+ ").hystrixValidation(getTarget(), getTargetMethod(), getTargetArgs())";
-	}
-
 	@Around("@annotation(com.zh.cn.trio.aop.hystrix.annotation.TrioHystrix)")
 	@Override
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {

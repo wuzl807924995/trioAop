@@ -6,7 +6,7 @@ import com.zh.cn.trio.aop.utils.function.validation.ValidationFace;
 import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
 import com.zh.cn.trio.aop.utils.strategy.validation.ErrorReturnStrategy;
 
-public class ErrorReturnValidationStrategy<E extends IValidationResult> extends ErrorReturnStrategy<ValidationBeanConfig>{
+public class ErrorReturnValidationStrategy<E extends IValidationResult> extends ErrorReturnStrategy<ValidationBeanConfig,E>{
 
 	
 

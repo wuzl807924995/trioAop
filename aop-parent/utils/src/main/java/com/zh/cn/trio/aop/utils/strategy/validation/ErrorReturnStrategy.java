@@ -12,7 +12,7 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
  *	在ValidationResult.isSuccess()=false的时候将会返回解析到的返回信息
  * @param <T>
  */
-public abstract class ErrorReturnStrategy<T extends AopUtilConfig<T>> extends AbstartValidationResultStrategy<T> {
+public abstract class ErrorReturnStrategy<T extends AopUtilConfig<T>,E extends IValidationResult> extends AbstartValidationResultStrategy<T,E> {
 
 	public abstract String getErrorMsgFormatString(AopUtilContext<T> aopUtilContext);
 	
