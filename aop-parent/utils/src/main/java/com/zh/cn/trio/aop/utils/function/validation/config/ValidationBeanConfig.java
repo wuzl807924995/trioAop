@@ -1,7 +1,6 @@
 package com.zh.cn.trio.aop.utils.function.validation.config;
 
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.function.validation.ValidationFace;
 
 /**
  *	 
@@ -29,10 +28,6 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 	 */
 	private String errorResult;
 
-	/**
-	 * 验证接口
-	 */
-	private ValidationFace validationFace;
 
 	public String[] getExpression() {
 		return expression;
@@ -65,14 +60,5 @@ public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig>  {
 	public void setErrorResult(String errorResult) {
 		this.errorResult = errorResult;
 	}
-
-	public ValidationFace getValidationFace() {
-		return validationFace;
-	}
-
-	public void setValidationFace(ValidationFace validationFace) {
-		this.validationFace = validationFace;
-	}
-
 
 }

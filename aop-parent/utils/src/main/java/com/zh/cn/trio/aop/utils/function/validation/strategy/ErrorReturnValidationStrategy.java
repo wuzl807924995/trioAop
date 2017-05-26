@@ -8,13 +8,28 @@ import com.zh.cn.trio.aop.utils.strategy.validation.ErrorReturnStrategy;
 
 public class ErrorReturnValidationStrategy extends ErrorReturnStrategy<ValidationBeanConfig>{
 
+	
+
+	/**
+	 * 验证接口
+	 */
+	private ValidationFace validationFace;
+	
+	public ValidationFace getValidationFace() {
+		return validationFace;
+	}
+	
+	public void setValidationFace(ValidationFace validationFace) {
+		this.validationFace = validationFace;
+	}
 
 	@Override
 	public ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
-		ValidationFace validationFace = aopUtilContext.getAopUtilConfig().getValidationFace();
+		ValidationFace validationFace =getValidationFace();
 		return validationFace.validationData(aopUtilContext);
 	}
 
+	
 	@Override
 	public String getErrorMsgFormatString(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
 		return aopUtilContext.getAopUtilConfig().getErrorResult();

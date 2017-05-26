@@ -8,45 +8,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 import com.zh.cn.trio.aop.logger.annotation.TrioLogger;
-import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationAspect;
+import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationConfigAspect;
 import com.zh.cn.trio.aop.utils.base.format.Format;
-import com.zh.cn.trio.aop.utils.function.logger.LoggerFace;
 import com.zh.cn.trio.aop.utils.function.logger.config.LoggerBeanConfig;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
 @Aspect
-public class TrioLoggerAnnotationAspect extends AbstractAnnotationAspect<LoggerBeanConfig,TrioLogger> {
+public class TrioLoggerAnnotationAspect extends AbstractAnnotationConfigAspect<LoggerBeanConfig,TrioLogger> {
 
 
-	private AopStrategy<LoggerBeanConfig> defaultAopStrategy;
-
-	private Format defaultFormat;
-
-	private LoggerFace defaultLoggerFace;
-
-	public AopStrategy<LoggerBeanConfig> getDefaultAopStrategy() {
-		return defaultAopStrategy;
-	}
-
-	public void setDefaultAopStrategy(AopStrategy<LoggerBeanConfig> defaultAopStrategy) {
-		this.defaultAopStrategy = defaultAopStrategy;
-	}
-
-	public Format getDefaultFormat() {
-		return defaultFormat;
-	}
-
-	public void setDefaultFormat(Format defaultFormat) {
-		this.defaultFormat = defaultFormat;
-	}
-
-	public LoggerFace getDefaultLoggerFace() {
-		return defaultLoggerFace;
-	}
-
-	public void setDefaultLoggerFace(LoggerFace defaultLoggerFace) {
-		this.defaultLoggerFace = defaultLoggerFace;
-	}
 
 	@Around("@annotation(com.zh.cn.trio.aop.logger.annotation.TrioLogger)")
 	@Override
@@ -64,9 +34,8 @@ public class TrioLoggerAnnotationAspect extends AbstractAnnotationAspect<LoggerB
 	public LoggerBeanConfig crateConfig(TrioLogger trioLogger) {
 		LoggerBeanConfig loggerBeanConfig = new LoggerBeanConfig();
 		
-		AopStrategy<LoggerBeanConfig> aopStrategy = getBean(trioLogger.aopStrategy(), AopStrategy.class,defaultAopStrategy);
-		Format format = getBean(trioLogger.format(), Format.class, defaultFormat);
-		LoggerFace loggerFace = getBean(trioLogger.loggerFace(), LoggerFace.class, defaultLoggerFace);
+		AopStrategy<LoggerBeanConfig> aopStrategy = getBean(trioLogger.aopStrategy(), AopStrategy.class,getDefaultAopStrategy());
+		Format format = getBean(trioLogger.format(), Format.class, getDefaultFormat());
 		
 		Map<String, Map<String, String>> config = new HashMap<String, Map<String, String>>();
 		Map<String, String> levelName = new HashMap<String, String>();
@@ -77,7 +46,6 @@ public class TrioLoggerAnnotationAspect extends AbstractAnnotationAspect<LoggerB
 		loggerBeanConfig.setTargetTimes(new String[] { trioLogger.targetTime() });
 		loggerBeanConfig.setAopStrategy(aopStrategy);
 		loggerBeanConfig.setFormat(format);
-		loggerBeanConfig.setLoggerFace(loggerFace);
 		loggerBeanConfig.setModelString(trioLogger.modelString());
 		loggerBeanConfig.setConfig(config);
 		return loggerBeanConfig;

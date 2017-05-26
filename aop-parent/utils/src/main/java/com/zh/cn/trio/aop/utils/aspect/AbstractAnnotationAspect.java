@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.context.AopUtilContext;
 
 /**
  * 注解aop
@@ -19,24 +18,9 @@ import com.zh.cn.trio.aop.utils.context.AopUtilContext;
  * @param <E> 注解
  */
 public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E extends Annotation>
-		extends AbstractAopAspect<T> {
+		extends AbstractAopBeanAspect<T> {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-
-	private T configBean;
-
-	public T getConfigBean() {
-		return configBean;
-	}
-
-	public void setConfigBean(T configBean) {
-		this.configBean = configBean;
-	}
-
-	@Override
-	public T createBean(AopUtilContext<T> aopUtilContext) {
-		return configBean;
-	}
 
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		try {

@@ -38,11 +38,6 @@ public @interface TrioCache {
 	String cacheModel() default CacheModel.READ_WRITE;
 
 	/**
-	 * 缓存实现接口
-	 */
-	String cacheFace() default "";
-
-	/**
 	 * 缓存建 模板字符
 	 */
 	String keyModelString() default "";

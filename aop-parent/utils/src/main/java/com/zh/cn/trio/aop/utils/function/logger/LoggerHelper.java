@@ -15,14 +15,13 @@ import com.zh.cn.trio.aop.utils.function.logger.config.LoggerBeanConfig;
  */
 public abstract class LoggerHelper {
 
-	public static void logger(AopUtilContext<LoggerBeanConfig> aopUtilContext, String targetTime) {
+	public static void logger(LoggerFace loggerFace,AopUtilContext<LoggerBeanConfig> aopUtilContext, String targetTime) {
 		//读配置
 		Map<String, Map<String, String>> loggerConfig = aopUtilContext.getAopUtilConfig().getConfig();
 		Map<String, String> config = loggerConfig.get(targetTime);
 		//填充之后的信息
 		String info = aopUtilContext.getAopUtilConfig().getFormat().format(
 				FormatConvertUtils.convertContext(aopUtilContext), aopUtilContext.getAopUtilConfig().getModelString());
-		LoggerFace loggerFace = aopUtilContext.getAopUtilConfig().getLoggerFace();
 
 		for (String level : config.keySet()) {
 			String name = config.get(level);

@@ -8,49 +8,20 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.util.StringUtils;
 
 import com.zh.cn.trio.aop.cache.annotation.TrioCache;
-import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationAspect;
+import com.zh.cn.trio.aop.utils.aspect.AbstractAnnotationConfigAspect;
 import com.zh.cn.trio.aop.utils.base.format.Format;
-import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
 import com.zh.cn.trio.aop.utils.function.cache.config.CacheBeanConfig;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 import com.zh.cn.trio.aop.utils.strategy.AopStrategy;
 
 @Aspect
-public class TrioCacheAnnotationAspect extends AbstractAnnotationAspect<CacheBeanConfig, TrioCache> {
+public class TrioCacheAnnotationAspect extends AbstractAnnotationConfigAspect<CacheBeanConfig, TrioCache> {
 
-	private AopStrategy<CacheBeanConfig> defaultAopStrategy;
-
-	private Format defaultFormat;
-
-	private CacheFace defautlCacheFace;
 
 	private CacheModel defaultCacheModel;
 
 	private String defaultKeyModelString="'method:'+getTargetMethod()+':args:'+getTargetArgs()";
 
-	public AopStrategy<CacheBeanConfig> getDefaultAopStrategy() {
-		return defaultAopStrategy;
-	}
-
-	public void setDefaultAopStrategy(AopStrategy<CacheBeanConfig> defaultAopStrategy) {
-		this.defaultAopStrategy = defaultAopStrategy;
-	}
-
-	public Format getDefaultFormat() {
-		return defaultFormat;
-	}
-
-	public void setDefaultFormat(Format defaultFormat) {
-		this.defaultFormat = defaultFormat;
-	}
-
-	public CacheFace getDefautlCacheFace() {
-		return defautlCacheFace;
-	}
-
-	public void setDefautlCacheFace(CacheFace defautlCacheFace) {
-		this.defautlCacheFace = defautlCacheFace;
-	}
 
 	public CacheModel getDefaultCacheModel() {
 		return defaultCacheModel;
@@ -85,17 +56,15 @@ public class TrioCacheAnnotationAspect extends AbstractAnnotationAspect<CacheBea
 		CacheBeanConfig cacheBeanConfig = new CacheBeanConfig();
 
 		AopStrategy<CacheBeanConfig> aopStrategy = getBean(trioCache.aopStrategy(), AopStrategy.class,
-				defaultAopStrategy);
-		CacheFace cacheFace = getBean(trioCache.cacheFace(), CacheFace.class, defautlCacheFace);
+				getDefaultAopStrategy());
 		CacheModel cacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
-		Format format = getBean(trioCache.format(), Format.class, defaultFormat);
+		Format format = getBean(trioCache.format(), Format.class, getDefaultFormat());
 		String modelString = trioCache.keyModelString();
 		if (StringUtils.isEmpty(modelString)) {
 			modelString = defaultKeyModelString;
 		}
 
 		cacheBeanConfig.setAopStrategy(aopStrategy);
-		cacheBeanConfig.setCacheFace(cacheFace);
 		cacheBeanConfig.setCacheModel(cacheModel);
 		cacheBeanConfig.setCacheTime(trioCache.cacheTime());
 		cacheBeanConfig.setFormat(format);

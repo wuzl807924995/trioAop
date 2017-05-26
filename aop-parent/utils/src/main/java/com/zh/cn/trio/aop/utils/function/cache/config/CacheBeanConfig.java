@@ -1,7 +1,6 @@
 package com.zh.cn.trio.aop.utils.function.cache.config;
 
 import com.zh.cn.trio.aop.utils.context.AopUtilConfig;
-import com.zh.cn.trio.aop.utils.function.cache.CacheFace;
 import com.zh.cn.trio.aop.utils.function.cache.model.CacheModel;
 
 /**
@@ -21,11 +20,6 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 	 */
 	private CacheModel cacheModel;
 
-	/**
-	 * 缓存实现接口
-	 */
-	private CacheFace cacheFace;
-	
 	/**
 	 * 缓存建 模板字符
 	 */
@@ -47,14 +41,6 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 		this.cacheModel = cacheModel;
 	}
 
-	public CacheFace getCacheFace() {
-		return cacheFace;
-	}
-
-	public void setCacheFace(CacheFace cacheFace) {
-		this.cacheFace = cacheFace;
-	}
-
 	public String getKeyModelString() {
 		return keyModelString;
 	}
@@ -63,6 +49,4 @@ public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 		this.keyModelString = keyModelString;
 	}
 
-	
-	
 }

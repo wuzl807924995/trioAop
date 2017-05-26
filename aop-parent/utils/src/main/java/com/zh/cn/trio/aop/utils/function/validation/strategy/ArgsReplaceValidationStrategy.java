@@ -8,6 +8,19 @@ import com.zh.cn.trio.aop.utils.strategy.validation.ArgsReplaceStrategy;
 
 public class ArgsReplaceValidationStrategy extends ArgsReplaceStrategy<ValidationBeanConfig,ValidationResult> {
 
+	/**
+	 * 验证接口
+	 */
+	private ValidationFace validationFace;
+	
+	public ValidationFace getValidationFace() {
+		return validationFace;
+	}
+	
+	public void setValidationFace(ValidationFace validationFace) {
+		this.validationFace = validationFace;
+	}
+	
 	@Override
 	public Class<ValidationResult> getEClass() {
 		return ValidationResult.class;
@@ -15,7 +28,7 @@ public class ArgsReplaceValidationStrategy extends ArgsReplaceStrategy<Validatio
 	
 	@Override
 	public ValidationResult validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {
-		ValidationFace validationFace = aopUtilContext.getAopUtilConfig().getValidationFace();
+		ValidationFace validationFace = getValidationFace();
 		return validationFace.validationData(aopUtilContext);
 	}
 

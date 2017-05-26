@@ -42,10 +42,6 @@ public @interface TrioLogger {
 	  */
 	 String targetName() default "";
 	 
-	 /**
-	  * 日志接口
-	  */
-	 String loggerFace() default "";
 	 
 	 /**
 	  * 日志模板
