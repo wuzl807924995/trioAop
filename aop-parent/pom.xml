@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.zh.cn.trio.aop</groupId>
   <artifactId>aop-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>pom</packaging>
   <modules>
   	<module>utils</module>
@@ -11,6 +11,11 @@
   	<module>validation</module>
   	<module>hystrix</module>
   </modules>
+  
+  	<properties>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+  	</properties>
   
   	<build>
 		<plugins>
