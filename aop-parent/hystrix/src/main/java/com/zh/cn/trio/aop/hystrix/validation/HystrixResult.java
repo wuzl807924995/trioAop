@@ -1,6 +1,6 @@
 package com.zh.cn.trio.aop.hystrix.validation;
 
-import com.zh.cn.trio.aop.utils.base.validation.bean.IValidationResult;
+import com.zh.cn.trio.aop.croe.base.validation.bean.IValidationResult;
 
 public class HystrixResult implements IValidationResult {
 

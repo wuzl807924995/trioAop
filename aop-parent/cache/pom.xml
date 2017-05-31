@@ -9,8 +9,8 @@
 	<artifactId>cache</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>io.github.zh.cn.trio</groupId>
-			<artifactId>utils</artifactId>
+			<groupId>${parent.groupId}</groupId>
+			<artifactId>croe</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>

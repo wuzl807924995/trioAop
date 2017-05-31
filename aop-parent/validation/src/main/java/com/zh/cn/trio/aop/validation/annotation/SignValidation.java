@@ -9,34 +9,28 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD })
 public @interface SignValidation {
 
-	
-	 /**
-	  * 执行策略
-	  */
-	 String aopStrategy() default "";
-	 
-	 /**
-	  * 填充模式
-	  */
-	 String format() default "";
-	 
-	 /**
-	  * 验证表达式
-	  */
-	 String validationExpress();
+	/**
+	 * 执行策略
+	 */
+	String aopStrategy() default "";
 
-	 /**
-	  * 错误码
-	  */
-	 String errorCode() default "";
-	 
-	 /**
-	  * 错误消息
-	  */
-	 String errorMsg() default "";
-	 
-	 /**
-	  * 错误返回表达式
-	  */
-	 String errorReturn() default "";
+	/**
+	 * 验证表达式
+	 */
+	String validationExpress();
+
+	/**
+	 * 错误码
+	 */
+	String errorCode() default "";
+
+	/**
+	 * 错误消息
+	 */
+	String errorMsg() default "";
+
+	/**
+	 * 错误返回表达式
+	 */
+	String errorReturn() default "";
 }
