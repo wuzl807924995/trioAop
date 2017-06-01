@@ -13,6 +13,28 @@
 		<module>croe</module>
 	</modules>
 
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/zh-cn-trio/trioAop</url>
+		<connection>git@github.com:zh-cn-trio/trioAop.git</connection>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>吴志林</name>
+			<email>807924995@qq.com</email>
+			<url>www.wuzl.online</url>
+		</developer>
+	</developers>
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
