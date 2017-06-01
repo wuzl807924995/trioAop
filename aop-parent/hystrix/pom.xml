@@ -10,7 +10,7 @@
   <dependencies>
 		<dependency>
 			<groupId>io.github.zh.cn.trio</groupId>
-			<artifactId>croe</artifactId>
+			<artifactId>validation</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>

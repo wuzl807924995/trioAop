@@ -2,7 +2,7 @@ package io.github.zh.cn.trio.aop.logger.config;
 
 import java.util.Map;
 
-import com.zh.cn.trio.aop.croe.context.AopUtilConfig;
+import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
 
 /**
  * 	

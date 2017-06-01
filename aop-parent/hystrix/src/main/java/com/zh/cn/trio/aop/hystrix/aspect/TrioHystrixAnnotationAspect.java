@@ -4,11 +4,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-import com.zh.cn.trio.aop.croe.aspect.annotation.AbstractAnnotationConfigAspect;
-import com.zh.cn.trio.aop.croe.base.format.Format;
-import com.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import com.zh.cn.trio.aop.hystrix.annotation.TrioHystrix;
-import com.zh.cn.trio.aop.utils.function.validation.config.ValidationBeanConfig;
+
+import io.github.zh.cn.trio.aop.croe.aspect.annotation.AbstractAnnotationConfigAspect;
+import io.github.zh.cn.trio.aop.croe.base.format.Format;
+import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
+import io.github.zh.cn.trio.aop.validation.config.ValidationBeanConfig;
 
 @Aspect
 public class TrioHystrixAnnotationAspect extends AbstractAnnotationConfigAspect<ValidationBeanConfig, TrioHystrix> {

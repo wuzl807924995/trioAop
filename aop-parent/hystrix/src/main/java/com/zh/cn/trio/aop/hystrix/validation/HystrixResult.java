@@ -1,8 +1,8 @@
 package com.zh.cn.trio.aop.hystrix.validation;
 
-import com.zh.cn.trio.aop.croe.base.validation.bean.IValidationResult;
+import io.github.zh.cn.trio.aop.validation.bean.IResult;
 
-public class HystrixResult implements IValidationResult {
+public class HystrixResult implements IResult {
 
 	private boolean success;
 
