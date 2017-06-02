@@ -8,7 +8,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
  *
  * @param <T> 子类配置
  */
-public class AbstractAopBeanAspect<T extends AopUtilConfig<T>> extends AbstractAopAspect<T> {
+public class AbstractAopBeanAspect<T extends AopUtilConfig> extends AbstractAopAspect<T> {
 
 	private T configBean;
 

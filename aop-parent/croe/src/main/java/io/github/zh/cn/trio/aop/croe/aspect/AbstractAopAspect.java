@@ -17,7 +17,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
  *
  * @param <T> 配置子类
  */
-public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements ApplicationContextAware, Ordered {
+public abstract class AbstractAopAspect<T extends AopUtilConfig> implements ApplicationContextAware, Ordered {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

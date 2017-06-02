@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 /**
  * 上下文
  */
-public class AopUtilContext<T extends AopUtilConfig<T>> {
+public class AopUtilContext<T extends AopUtilConfig> {
 
 	/**
 	 * 泛型子类配置

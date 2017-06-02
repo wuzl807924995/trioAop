@@ -20,7 +20,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
  * @param <E>
  *            注解
  */
-public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E extends Annotation>
+public abstract class AbstractAnnotationAspect<T extends AopUtilConfig, E extends Annotation>
 		extends AbstractAopBeanAspect<T> {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

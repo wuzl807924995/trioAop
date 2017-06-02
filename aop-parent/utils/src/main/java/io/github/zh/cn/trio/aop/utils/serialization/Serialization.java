@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.croe.base.serialization;
+package io.github.zh.cn.trio.aop.utils.serialization;
 
 public interface Serialization {
 

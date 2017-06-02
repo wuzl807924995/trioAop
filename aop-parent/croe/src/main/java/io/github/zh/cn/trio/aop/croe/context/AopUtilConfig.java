@@ -7,9 +7,8 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 /**
  * 抽象父类配置
  * 
- * @param <T> 子类配置
  */
-public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
+public abstract class AopUtilConfig {
 
 	/**
 	 * 触发时间--前置触发
@@ -25,6 +24,7 @@ public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 	public static final String TIME_ERROR = "ERROR";
 
 	public static final String TIME_AROUND_STARAT = "AROUND_SATART";
+	
 	public static final String TIME_AROUND_END = "AROUND_END";
 
 	/**
@@ -35,7 +35,7 @@ public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 	/**
 	 * 策略
 	 */
-	private AopStrategy<T> aopStrategy;
+	private AopStrategy aopStrategy;
 
 	public boolean checkEnable(String time) {
 		if (targetTimes == null || StringUtils.isEmpty(time)) {
@@ -57,11 +57,11 @@ public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 		this.targetTimes = targetTimes;
 	}
 
-	public AopStrategy<T> getAopStrategy() {
+	public AopStrategy getAopStrategy() {
 		return aopStrategy;
 	}
 
-	public void setAopStrategy(AopStrategy<T> aopStrategy) {
+	public void setAopStrategy(AopStrategy aopStrategy) {
 		this.aopStrategy = aopStrategy;
 	}
 
