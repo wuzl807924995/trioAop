@@ -7,7 +7,7 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 /**
  * 抽象父类配置
  * 
- * @param <T>
+ * @param <T> 子类配置
  */
 public abstract class AopUtilConfig<T extends AopUtilConfig<T>> {
 

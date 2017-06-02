@@ -6,7 +6,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 /**
  * 
  *策略接口
- * @param <T>
+ * @param <T> 子类配置
  */
 public interface AopStrategy<T extends AopUtilConfig<T>> {
 

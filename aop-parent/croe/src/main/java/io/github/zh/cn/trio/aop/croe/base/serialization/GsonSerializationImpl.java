@@ -10,10 +10,11 @@ public class GsonSerializationImpl implements Serialization {
 		return gson.toJson(object);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object forSerialization(String val, Class<?> returnClass) {
+	public <T> T  forSerialization(String val, Class<?> returnClass) {
 		Gson gson = new Gson();
-		return gson.fromJson(val, returnClass);
+		return (T) gson.fromJson(val, returnClass);
 	}
 
 }

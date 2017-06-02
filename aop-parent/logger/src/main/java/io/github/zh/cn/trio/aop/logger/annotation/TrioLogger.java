@@ -13,29 +13,29 @@ public @interface TrioLogger {
 
 	
 	/**
-	 * 触发时间  默认异常触发
+	 * @return 触发时间  默认异常触发
 	 */
 	 String targetTime() default LoggerBeanConfig.TIME_ERROR;
 	 
 	 
 	 /**
-	  * 执行策略
+	  *@return 执行策略
 	  */
 	 String aopStrategy() default "";
 	 
 	 /**
-	  * 触发等级 默认info
+	  *@return 触发等级 默认info
 	  */
 	 String targetLevel() default LoggerBeanConfig.LEVEL_INFO;
 	 
 	 /**
-	  * 日志名称 默认目标主日志
+	  *@return 日志名称 默认目标主日志
 	  */
 	 String targetName() default "";
 	 
 	 
 	 /**
-	  * 日志模板
+	  * @return 日志模板
 	  */
 	 String modelString() default "";
 }

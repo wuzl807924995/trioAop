@@ -12,27 +12,28 @@ import io.github.zh.cn.trio.aop.cache.model.CacheModel;
 public @interface TrioCache {
 
 	/**
-	 * 执行策略
+	 *
+	 * @return  执行策略
 	 */
 	String aopStrategy() default "";
 
 	/**
-	 * 填充模式
+	 *@return 填充模式
 	 */
 	String format() default "";
 
 	/**
-	 * 缓存时间
+	 *@return 缓存时间
 	 */
 	int cacheTime() default -1;
 
 	/**
-	 * 缓存模式
+	 *@return 缓存模式
 	 */
 	String cacheModel() default CacheModel.READ_WRITE;
 
 	/**
-	 * 缓存建 模板字符
-	 */
+	 *@return 缓存建 模板字符
+	 */	
 	String keyModelString() default "";
 }

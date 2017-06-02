@@ -10,27 +10,27 @@ import java.lang.annotation.Target;
 public @interface SignValidation {
 
 	/**
-	 * 执行策略
+	 * @return 执行策略
 	 */
 	String aopStrategy() default "";
 
 	/**
-	 * 验证表达式
+	 * @return 验证表达式
 	 */
 	String validationExpress();
 
 	/**
-	 * 错误码
+	 *@return  错误码
 	 */
 	String errorCode() default "";
 
 	/**
-	 * 错误消息
+	 * @return 错误消息
 	 */
 	String errorMsg() default "";
 
 	/**
-	 * 错误返回表达式
+	 *@return 错误返回表达式
 	 */
 	String errorReturn() default "";
 }

@@ -10,7 +10,6 @@ import io.github.zh.cn.trio.aop.validation.face.ValidationFace;
  * 
  * 验证模板
  * 
- * @param <T>
  */
 public abstract class AbstartValidationResultStrategy<E extends IResult> implements AopStrategy<ValidationBeanConfig> {
 
@@ -30,7 +29,6 @@ public abstract class AbstartValidationResultStrategy<E extends IResult> impleme
 	/***
 	 * 验证结果
 	 * 
-	 * @param aopUtilContext
 	 * @return
 	 */
 	public E validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext) {

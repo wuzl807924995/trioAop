@@ -25,6 +25,12 @@ public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E ext
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * 拦截aop的模板方法
+	 * @param proceedingJoinPoint 拦截点 @see MethodInvocationProceedingJoinPoint
+	 * @return 目标方法返回值
+	 * @throws Throwable 目标方法异常
+	 */
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		try {
 			// 读注解
@@ -39,6 +45,12 @@ public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E ext
 		return super.proxy(proceedingJoinPoint);
 	}
 
+	/**
+	 * 读取目标注解
+	 * @param proceedingJoinPoint 切面
+	 * @param annotationClass 注解
+	 * @return 目标注解
+	 */
 	public E getAnnotation(ProceedingJoinPoint proceedingJoinPoint, Class<E> annotationClass) {
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
 		Method method = signature.getMethod();
@@ -46,6 +58,13 @@ public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E ext
 		return annotation;
 	}
 
+	/**
+	 * 读默认配置
+	 * @param beanName beanName
+	 * @param tcls 配置类型
+	 * @param defaultBean 读取失败时返回的默认配置
+	 * @return
+	 */
 	public <U> U getBean(String beanName, Class<U> tcls, U defaultBean) {
 		if (StringUtils.isEmpty(beanName)) {
 			return defaultBean;
@@ -59,7 +78,15 @@ public abstract class AbstractAnnotationAspect<T extends AopUtilConfig<T>, E ext
 		}
 	}
 
+	/**
+	 * 
+	 * @return 目标注解的类型
+	 */
 	public abstract Class<E> getAnnotationClass();
 
+	/**
+	 * @param eAnnotation 目标注解
+	 * @return 通过注解转化为配置
+	 */
 	public abstract T crateConfig(E eAnnotation);
 }

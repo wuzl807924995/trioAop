@@ -6,7 +6,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 /**
  * 泛型模板配置
  *
- * @param <T>
+ * @param <T> 子类配置
  */
 public class AbstractAopBeanAspect<T extends AopUtilConfig<T>> extends AbstractAopAspect<T> {
 

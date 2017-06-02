@@ -5,16 +5,16 @@ import io.github.zh.cn.trio.aop.cache.face.CacheFace;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 
 public abstract class AbstractCacheModel implements CacheModel {
-	
+
 	/**
 	 * 缓存实现接口
 	 */
 	private CacheFace cacheFace;
-	
+
 	public CacheFace getCacheFace() {
 		return cacheFace;
 	}
-	
+
 	public void setCacheFace(CacheFace cacheFace) {
 		this.cacheFace = cacheFace;
 	}
@@ -31,6 +31,8 @@ public abstract class AbstractCacheModel implements CacheModel {
 
 	/**
 	 * 读缓存结果
+	 * 
+	 * @param aopUtilContext 上下文
 	 */
 	protected void getCacheResult(AopUtilContext<CacheBeanConfig> aopUtilContext) {
 		boolean hasCache = cacheFace.hasCache(aopUtilContext);

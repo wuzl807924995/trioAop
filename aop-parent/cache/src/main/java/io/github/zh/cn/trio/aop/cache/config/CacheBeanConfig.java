@@ -12,17 +12,17 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
 public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
 
 	/**
-	 * 缓存时间
+	 *@return 缓存时间
 	 */
 	private int cacheTime;
 
 	/**
-	 * 缓存模式
+	 *@return 缓存模式
 	 */
 	private CacheModel cacheModel;
 
 	/**
-	 * 缓存建 模板字符
+	 *@return 缓存建 模板字符
 	 */
 	private String keyModelString;
 

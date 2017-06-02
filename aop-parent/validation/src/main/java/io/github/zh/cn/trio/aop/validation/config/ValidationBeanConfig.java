@@ -9,7 +9,6 @@ import io.github.zh.cn.trio.aop.validation.model.ValidationModel;
  * 
  * 验证模式配置
  * 
- * @param <E>
  */
 public class ValidationBeanConfig extends AopUtilConfig<ValidationBeanConfig> {
 

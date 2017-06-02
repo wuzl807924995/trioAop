@@ -3,42 +3,37 @@ package io.github.zh.cn.trio.aop.croe.base.redis.operaction;
 /**
  * redis 操作
  * 
- * @author Administrator
  *
  */
 public interface RedisStringOperation {
 
 	/**
-	 * 是否存在建
 	 * 
-	 * @param key
-	 * @return
+	 * 
+	 * @param key key
+	 * @return  是否存在建
 	 */
 	boolean exists(String key);
 
 	/**
-	 * 设置值并且设置超时时间
-	 * 
-	 * @param key
-	 * @param val
-	 * @param cacheTime
-	 * @return
+	 * @param key key
+	 * @param val  val
+	 * @param cacheTime cacheTime
+	 * @return 设置值并且设置超时时间
 	 */
 	boolean expireat(String key, String val, int cacheTime);
 
 	/**
-	 * 取值
-	 * 
-	 * @param key
-	 * @return
+	 * @param key key
+	 * @return 取值
 	 */
 	String get(String key);
 
 	/**
-	 * 删除
 	 * 
-	 * @param key
-	 * @return
+	 * 
+	 * @param key key
+	 * @return 删除
 	 */
 	boolean del(String key);
 

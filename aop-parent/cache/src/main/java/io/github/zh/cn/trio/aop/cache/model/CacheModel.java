@@ -36,16 +36,12 @@ public interface CacheModel {
 	/**
 	 * 前置执行
 	 * 
-	 * @param aopUtilContext
-	 * @throws Throwable
 	 */
 	void execBefore(AopUtilContext<CacheBeanConfig> aopUtilContext);
 
 	/**
 	 * 后置执行
 	 * 
-	 * @param aopUtilContext
-	 * @throws Throwable
 	 */
 	void execAfter(AopUtilContext<CacheBeanConfig> aopUtilContext);
 }

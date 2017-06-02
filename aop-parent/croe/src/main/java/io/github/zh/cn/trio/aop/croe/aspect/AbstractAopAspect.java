@@ -15,7 +15,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 /**
  * 抽象拦截aop接口
  *
- * @param <T>
+ * @param <T> 配置子类
  */
 public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements ApplicationContextAware, Ordered {
 
@@ -51,9 +51,9 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 
 	/**
 	 * 拦截aop的模板方法
-	 * @param proceedingJoinPoint
-	 * @return
-	 * @throws Throwable
+	 * @param proceedingJoinPoint 拦截点 @see MethodInvocationProceedingJoinPoint
+	 * @return 目标方法返回值
+	 * @throws Throwable 目标方法异常
 	 */
 	public final Object proxy(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		AopUtilContext<T> aopUtilContext = createContext(proceedingJoinPoint);//初始化配置
@@ -82,8 +82,8 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 
 	/**
 	 * 拦截目标的结果值是否已经设置过
-	 * @param aopUtilContext
-	 * @return
+	 * @param aopUtilContext 配置上下文
+	 * @return 是否已经设置过返回值
 	 */
 	protected boolean hasRs(AopUtilContext<?> aopUtilContext) {
 		return aopUtilContext != null && aopUtilContext.isSetResult();
@@ -91,8 +91,8 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 
 	/**
 	 * 触发通知
-	 * @param aopUtilContext
-	 * @param targetTime
+	 * @param aopUtilContext 配置上下文
+	 * @param targetTime 触发时间
 	 */
 	public void warpErrorOperAop(AopUtilContext<T> aopUtilContext, String targetTime) {
 		try {
@@ -104,15 +104,15 @@ public abstract class AbstractAopAspect<T extends AopUtilConfig<T>> implements A
 
 	/**
 	 * 钩子方法  读取配置
-	 * @param aopUtilContext
-	 * @return
+	 * @param aopUtilContext 上下文
+	 * @return 子类化配置
 	 */
 	public abstract T createBean(AopUtilContext<T> aopUtilContext);
 
 	/**
 	 * 创建配置
-	 * @param proceedingJoinPoint
-	 * @return
+	 * @param proceedingJoinPoint 切面
+	 * @return 上下文
 	 */
 	public AopUtilContext<T> createContext(ProceedingJoinPoint proceedingJoinPoint) {
 		try {
