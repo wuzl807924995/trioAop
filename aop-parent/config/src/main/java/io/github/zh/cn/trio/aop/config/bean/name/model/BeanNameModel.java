@@ -1,13 +1,13 @@
 package io.github.zh.cn.trio.aop.config.bean.name.model;
 
-import io.github.zh.cn.trio.aop.config.bean.name.context.BeanNameConfig;
+import io.github.zh.cn.trio.aop.config.bean.name.context.BeanNameContext;
 
 public interface BeanNameModel {
 
-	public void beforeAop(BeanNameConfig beanNameConfig);
+	public void beforeAop(BeanNameContext beanNameContext);
 
-	public void afertAop(BeanNameConfig beanNameConfig);
+	public void afertAop(BeanNameContext beanNameContext);
 
-	public void errorAop(BeanNameConfig beanNameConfig);
+	public void errorAop(BeanNameContext beanNameContext);
 
 }

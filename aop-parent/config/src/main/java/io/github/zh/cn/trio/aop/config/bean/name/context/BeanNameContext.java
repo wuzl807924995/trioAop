@@ -3,7 +3,7 @@ package io.github.zh.cn.trio.aop.config.bean.name.context;
 import io.github.zh.cn.trio.aop.config.bean.name.model.BeanNameModel;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 
-public class BeanNameConfig extends AopUtilContext {
+public class BeanNameContext extends AopUtilContext {
 
 	private String beanName;
 
