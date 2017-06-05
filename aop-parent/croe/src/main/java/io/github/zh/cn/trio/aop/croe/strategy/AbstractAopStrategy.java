@@ -3,28 +3,34 @@ package io.github.zh.cn.trio.aop.croe.strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 
 public abstract class AbstractAopStrategy implements AopStrategy{
 
-	private Logger logger=LoggerFactory.getLogger(getClass());
-	
-	public  <T extends AopUtilConfig>  void  beforeAop(AopUtilContext<T> aopUtilContext){
-	}
-	public  <T extends AopUtilConfig>  void  afertAop(AopUtilContext<T> aopUtilContext){}
-	public  <T extends AopUtilConfig>  void  errorAop(AopUtilContext<T> aopUtilContext){}
-	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Override
-	public <T extends AopUtilConfig> void operAop(AopUtilContext<T> aopUtilContext, String targetTime) {
-		if (AopUtilConfig.TIME_BEFORE.equals(targetTime)) {
+	public void operAop(AopUtilContext aopUtilContext, String targetTime) {
+		if (AopUtilContext.TIME_BEFORE.equals(targetTime)) {
 			beforeAop(aopUtilContext);
-		}else if (AopUtilConfig.TIME_AFTER.equals(targetTime)) {
+		} else if (AopUtilContext.TIME_AFTER.equals(targetTime)) {
 			afertAop(aopUtilContext);
-		}else if (AopUtilConfig.TIME_ERROR.equals(targetTime)) {
+		} else if (AopUtilContext.TIME_ERROR.equals(targetTime)) {
 			errorAop(aopUtilContext);
-		}else {
+		} else {
 			logger.error("operAop has not time to target ");
 		}
+	}
+
+	public void errorAop(AopUtilContext aopUtilContext) {
+
+	}
+
+	public void afertAop(AopUtilContext aopUtilContext) {
+
+	}
+
+	public void beforeAop(AopUtilContext aopUtilContext) {
+
 	}
 }

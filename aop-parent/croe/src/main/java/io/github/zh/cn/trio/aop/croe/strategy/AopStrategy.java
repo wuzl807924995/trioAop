@@ -1,6 +1,5 @@
 package io.github.zh.cn.trio.aop.croe.strategy;
 
-import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 
 /**
@@ -17,7 +16,6 @@ public interface AopStrategy {
 	 * @param targetTime
 	 *            触发时间
 	 */
-	<T extends AopUtilConfig> void operAop(AopUtilContext<T> aopUtilContext, String targetTime);
+	void operAop(AopUtilContext aopUtilContext, String targetTime);
 
-	void operAop1(AopUtilContext<?> aopUtilContext, String targetTime);
 }

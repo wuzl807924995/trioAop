@@ -5,16 +5,31 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.context.ApplicationContext;
+import org.springframework.util.StringUtils;
+
+import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 
 /**
  * 上下文
  */
-public class AopUtilContext<T extends AopUtilConfig> {
+public class AopUtilContext {
 
 	/**
-	 * 泛型子类配置
+	 * 触发时间--前置触发
 	 */
-	private T aopUtilConfig;
+	public static final String TIME_BEFORE = "BEFORE";
+	/**
+	 * 触发时间--后置触发
+	 */
+	public static final String TIME_AFTER = "AFTER";
+	/**
+	 * 触发时间--异常触发
+	 */
+	public static final String TIME_ERROR = "ERROR";
+
+	public static final String TIME_AROUND_STARAT = "AROUND_SATART";
+
+	public static final String TIME_AROUND_END = "AROUND_END";
 
 	/**
 	 * 环绕开启时间
@@ -27,9 +42,16 @@ public class AopUtilContext<T extends AopUtilConfig> {
 	private long aroundTimeEnd;
 
 	/**
-	 * 目标方法抛出的异常
+	 * 触发时间
 	 */
-	private Throwable throwable;
+	private String[] targetTimes;
+
+	/**
+	 * 策略
+	 */
+	private AopStrategy aopStrategy;
+
+	private ApplicationContext applicationContext;
 
 	/**
 	 * 是否设置过目标结果
@@ -45,8 +67,6 @@ public class AopUtilContext<T extends AopUtilConfig> {
 	 * 目标方法返回值类型
 	 */
 	private Class<?> returnClass;
-
-	private ApplicationContext applicationContext;
 
 	/**
 	 * aop切面
@@ -70,12 +90,45 @@ public class AopUtilContext<T extends AopUtilConfig> {
 	 */
 	private Object resultObject;
 
-	public T getAopUtilConfig() {
-		return aopUtilConfig;
+	/**
+	 * 目标方法抛出的异常
+	 */
+	private Throwable throwable;
+
+	public boolean checkEnable(String time) {
+		if (targetTimes == null || StringUtils.isEmpty(time)) {
+			return false;
+		}
+		for (String string : targetTimes) {
+			if (time.equals(string)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void setAopUtilConfig(T aopUtilConfig) {
-		this.aopUtilConfig = aopUtilConfig;
+	public String[] getTargetTimes() {
+		return targetTimes;
+	}
+
+	public void setTargetTimes(String[] targetTimes) {
+		this.targetTimes = targetTimes;
+	}
+
+	public AopStrategy getAopStrategy() {
+		return aopStrategy;
+	}
+
+	public void setAopStrategy(AopStrategy aopStrategy) {
+		this.aopStrategy = aopStrategy;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 	public Object getTarget() {
@@ -180,18 +233,4 @@ public class AopUtilContext<T extends AopUtilConfig> {
 		return setResult;
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
-	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
-
-	public void operAop(String targetTime) {
-		boolean enable = this.aopUtilConfig.checkEnable(targetTime);
-		if (enable) {
-			this.getAopUtilConfig().getAopStrategy().operAop(this, targetTime);
-		}
-	}
 }
