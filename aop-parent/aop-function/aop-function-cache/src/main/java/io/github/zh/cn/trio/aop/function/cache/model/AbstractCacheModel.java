@@ -31,7 +31,7 @@ public abstract class AbstractCacheModel implements CacheModel {
 	/**
 	 * 读缓存结果
 	 * 
-	 * @param aopUtilContext
+	 * @param cacheBeanContext
 	 *            上下文
 	 */
 	protected void getCacheResult(CacheBeanContext cacheBeanContext) {

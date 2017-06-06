@@ -5,11 +5,11 @@
     <artifactId>aop-parent</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
-  <artifactId>config</artifactId>
+  <artifactId>aop-croe</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
-			<artifactId>croe</artifactId>
+			<artifactId>aop-utils</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>

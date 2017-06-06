@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>io.github.zh-cn-trio</groupId>
-		<artifactId>function</artifactId>
+		<artifactId>aop-function</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>cache</artifactId>
+	<artifactId>aop-function-cache</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
-			<artifactId>config</artifactId>
+			<artifactId>aop-config</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>

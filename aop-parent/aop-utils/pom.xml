@@ -5,12 +5,5 @@
     <artifactId>aop-parent</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
-  <artifactId>croe</artifactId>
-  <dependencies>
-		<dependency>
-			<groupId>${parent.groupId}</groupId>
-			<artifactId>utils</artifactId>
-			<version>${parent.version}</version>
-		</dependency>
-	</dependencies>
+  <artifactId>aop-utils</artifactId>
 </project>

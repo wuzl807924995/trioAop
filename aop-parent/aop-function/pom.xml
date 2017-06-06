@@ -5,9 +5,9 @@
     <artifactId>aop-parent</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
-  <artifactId>function</artifactId>
+  <artifactId>aop-function</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>cache</module>
+  	<module>aop-function-cache</module>
   </modules>
 </project>

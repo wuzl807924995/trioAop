@@ -6,12 +6,13 @@
 	<artifactId>aop-parent</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	
 
 	<modules>
-		<module>croe</module>
-		<module>utils</module>
-		<module>config</module>
-		<module>function</module>
+		<module>aop-croe</module>
+		<module>aop-utils</module>
+		<module>aop-config</module>
+		<module>aop-function</module>
 	</modules>
 
 	<licenses>
@@ -23,9 +24,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/zh-cn-trio/trioAop</url>
-		<connection>git@github.com:zh-cn-trio/trioAop.git</connection>
-		<developerConnection>git@github.com:zh-cn-trio/trioAop.git</developerConnection>
+		<url>git@github.com:zh-cn-trio/trioAop.git</url>
+		<connection>scm:git:git@github.com:zh-cn-trio/trioAop.git</connection>
+		<developerConnection>scm:git:git@github.com:zh-cn-trio/trioAop.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -120,10 +121,10 @@
 					<id>ossrh</id>
 					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 				</snapshotRepository>
-				<repository>
+				<!-- <repository>
 					<id>ossrh</id>
 					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-				</repository>
+				</repository> -->
 			</distributionManagement>
 			<build>
 				<plugins>

@@ -33,14 +33,14 @@ public interface CacheModel {
 	String getModelName();
 
 	/**
-	 * 前置执行
-	 * 
+	 *前置执行 
+	 * @param cacheBeanContext 上下文
 	 */
 	void execBefore(CacheBeanContext cacheBeanContext);
 
 	/**
 	 * 后置执行
-	 * 
+	 *  @param cacheBeanContext 上下文
 	 */
 	void execAfter(CacheBeanContext cacheBeanContext);
 }
