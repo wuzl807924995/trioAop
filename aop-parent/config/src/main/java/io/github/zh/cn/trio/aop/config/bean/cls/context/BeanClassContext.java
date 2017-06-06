@@ -1,21 +1,24 @@
 package io.github.zh.cn.trio.aop.config.bean.cls.context;
 
-import io.github.zh.cn.trio.aop.config.bean.cls.model.BeanClassModel;
-import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
+import io.github.zh.cn.trio.aop.config.bean.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.config.bean.abs.model.AbsBeanModel;
 
-public class BeanClassContext extends AopUtilContext {
+public class BeanClassContext extends AbsContext {
 
-	private Class<? extends BeanClassModel> beanClass;
+	private Class<? extends AbsContext> beanClass;
 
-	public Class<? extends BeanClassModel> getBeanClass() {
+	public Class<? extends AbsContext> getBeanClass() {
 		return beanClass;
 	}
 
-	public void setBeanClass(Class<? extends BeanClassModel> beanClass) {
+	public void setBeanClass(Class<? extends AbsContext> beanClass) {
 		this.beanClass = beanClass;
 	}
 
-	public <T extends BeanClassModel> BeanClassModel getBeanModel() {
-		return getApplicationContext().getBean(getBeanClass());
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends AbsBeanModel> T getBeanModel() {
+		return (T) getApplicationContext().getBean(beanClass);
 	}
+
 }

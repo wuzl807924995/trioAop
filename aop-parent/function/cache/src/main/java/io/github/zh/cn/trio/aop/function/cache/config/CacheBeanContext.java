@@ -1,7 +1,7 @@
-package io.github.zh.cn.trio.aop.cache.config;
+package io.github.zh.cn.trio.aop.function.cache.config;
 
-import io.github.zh.cn.trio.aop.cache.model.CacheModel;
-import io.github.zh.cn.trio.aop.config.bean.name.context.BeanNameContext;
+import io.github.zh.cn.trio.aop.config.bean.cls.context.BeanClassContext;
+import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 import io.github.zh.cn.trio.aop.utils.format.Format;
 
 /**
@@ -9,7 +9,7 @@ import io.github.zh.cn.trio.aop.utils.format.Format;
  * 缓存配置
  *
  */
-public class CacheBeanContext extends BeanNameContext {
+public class CacheBeanContext extends BeanClassContext {
 
 	/**
 	 *@return 缓存时间

@@ -15,8 +15,7 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 /**
  * 抽象拦截aop接口
  *
- * @param <T>
- *            配置子类
+ * 配置子类
  */
 public abstract class AbstractAopAspect implements ApplicationContextAware, Ordered {
 
@@ -133,6 +132,9 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 
 		aopUtilContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
 		aopUtilContext.setApplicationContext(applicationContext);
+		aopUtilContext=initContext(aopUtilContext);
 		return aopUtilContext;
 	}
+
+	public abstract <T extends AopUtilContext> T initContext(AopUtilContext aopUtilContext);
 }

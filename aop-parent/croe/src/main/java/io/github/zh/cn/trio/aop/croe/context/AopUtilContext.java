@@ -233,4 +233,10 @@ public class AopUtilContext {
 		return setResult;
 	}
 
+	public static <T extends AopUtilContext> T copyContext(AopUtilContext aopUtilContext,T t) {
+		t.setApplicationContext(aopUtilContext.getApplicationContext());
+		t.setMethodInvocationProceedingJoinPoint(aopUtilContext.getMethodInvocationProceedingJoinPoint());
+		return t;
+	}
+	
 }

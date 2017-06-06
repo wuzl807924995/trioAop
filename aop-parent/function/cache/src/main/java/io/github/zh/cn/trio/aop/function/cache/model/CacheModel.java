@@ -1,6 +1,6 @@
-package io.github.zh.cn.trio.aop.cache.model;
+package io.github.zh.cn.trio.aop.function.cache.model;
 
-import io.github.zh.cn.trio.aop.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
 
 /**
  * 缓存读写模式的接口
@@ -36,11 +36,11 @@ public interface CacheModel {
 	 * 前置执行
 	 * 
 	 */
-	void execBefore(CacheBeanContext cacheBeanConfig);
+	void execBefore(CacheBeanContext cacheBeanContext);
 
 	/**
 	 * 后置执行
 	 * 
 	 */
-	void execAfter(CacheBeanContext cacheBeanConfig);
+	void execAfter(CacheBeanContext cacheBeanContext);
 }
