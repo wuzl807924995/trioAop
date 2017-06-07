@@ -8,8 +8,7 @@ public class ReadOnlyCacheModel extends AbstractCacheModel {
 	public String getModelName() {
 		return READ_ONLY;
 	}
-	
-	
+
 	@Override
 	public void execBefore(CacheBeanContext cacheBeanContext) {
 		getCacheResult(cacheBeanContext);

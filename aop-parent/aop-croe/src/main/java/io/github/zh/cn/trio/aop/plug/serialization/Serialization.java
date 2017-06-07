@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.utils.serialization;
+package io.github.zh.cn.trio.aop.plug.serialization;
 
 public interface Serialization {
 

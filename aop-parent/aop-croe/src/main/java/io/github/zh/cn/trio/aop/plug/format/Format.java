@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.utils.format;
+package io.github.zh.cn.trio.aop.plug.format;
 
 public interface Format {
 

@@ -30,7 +30,6 @@ public interface CacheModel {
 	 */
 	public static final String REMOVE = "REMOVE";
 
-	String getModelName();
 
 	/**
 	 *前置执行 

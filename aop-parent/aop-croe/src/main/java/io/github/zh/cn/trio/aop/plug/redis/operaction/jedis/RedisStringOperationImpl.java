@@ -1,9 +1,9 @@
-package io.github.zh.cn.trio.aop.utils.redis.operaction.jedis;
+package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.zh.cn.trio.aop.utils.redis.operaction.RedisStringOperation;
+import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 

@@ -1,8 +1,8 @@
-package io.github.zh.cn.trio.aop.utils.serialization.gson;
+package io.github.zh.cn.trio.aop.plug.serialization.gson;
 
 import com.google.gson.Gson;
 
-import io.github.zh.cn.trio.aop.utils.serialization.Serialization;
+import io.github.zh.cn.trio.aop.plug.serialization.Serialization;
 
 public class GsonSerializationImpl implements Serialization {
 

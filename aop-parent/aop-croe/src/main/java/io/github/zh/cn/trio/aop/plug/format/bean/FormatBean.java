@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.utils.format.bean;
+package io.github.zh.cn.trio.aop.plug.format.bean;
 
 import java.lang.reflect.Method;
 

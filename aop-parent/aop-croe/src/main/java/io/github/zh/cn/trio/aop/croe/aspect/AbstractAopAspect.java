@@ -8,7 +8,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
-import org.springframework.util.StringUtils;
 
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
@@ -80,7 +79,7 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			try {
-				if (aopUtilContext!=null) {
+				if (aopUtilContext != null) {
 					aopUtilContext.setThrowable(e);
 					warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_ERROR);// 异常通知
 				}
@@ -122,19 +121,6 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 		}
 	}
 
-	public <U> U getBean(String beanName, Class<U> tcls, U defaultBean) {
-		if (StringUtils.isEmpty(beanName)) {
-			return defaultBean;
-		} else {
-			try {
-				return getApplicationContext().getBean(beanName, tcls);
-			} catch (Exception e) {
-				logger.error("getBean has exception beanName:" + beanName + " class:" + tcls, e);
-				return defaultBean;
-			}
-		}
-	}
-	
 	/**
 	 * 创建配置
 	 * 
@@ -148,7 +134,7 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 
 		aopUtilContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
 		aopUtilContext.setApplicationContext(applicationContext);
-		aopUtilContext=initContext(aopUtilContext);
+		aopUtilContext = initContext(aopUtilContext);
 		return aopUtilContext;
 	}
 

@@ -10,10 +10,12 @@ import org.springframework.util.StringUtils;
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
+import io.github.zh.cn.trio.aop.croe.utils.BeanUtils;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
 import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
-import io.github.zh.cn.trio.aop.utils.format.Format;
+import io.github.zh.cn.trio.aop.plug.format.Format;
 
 @Aspect
 public class TrioCacheAnnotationAspect extends AbstractAopAspect {
@@ -69,9 +71,9 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 	}
 
 	protected CacheModel getAnnotationConfigCacheModel(String cacheModel) {
-		Map<String, CacheModel> map = getApplicationContext().getBeansOfType(CacheModel.class);
+		Map<String, AbstractCacheModel> map = getApplicationContext().getBeansOfType(AbstractCacheModel.class);
 		for (String beanName : map.keySet()) {
-			CacheModel model = getApplicationContext().getBean(beanName, CacheModel.class);
+			AbstractCacheModel model = map.get(beanName);
 			if (model.getModelName().equals(cacheModel)) {
 				return model;
 			}
@@ -89,8 +91,8 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 		TrioCache trioCache = cacheBeanContext.getTargetMethod().getAnnotation(TrioCache.class);
 		
 		
-		AopStrategy aopStrategy = getBean(trioCache.aopStrategy(), AopStrategy.class, getDefaultAopStrategy());
-		Format format = getBean(trioCache.format(), Format.class, defaultFormat);
+		AopStrategy aopStrategy = BeanUtils.getBean(getApplicationContext(),trioCache.aopStrategy(), AopStrategy.class, getDefaultAopStrategy());
+		Format format = BeanUtils.getBean(getApplicationContext(),trioCache.format(), Format.class, defaultFormat);
 		CacheModel cacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
 		String formatString=StringUtils.isEmpty(trioCache.keyModelString())?defaultKeyModelString:trioCache.keyModelString();
 		

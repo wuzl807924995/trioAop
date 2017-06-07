@@ -2,7 +2,7 @@ package io.github.zh.cn.trio.aop.function.cache.context;
 
 import io.github.zh.cn.trio.aop.config.cls.context.BeanClassContext;
 import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
-import io.github.zh.cn.trio.aop.utils.format.Format;
+import io.github.zh.cn.trio.aop.plug.format.Format;
 
 /**
  * 
