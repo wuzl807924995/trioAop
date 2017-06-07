@@ -1,10 +1,10 @@
-package io.github.zh.cn.trio.aop.config.bean.abs.strategy;
+package io.github.zh.cn.trio.aop.config.abs.strategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.zh.cn.trio.aop.config.bean.abs.context.AbsContext;
-import io.github.zh.cn.trio.aop.config.bean.abs.model.AbsBeanModel;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 

@@ -1,6 +1,6 @@
-package io.github.zh.cn.trio.aop.config.bean.abs.model;
+package io.github.zh.cn.trio.aop.config.abs.model;
 
-import io.github.zh.cn.trio.aop.config.bean.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
 
 public interface AbsBeanModel {
 

@@ -10,7 +10,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
-			<artifactId>aop-config</artifactId>
+			<artifactId>aop-croe</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>

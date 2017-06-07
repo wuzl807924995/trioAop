@@ -16,8 +16,6 @@
 
 	<modules>
 		<module>aop-croe</module>
-		<module>aop-utils</module>
-		<module>aop-config</module>
 		<module>aop-function</module>
 	</modules>
 

@@ -1,6 +1,6 @@
 package io.github.zh.cn.trio.aop.function.cache.config;
 
-import io.github.zh.cn.trio.aop.config.bean.cls.context.BeanClassContext;
+import io.github.zh.cn.trio.aop.config.cls.context.BeanClassContext;
 import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 import io.github.zh.cn.trio.aop.utils.format.Format;
 

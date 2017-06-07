@@ -9,5 +9,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>aop-function-cache</module>
+  	<module>aop-function-logger</module>
   </modules>
 </project>

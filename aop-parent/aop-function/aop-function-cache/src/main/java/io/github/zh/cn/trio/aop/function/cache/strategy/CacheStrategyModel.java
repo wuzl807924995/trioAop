@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.strategy;
 
-import io.github.zh.cn.trio.aop.config.bean.abs.context.AbsContext;
-import io.github.zh.cn.trio.aop.config.bean.abs.model.AbsBeanModel;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
 
 public class CacheStrategyModel implements AbsBeanModel {

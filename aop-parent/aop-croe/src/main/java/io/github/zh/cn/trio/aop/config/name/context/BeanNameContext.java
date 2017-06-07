@@ -1,7 +1,7 @@
-package io.github.zh.cn.trio.aop.config.bean.name.context;
+package io.github.zh.cn.trio.aop.config.name.context;
 
-import io.github.zh.cn.trio.aop.config.bean.abs.context.AbsContext;
-import io.github.zh.cn.trio.aop.config.bean.abs.model.AbsBeanModel;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 
 public class BeanNameContext extends AbsContext {
 
