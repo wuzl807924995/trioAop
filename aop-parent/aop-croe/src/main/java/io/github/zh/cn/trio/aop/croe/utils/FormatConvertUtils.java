@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.croe.utils;
 
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
-import io.github.zh.cn.trio.aop.utils.format.bean.FormatBean;
+import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
 
 public class FormatConvertUtils {
 

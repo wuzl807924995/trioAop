@@ -1,15 +1,21 @@
 package io.github.zh.cn.trio.aop.function.cache.face.redis;
 
-import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
-import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
-import io.github.zh.cn.trio.aop.utils.redis.operaction.RedisStringOperation;
-import io.github.zh.cn.trio.aop.utils.serialization.Serialization;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
+import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
+import io.github.zh.cn.trio.aop.plug.serialization.Serialization;
+
+@Component
 public class RedisCacheFaceImpl implements CacheFace {
 
+	@Autowired
 	private RedisStringOperation redisStringOperation;
 
+	@Autowired
 	private Serialization serialization;
 
 	public RedisStringOperation getRedisStringOperation() {

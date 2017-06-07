@@ -4,14 +4,25 @@
 	<parent>
 		<groupId>io.github.zh-cn-trio</groupId>
 		<artifactId>aop-function</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>aop-function-cache</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
-			<artifactId>aop-config</artifactId>
+			<artifactId>aop-croe</artifactId>
 			<version>${parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.json.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
 		</dependency>
 	</dependencies>
 </project>

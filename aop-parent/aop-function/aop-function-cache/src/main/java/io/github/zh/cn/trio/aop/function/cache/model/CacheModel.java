@@ -1,6 +1,6 @@
 package io.github.zh.cn.trio.aop.function.cache.model;
 
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 
 /**
  * 缓存读写模式的接口
@@ -30,7 +30,6 @@ public interface CacheModel {
 	 */
 	public static final String REMOVE = "REMOVE";
 
-	String getModelName();
 
 	/**
 	 *前置执行 

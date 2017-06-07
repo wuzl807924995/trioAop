@@ -1,6 +1,6 @@
 package io.github.zh.cn.trio.aop.function.cache.face;
 
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 
 public interface CacheFace {
 	/**
