@@ -6,4 +6,11 @@
     <version>0.0.3-SNAPSHOT</version>
   </parent>
   <artifactId>aop-function-logger</artifactId>
+  <dependencies>
+		<dependency>
+			<groupId>${parent.groupId}</groupId>
+			<artifactId>aop-croe</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+	</dependencies>
 </project>

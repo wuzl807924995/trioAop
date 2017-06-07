@@ -1,15 +1,15 @@
-package io.github.zh.cn.trio.aop.cache.config;
+package io.github.zh.cn.trio.aop.function.cache.context;
 
-import io.github.zh.cn.trio.aop.cache.model.CacheModel;
-import io.github.zh.cn.trio.aop.croe.base.format.Format;
-import io.github.zh.cn.trio.aop.croe.context.AopUtilConfig;
+import io.github.zh.cn.trio.aop.config.cls.context.BeanClassContext;
+import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
+import io.github.zh.cn.trio.aop.utils.format.Format;
 
 /**
  * 
  * 缓存配置
  *
  */
-public class CacheBeanConfig extends AopUtilConfig<CacheBeanConfig> {
+public class CacheBeanContext extends BeanClassContext {
 
 	/**
 	 *@return 缓存时间

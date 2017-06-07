@@ -11,7 +11,7 @@ import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 import io.github.zh.cn.trio.aop.utils.format.Format;
 
