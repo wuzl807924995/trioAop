@@ -1,9 +1,12 @@
 package io.github.zh.cn.trio.aop.plug.serialization.gson;
 
+import org.springframework.stereotype.Component;
+
 import com.google.gson.Gson;
 
 import io.github.zh.cn.trio.aop.plug.serialization.Serialization;
 
+@Component
 public class GsonSerializationImpl implements Serialization {
 
 	@Override

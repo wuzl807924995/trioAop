@@ -1,5 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
 import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
@@ -10,6 +12,7 @@ public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
 	/**
 	 * 缓存实现接口
 	 */
+	@Autowired
 	private CacheFace cacheFace;
 
 	public CacheFace getCacheFace() {

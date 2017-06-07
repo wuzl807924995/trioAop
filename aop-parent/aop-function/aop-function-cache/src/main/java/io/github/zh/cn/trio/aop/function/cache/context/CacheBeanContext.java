@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.context;
 
-import io.github.zh.cn.trio.aop.config.cls.context.BeanClassContext;
-import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
 import io.github.zh.cn.trio.aop.plug.format.Format;
 
 /**
@@ -9,20 +9,20 @@ import io.github.zh.cn.trio.aop.plug.format.Format;
  * 缓存配置
  *
  */
-public class CacheBeanContext extends BeanClassContext {
+public class CacheBeanContext extends AbsContext {
 
 	/**
-	 *@return 缓存时间
+	 * @return 缓存时间
 	 */
 	private int cacheTime;
 
 	/**
-	 *@return 缓存模式
+	 * @return 缓存模式
 	 */
-	private CacheModel cacheModel;
+	private AbstractCacheModel cacheModel;
 
 	/**
-	 *@return 缓存建 模板字符
+	 * @return 缓存建 模板字符
 	 */
 	private String keyModelString;
 
@@ -36,11 +36,11 @@ public class CacheBeanContext extends BeanClassContext {
 		this.cacheTime = cacheTime;
 	}
 
-	public CacheModel getCacheModel() {
+	public AbstractCacheModel getCacheModel() {
 		return cacheModel;
 	}
 
-	public void setCacheModel(CacheModel cacheModel) {
+	public void setCacheModel(AbstractCacheModel cacheModel) {
 		this.cacheModel = cacheModel;
 	}
 
@@ -58,5 +58,11 @@ public class CacheBeanContext extends BeanClassContext {
 
 	public void setFormat(Format format) {
 		this.format = format;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AbstractCacheModel getBeanModel() {
+		return cacheModel;
 	}
 }

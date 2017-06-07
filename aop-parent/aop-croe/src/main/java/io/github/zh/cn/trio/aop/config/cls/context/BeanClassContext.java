@@ -5,13 +5,13 @@ import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 
 public class BeanClassContext extends AbsContext {
 
-	private Class<? extends AbsContext> beanClass;
+	private Class<? extends AbsBeanModel> beanClass;
 
-	public Class<? extends AbsContext> getBeanClass() {
+	public Class<? extends AbsBeanModel> getBeanClass() {
 		return beanClass;
 	}
 
-	public void setBeanClass(Class<? extends AbsContext> beanClass) {
+	public void setBeanClass(Class<? extends AbsBeanModel> beanClass) {
 		this.beanClass = beanClass;
 	}
 

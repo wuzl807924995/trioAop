@@ -2,13 +2,16 @@ package io.github.zh.cn.trio.aop.config.abs.strategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
 import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 
+@Component
 public class SimpleContextStrategy implements AopStrategy {
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
