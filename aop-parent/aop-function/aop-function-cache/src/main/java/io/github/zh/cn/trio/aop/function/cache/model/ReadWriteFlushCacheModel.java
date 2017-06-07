@@ -1,6 +1,6 @@
 package io.github.zh.cn.trio.aop.function.cache.model;
 
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 
 public class ReadWriteFlushCacheModel extends AbstractCacheModel {
 

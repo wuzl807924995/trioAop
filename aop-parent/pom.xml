@@ -10,14 +10,12 @@
 
 	<groupId>io.github.zh-cn-trio</groupId>
 	<artifactId>aop-parent</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 
 	<modules>
 		<module>aop-croe</module>
-		<module>aop-utils</module>
-		<module>aop-config</module>
 		<module>aop-function</module>
 	</modules>
 

@@ -2,8 +2,15 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.github.zh-cn-trio</groupId>
-    <artifactId>aop-parent</artifactId>
+    <artifactId>aop-function</artifactId>
     <version>0.0.3-SNAPSHOT</version>
   </parent>
-  <artifactId>aop-croe</artifactId>
+  <artifactId>aop-function-logger</artifactId>
+  <dependencies>
+		<dependency>
+			<groupId>${parent.groupId}</groupId>
+			<artifactId>aop-croe</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+	</dependencies>
 </project>

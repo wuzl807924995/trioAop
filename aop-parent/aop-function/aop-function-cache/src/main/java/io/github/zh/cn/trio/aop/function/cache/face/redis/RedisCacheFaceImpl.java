@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.face.redis;
 
 import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
-import io.github.zh.cn.trio.aop.function.cache.config.CacheBeanContext;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
 import io.github.zh.cn.trio.aop.utils.redis.operaction.RedisStringOperation;
 import io.github.zh.cn.trio.aop.utils.serialization.Serialization;
