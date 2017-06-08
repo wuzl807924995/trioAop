@@ -16,8 +16,8 @@
 		<gson.json.version>2.8.0</gson.json.version>
 		<jedis.version>2.9.0</jedis.version>
 
-		<test.cache.version>0.0.3</test.cache.version>
-		<test.logger.version>0.0.3</test.logger.version>
+		<test.cache.version>0.0.4-SNAPSHOT</test.cache.version>
+		<test.logger.version>0.0.4-SNAPSHOT</test.logger.version>
 	</properties>
 
 	<dependencies>
