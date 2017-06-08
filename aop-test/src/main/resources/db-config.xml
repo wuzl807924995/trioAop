@@ -2,19 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	
+
+
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
 		<constructor-arg type="java.net.URI">
-			<value>http://:laoniubusi@118.178.187.237:6878/0</value>
+			<value>${filter.config.redis.single}</value>
 		</constructor-arg>
 	</bean>
-	
+
 	<bean
 		class="io.github.zh.cn.trio.aop.plug.redis.operaction.jedis.RedisStringOperationImpl">
 		<property name="jedisPool" ref="jedisPool"></property>
 	</bean>
-	
+
 	<bean class="io.github.zh.cn.trio.aop.logger.face.slf4j.Slf4jLoggerFaceImpl"></bean>
 
 </beans>

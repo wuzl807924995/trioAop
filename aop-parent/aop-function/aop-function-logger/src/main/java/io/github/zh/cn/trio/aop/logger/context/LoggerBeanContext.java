@@ -7,7 +7,6 @@ import org.springframework.util.CollectionUtils;
 
 import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
 import io.github.zh.cn.trio.aop.logger.face.AbstarctLoggerFace;
-import io.github.zh.cn.trio.aop.plug.format.Format;
 
 /**
  * 
@@ -24,25 +23,14 @@ public class LoggerBeanContext extends AbsContext {
 	private Map<String, String> levelToNameMap;
 	private Map<String, String> nameToModelMap;
 
-	private Format format;
-	
 	private AbstarctLoggerFace loggerFace;
-	
+
 	public AbstarctLoggerFace getLoggerFace() {
 		return loggerFace;
 	}
-	
-	
+
 	public void setLoggerFace(AbstarctLoggerFace loggerFace) {
 		this.loggerFace = loggerFace;
-	}
-
-	public Format getFormat() {
-		return format;
-	}
-
-	public void setFormat(Format format) {
-		this.format = format;
 	}
 
 	public Map<String, String> getTimeToLevelMap() {
@@ -80,15 +68,14 @@ public class LoggerBeanContext extends AbsContext {
 	public String getModel(String name) {
 		return getNameToModelMap().get(name);
 	}
-	
-	public <K,V> Map<K, V> initMap(Map<K,V> map,K k,V v){
+
+	public <K, V> Map<K, V> initMap(Map<K, V> map, K k, V v) {
 		if (CollectionUtils.isEmpty(map)) {
-			map=new HashMap<>();
+			map = new HashMap<>();
 		}
 		map.put(k, v);
 		return map;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override

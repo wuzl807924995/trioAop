@@ -9,7 +9,7 @@ import test.demo.face.bean.User;
 
 public class FaceImpl implements IFace {
 
-	@TrioLogger(targetTime=CacheBeanContext.TIME_BEFORE,modelString= "'before method:'+getTargetMethod()+':args:'+getTargetArgs()[0]")
+	@TrioLogger(targetTime=CacheBeanContext.TIME_BEFORE,modelString= "'before :'+getTargetMethod()+':args:'+getTargetArgs()[0].getId()")
 	@TrioCache(cacheModel=CacheModel.READ_WRITE_FLUSH)
 	@Override
 	public User test1(User u) {

@@ -3,12 +3,20 @@
   <parent>
     <groupId>io.github.zh-cn-trio</groupId>
     <artifactId>aop-parent</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>aop-function</artifactId>
   <packaging>pom</packaging>
   <modules>
   	<module>aop-function-cache</module>
   	<module>aop-function-logger</module>
+  	<module>aop-function-validation</module>
   </modules>
+    <dependencies>
+		<dependency>
+			<groupId>${parent.groupId}</groupId>
+			<artifactId>aop-croe</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+	</dependencies>
 </project>
