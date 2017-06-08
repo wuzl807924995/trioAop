@@ -2,20 +2,16 @@ package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 @SuppressWarnings("deprecation")
-@Component
 public class RedisStringOperationImpl implements RedisStringOperation {
 	
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Autowired
 	private JedisPool jedisPool;
 
 	public JedisPool getJedisPool() {

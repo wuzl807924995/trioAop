@@ -19,6 +19,6 @@ public class ReadWriteCacheModel extends AbstractCacheModel {
 
 	@Override
 	public void execAfter(CacheBeanContext cacheBeanContext) {
-		getCacheFace().setCache(cacheBeanContext);
+		setCacheResult(cacheBeanContext, false);
 	}
 }

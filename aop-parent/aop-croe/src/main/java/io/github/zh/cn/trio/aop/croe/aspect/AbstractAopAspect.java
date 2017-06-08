@@ -17,7 +17,7 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
  *
  * 配置子类
  */
-public abstract class AbstractAopAspect implements ApplicationContextAware, Ordered {
+public abstract class AbstractAopAspect<T extends AopUtilContext> implements ApplicationContextAware, Ordered {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -128,15 +128,11 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 	 *            切面
 	 * @return 上下文
 	 */
-	public AopUtilContext createContext(ProceedingJoinPoint proceedingJoinPoint) {
-		AopUtilContext aopUtilContext = new AopUtilContext();
+	public T createContext(ProceedingJoinPoint proceedingJoinPoint) {
 		MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
-
-		aopUtilContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
-		aopUtilContext.setApplicationContext(applicationContext);
-		aopUtilContext = initContext(aopUtilContext);
-		return aopUtilContext;
+		return initContext(methodInvocationProceedingJoinPoint);
 	}
+	
+	public abstract T initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint);
 
-	public abstract <T extends AopUtilContext> T initContext(AopUtilContext aopUtilContext);
 }

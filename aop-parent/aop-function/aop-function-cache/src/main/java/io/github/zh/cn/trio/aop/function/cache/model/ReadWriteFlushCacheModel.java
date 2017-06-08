@@ -14,6 +14,6 @@ public class ReadWriteFlushCacheModel extends AbstractCacheModel {
 
 	@Override
 	public void execAfter(CacheBeanContext cacheBeanContext) {
-		getCacheFace().setCache(cacheBeanContext);
+		setCacheResult(cacheBeanContext, true);
 	}
 }

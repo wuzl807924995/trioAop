@@ -8,21 +8,24 @@
 
 	<import resource="db-config.xml" />
 
-	<context:component-scan base-package="io.github.zh.cn.trio.aop">
+	<context:component-scan base-package="io.github.zh.cn.trio.aop"
+		use-default-filters="true">
+
 	</context:component-scan>
 
 	<aop:aspectj-autoproxy proxy-target-class="true">
 	</aop:aspectj-autoproxy>
 
-	<bean id="trioCacheAnnotationAspect"
-		class="io.github.zh.cn.trio.aop.function.cache.aspect.TrioCacheAnnotationAspect">
+	<bean id="trioLoggerAnnotationAspect"
+		class="io.github.zh.cn.trio.aop.logger.aspect.TrioLoggerAnnotationAspect">
 	</bean>
-
 
 
 
 	<bean id="face" class="test.demo.face.impl.FaceImpl">
 
 	</bean>
+
+
 
 </beans>

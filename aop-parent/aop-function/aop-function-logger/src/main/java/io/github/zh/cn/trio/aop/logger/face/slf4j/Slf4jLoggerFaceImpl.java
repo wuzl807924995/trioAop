@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
 import io.github.zh.cn.trio.aop.logger.context.LoggerBeanContext;
-import io.github.zh.cn.trio.aop.logger.face.LoggerFace;
+import io.github.zh.cn.trio.aop.logger.face.AbstarctLoggerFace;
 import io.github.zh.cn.trio.aop.plug.format.Format;
 import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
 
@@ -14,7 +14,7 @@ import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
  * slf4j 实现的日志
  *
  */
-public class Slf4jLoggerFaceImpl implements LoggerFace {
+public class Slf4jLoggerFaceImpl extends AbstarctLoggerFace {
 
 	@Override
 	public void logger(LoggerBeanContext aopUtilContext, String targetTime) {

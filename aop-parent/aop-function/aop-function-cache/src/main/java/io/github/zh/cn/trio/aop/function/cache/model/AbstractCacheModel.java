@@ -64,5 +64,11 @@ public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
 			cacheBeanContext.setResultObject(cacheFace.getCache(cacheBeanContext));
 		}
 	}
+	
+	protected void setCacheResult(CacheBeanContext cacheBeanContext,boolean flush){
+		if (flush || !cacheFace.hasCache(cacheBeanContext)) {
+			cacheFace.setCache(cacheBeanContext);
+		}
+	}
 
 }

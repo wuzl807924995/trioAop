@@ -5,12 +5,12 @@ import java.util.Map;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
 
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
-import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.croe.utils.BeanUtils;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
@@ -19,7 +19,7 @@ import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
 import io.github.zh.cn.trio.aop.plug.format.Format;
 
 @Aspect
-public class TrioCacheAnnotationAspect extends AbstractAopAspect {
+public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContext> {
 
 	public static final String[] targetTime = new String[] { CacheBeanContext.TIME_BEFORE,
 			CacheBeanContext.TIME_AFTER };
@@ -84,14 +84,14 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 		return defaultCacheModel;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public CacheBeanContext initContext(AopUtilContext aopUtilContext) {
-		CacheBeanContext cacheBeanContext = new CacheBeanContext();
-		cacheBeanContext = CacheBeanContext.copyContext(aopUtilContext, cacheBeanContext);
-
+	public CacheBeanContext initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint) {
+		CacheBeanContext cacheBeanContext=new CacheBeanContext();
+		cacheBeanContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
+		cacheBeanContext.setApplicationContext(getApplicationContext());
+		
 		TrioCache trioCache = cacheBeanContext.getTargetMethod().getAnnotation(TrioCache.class);
-
+		
 		AopStrategy aopStrategy = BeanUtils.getBean(getApplicationContext(), trioCache.aopStrategy(), AopStrategy.class,
 				getDefaultAopStrategy());
 		Format format = BeanUtils.getBean(getApplicationContext(), trioCache.format(), Format.class, defaultFormat);
@@ -109,3 +109,4 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 		return cacheBeanContext;
 	}
 }
+
