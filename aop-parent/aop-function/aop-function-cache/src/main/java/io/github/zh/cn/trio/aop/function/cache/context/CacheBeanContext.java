@@ -2,7 +2,6 @@ package io.github.zh.cn.trio.aop.function.cache.context;
 
 import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
 import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
-import io.github.zh.cn.trio.aop.plug.format.Format;
 
 /**
  * 
@@ -26,8 +25,6 @@ public class CacheBeanContext extends AbsContext {
 	 */
 	private String keyModelString;
 
-	private Format format;
-
 	public int getCacheTime() {
 		return cacheTime;
 	}
@@ -50,14 +47,6 @@ public class CacheBeanContext extends AbsContext {
 
 	public void setKeyModelString(String keyModelString) {
 		this.keyModelString = keyModelString;
-	}
-
-	public Format getFormat() {
-		return format;
-	}
-
-	public void setFormat(Format format) {
-		this.format = format;
 	}
 
 	@SuppressWarnings("unchecked")

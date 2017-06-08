@@ -1,10 +1,10 @@
-package io.github.zh.cn.trio.aop.validation.bean;
+package io.github.zh.cn.trio.aop.validation.result;
 
 /**
  * 验证结果
  *
  */
-public class SimpleResult implements IReturnResult {
+public class MulitResult implements IResult {
 
 	/**
 	 * 结果是否全部成功
@@ -56,11 +56,6 @@ public class SimpleResult implements IReturnResult {
 
 	public void setValidationError(Object[] validationErrorMsg) {
 		this.validationError = validationErrorMsg;
-	}
-
-	@Override
-	public Object getRerrorResult() {
-		return null;
 	}
 
 }

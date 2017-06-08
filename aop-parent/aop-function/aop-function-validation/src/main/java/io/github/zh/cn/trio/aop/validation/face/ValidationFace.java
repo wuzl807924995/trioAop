@@ -1,17 +1,9 @@
 package io.github.zh.cn.trio.aop.validation.face;
 
-import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
-import io.github.zh.cn.trio.aop.validation.bean.IResult;
-import io.github.zh.cn.trio.aop.validation.config.ValidationBeanConfig;
+import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.validation.result.IReturnResult;
 
-/**
- * 
- * 验证接口
- *
- */
-public interface ValidationFace<T extends IResult> {
+public interface ValidationFace {
 
-	T validationData(AopUtilContext<ValidationBeanConfig> aopUtilContext);
-
-	Class<T> getEClass();
+	<T> IReturnResult<T> validation(AbsContext context);
 }

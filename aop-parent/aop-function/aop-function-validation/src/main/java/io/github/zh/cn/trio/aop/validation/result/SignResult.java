@@ -1,12 +1,9 @@
-package io.github.zh.cn.trio.aop.validation.bean;
+package io.github.zh.cn.trio.aop.validation.result;
 
 public class SignResult implements IResult {
 
-	@Override
-	public boolean isSuccess() {
-		return false;
-	}
-
+	private boolean success;
+	
 	private String errorCode;
 
 	private String errorMsg;
@@ -27,4 +24,12 @@ public class SignResult implements IResult {
 		this.errorMsg = errorMsg;
 	}
 
+	@Override
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 }

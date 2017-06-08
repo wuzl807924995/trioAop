@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.validation.bean;
+package io.github.zh.cn.trio.aop.validation.result;
 
 public interface IResult {
 
