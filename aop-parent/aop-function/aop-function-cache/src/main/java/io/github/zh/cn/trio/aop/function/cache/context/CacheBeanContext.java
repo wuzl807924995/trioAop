@@ -1,6 +1,6 @@
 package io.github.zh.cn.trio.aop.function.cache.context;
 
-import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
 
 /**
@@ -8,7 +8,7 @@ import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
  * 缓存配置
  *
  */
-public class CacheBeanContext extends AbsContext {
+public class CacheBeanContext extends AopUtilContext {
 
 	/**
 	 * @return 缓存时间
@@ -49,9 +49,4 @@ public class CacheBeanContext extends AbsContext {
 		this.keyModelString = keyModelString;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public AbstractCacheModel getBeanModel() {
-		return cacheModel;
-	}
 }

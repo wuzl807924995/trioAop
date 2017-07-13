@@ -17,4 +17,5 @@ public class ReadOnlyCacheModel extends AbstractCacheModel {
 		getCacheResult(cacheBeanContext);
 	}
 
+
 }

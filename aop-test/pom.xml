@@ -33,11 +33,11 @@
 			<version>${test.cache.version}</version>
 		</dependency>
 
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>io.github.zh-cn-trio</groupId>
 			<artifactId>aop-function-logger</artifactId>
 			<version>${test.logger.version}</version>
-		</dependency>
+		</dependency> -->
 
 
 		<dependency>

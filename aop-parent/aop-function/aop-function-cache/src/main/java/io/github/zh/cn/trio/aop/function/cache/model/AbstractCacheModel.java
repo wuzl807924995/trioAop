@@ -2,12 +2,10 @@ package io.github.zh.cn.trio.aop.function.cache.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
-import io.github.zh.cn.trio.aop.config.abs.model.AbsBeanModel;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
 
-public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
+public abstract class AbstractCacheModel implements CacheModel {
 
 	/**
 	 * 缓存实现接口
@@ -23,10 +21,7 @@ public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
 		this.cacheFace = cacheFace;
 	}
 
-	@Override
-	public void execBefore(CacheBeanContext cacheBeanContext) {
-
-	}
+	public abstract String getModelName();
 
 	@Override
 	public void execAfter(CacheBeanContext cacheBeanContext) {
@@ -34,23 +29,9 @@ public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
 	}
 
 	@Override
-	public void beforeAop(AbsContext context) {
-		CacheBeanContext cacheBeanContext = (CacheBeanContext) context;
-		execBefore(cacheBeanContext);
-	}
-
-	@Override
-	public void afertAop(AbsContext context) {
-		CacheBeanContext cacheBeanContext = (CacheBeanContext) context;
-		execAfter(cacheBeanContext);
-	}
-
-	@Override
-	public void errorAop(AbsContext context) {
+	public void execBefore(CacheBeanContext cacheBeanContext) {
 
 	}
-
-	public abstract String getModelName();
 
 	/**
 	 * 读缓存结果
@@ -64,8 +45,8 @@ public abstract class AbstractCacheModel implements CacheModel, AbsBeanModel {
 			cacheBeanContext.setResultObject(cacheFace.getCache(cacheBeanContext));
 		}
 	}
-	
-	protected void setCacheResult(CacheBeanContext cacheBeanContext,boolean flush){
+
+	protected void setCacheResult(CacheBeanContext cacheBeanContext, boolean flush) {
 		if (flush || !cacheFace.hasCache(cacheBeanContext)) {
 			cacheFace.setCache(cacheBeanContext);
 		}

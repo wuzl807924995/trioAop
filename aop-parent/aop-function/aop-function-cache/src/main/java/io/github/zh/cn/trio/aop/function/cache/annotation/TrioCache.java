@@ -18,11 +18,6 @@ public @interface TrioCache {
 	String aopStrategy() default "";
 
 	/**
-	 *@return 填充模式
-	 */
-	String format() default "";
-
-	/**
 	 *@return 缓存时间
 	 */
 	int cacheTime() default -1;

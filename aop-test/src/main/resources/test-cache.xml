@@ -18,7 +18,9 @@
 		class="io.github.zh.cn.trio.aop.function.cache.aspect.TrioCacheAnnotationAspect">
 	</bean>
 
-
+	<bean id="cacheStrategy"
+		class="io.github.zh.cn.trio.aop.function.cache.strategy.CacheStrategy">
+	</bean>
 
 
 	<bean id="face" class="test.demo.face.impl.FaceImpl">
