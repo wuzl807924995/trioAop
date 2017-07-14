@@ -18,9 +18,11 @@
 
 	<bean id="trioLoggerAnnotationAspect"
 		class="io.github.zh.cn.trio.aop.logger.aspect.TrioLoggerAnnotationAspect">
+		<property name="defaultAopStrategy" ref="loggerStrategy"></property>
 	</bean>
 
 
+	<bean id="loggerStrategy" class="io.github.zh.cn.trio.aop.logger.strategy.LoggerStrategy"></bean>
 
 	<bean id="face" class="test.demo.face.impl.FaceImpl">
 

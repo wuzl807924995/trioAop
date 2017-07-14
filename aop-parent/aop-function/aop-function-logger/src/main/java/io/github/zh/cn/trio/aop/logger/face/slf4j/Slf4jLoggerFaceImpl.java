@@ -2,10 +2,12 @@ package io.github.zh.cn.trio.aop.logger.face.slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
 import io.github.zh.cn.trio.aop.logger.context.LoggerBeanContext;
-import io.github.zh.cn.trio.aop.logger.face.AbstarctLoggerFace;
+import io.github.zh.cn.trio.aop.logger.face.LoggerFace;
 import io.github.zh.cn.trio.aop.plug.format.Format;
 import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
 
@@ -14,7 +16,19 @@ import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
  * slf4j 实现的日志
  *
  */
-public class Slf4jLoggerFaceImpl extends AbstarctLoggerFace {
+@Component
+public class Slf4jLoggerFaceImpl implements LoggerFace {
+
+	@Autowired
+	private Format format;
+
+	public Format getFormat() {
+		return format;
+	}
+
+	public void setFormat(Format format) {
+		this.format = format;
+	}
 
 	@Override
 	public void logger(LoggerBeanContext aopUtilContext, String targetTime) {
@@ -22,7 +36,6 @@ public class Slf4jLoggerFaceImpl extends AbstarctLoggerFace {
 		String level = aopUtilContext.getLevel(targetTime);
 		String name = aopUtilContext.getName(level);
 		String model = aopUtilContext.getModel(name);
-		Format format = aopUtilContext.getFormat();
 		FormatBean formatBean = FormatConvertUtils.convertContext(aopUtilContext);
 		String info = format.format(formatBean, model);
 		logger(level, name, info, aopUtilContext.getThrowable());

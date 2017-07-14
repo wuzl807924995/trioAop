@@ -11,15 +11,11 @@ import io.github.zh.cn.trio.aop.logger.context.LoggerBeanContext;
 @Target({ ElementType.METHOD })
 public @interface TrioLogger {
 
-	
-
-	
-
 	/**
 	 * @return 触发时间 默认异常触发
 	 */
 	String targetTime() default LoggerBeanContext.TIME_ERROR;
-	
+
 	/**
 	 * @return 触发等级 默认info
 	 */
@@ -30,19 +26,15 @@ public @interface TrioLogger {
 	 */
 	String targetName() default "";
 
-
 	/**
 	 * @return 日志模板
 	 */
 	String modelString() default "";
-	
+
 	/**
 	 * @return 执行策略
 	 */
 	String aopStrategy() default "";
-	
-	
-	String format() default "";
 
 	String loggerFace() default "";
 }

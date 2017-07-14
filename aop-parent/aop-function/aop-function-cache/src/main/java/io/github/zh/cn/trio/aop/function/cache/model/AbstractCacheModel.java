@@ -21,8 +21,6 @@ public abstract class AbstractCacheModel implements CacheModel {
 		this.cacheFace = cacheFace;
 	}
 
-	public abstract String getModelName();
-
 	@Override
 	public void execAfter(CacheBeanContext cacheBeanContext) {
 

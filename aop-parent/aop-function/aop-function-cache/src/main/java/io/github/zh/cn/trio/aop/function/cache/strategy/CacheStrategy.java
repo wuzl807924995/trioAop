@@ -1,9 +1,12 @@
 package io.github.zh.cn.trio.aop.function.cache.strategy;
 
+import org.springframework.stereotype.Component;
+
 import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AbstractAopStrategy;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 
+@Component
 public class CacheStrategy extends AbstractAopStrategy{
 
 	

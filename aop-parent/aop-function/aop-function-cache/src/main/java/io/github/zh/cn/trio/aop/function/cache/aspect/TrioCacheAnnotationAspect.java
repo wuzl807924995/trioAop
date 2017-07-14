@@ -15,7 +15,7 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.croe.utils.BeanUtils;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
-import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
+import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 
 @Aspect
 public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContext> {
@@ -25,18 +25,19 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 
 	@Autowired
 	@Qualifier("readWriteCacheModel")
-	private AbstractCacheModel defaultCacheModel;
+	private CacheModel defaultCacheModel;
 
 	@Autowired
+	@Qualifier("cacheStrategy")
 	private AopStrategy defaultAopStrategy;
 
 	private String defaultKeyModelString = "'method:'+getTargetMethod()+':args:'+getTargetArgs().toString()";
 
-	public AbstractCacheModel getDefaultCacheModel() {
+	public CacheModel getDefaultCacheModel() {
 		return defaultCacheModel;
 	}
 
-	public void setDefaultCacheModel(AbstractCacheModel defaultCacheModel) {
+	public void setDefaultCacheModel(CacheModel defaultCacheModel) {
 		this.defaultCacheModel = defaultCacheModel;
 	}
 
@@ -61,10 +62,10 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 		return super.proxy(proceedingJoinPoint);
 	}
 
-	protected AbstractCacheModel getAnnotationConfigCacheModel(String cacheModel) {
-		Map<String, AbstractCacheModel> map = getApplicationContext().getBeansOfType(AbstractCacheModel.class);
+	protected CacheModel getAnnotationConfigCacheModel(String cacheModel) {
+		Map<String, CacheModel> map = getApplicationContext().getBeansOfType(CacheModel.class);
 		for (String beanName : map.keySet()) {
-			AbstractCacheModel model = getApplicationContext().getBean(beanName, AbstractCacheModel.class);
+			CacheModel model = getApplicationContext().getBean(beanName, CacheModel.class);
 			if (model.getModelName().equals(cacheModel)) {
 				return model;
 			}
@@ -84,7 +85,7 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 				getDefaultAopStrategy());
 		String formatString = StringUtils.isEmpty(trioCache.keyModelString()) ? defaultKeyModelString
 				: trioCache.keyModelString();
-		AbstractCacheModel abstractCacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
+		CacheModel abstractCacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
 
 		cacheBeanContext.setAopStrategy(aopStrategy);
 		cacheBeanContext.setCacheTime(trioCache.cacheTime());

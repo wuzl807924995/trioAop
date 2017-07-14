@@ -15,6 +15,5 @@
 		<property name="jedisPool" ref="jedisPool"></property>
 	</bean>
 
-	<!-- <bean class="io.github.zh.cn.trio.aop.logger.face.slf4j.Slf4jLoggerFaceImpl"></bean> -->
 
 </beans>
