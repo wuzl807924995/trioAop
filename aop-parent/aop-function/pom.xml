@@ -11,6 +11,7 @@
   	<module>aop-function-cache</module>
   	<module>aop-function-logger</module>
   	<module>aop-function-validation</module>
+  	<module>aop-function-dynamic</module>
   </modules>
     <dependencies>
 		<dependency>
