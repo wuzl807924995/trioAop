@@ -15,32 +15,29 @@ import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.croe.utils.BeanUtils;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
-import io.github.zh.cn.trio.aop.function.cache.model.AbstractCacheModel;
-import io.github.zh.cn.trio.aop.plug.format.Format;
+import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 
 @Aspect
 public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContext> {
 
-	public static final String[] targetTime = new String[] { CacheBeanContext.TIME_BEFORE,
+	private static final String[] targetTime = new String[] { CacheBeanContext.TIME_BEFORE,
 			CacheBeanContext.TIME_AFTER };
 
 	@Autowired
 	@Qualifier("readWriteCacheModel")
-	private AbstractCacheModel defaultCacheModel;
+	private CacheModel defaultCacheModel;
 
 	@Autowired
-	private Format defaultFormat;
-
-	@Autowired
+	@Qualifier("cacheStrategy")
 	private AopStrategy defaultAopStrategy;
 
 	private String defaultKeyModelString = "'method:'+getTargetMethod()+':args:'+getTargetArgs().toString()";
 
-	public AbstractCacheModel getDefaultCacheModel() {
+	public CacheModel getDefaultCacheModel() {
 		return defaultCacheModel;
 	}
 
-	public void setDefaultCacheModel(AbstractCacheModel defaultCacheModel) {
+	public void setDefaultCacheModel(CacheModel defaultCacheModel) {
 		this.defaultCacheModel = defaultCacheModel;
 	}
 
@@ -50,14 +47,6 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 
 	public void setDefaultKeyModelString(String defaultKeyModelString) {
 		this.defaultKeyModelString = defaultKeyModelString;
-	}
-
-	public Format getDefaultFormat() {
-		return defaultFormat;
-	}
-
-	public void setDefaultFormat(Format defaultFormat) {
-		this.defaultFormat = defaultFormat;
 	}
 
 	public AopStrategy getDefaultAopStrategy() {
@@ -73,10 +62,10 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 		return super.proxy(proceedingJoinPoint);
 	}
 
-	protected AbstractCacheModel getAnnotationConfigCacheModel(String cacheModel) {
-		Map<String, AbstractCacheModel> map = getApplicationContext().getBeansOfType(AbstractCacheModel.class);
+	protected CacheModel getAnnotationConfigCacheModel(String cacheModel) {
+		Map<String, CacheModel> map = getApplicationContext().getBeansOfType(CacheModel.class);
 		for (String beanName : map.keySet()) {
-			AbstractCacheModel model = getApplicationContext().getBean( beanName,AbstractCacheModel.class);
+			CacheModel model = getApplicationContext().getBean(beanName, CacheModel.class);
 			if (model.getModelName().equals(cacheModel)) {
 				return model;
 			}
@@ -86,27 +75,24 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContex
 
 	@Override
 	public CacheBeanContext initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint) {
-		CacheBeanContext cacheBeanContext=new CacheBeanContext();
+		CacheBeanContext cacheBeanContext = new CacheBeanContext();
 		cacheBeanContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
 		cacheBeanContext.setApplicationContext(getApplicationContext());
-		
+
 		TrioCache trioCache = cacheBeanContext.getTargetMethod().getAnnotation(TrioCache.class);
-		
+
 		AopStrategy aopStrategy = BeanUtils.getBean(getApplicationContext(), trioCache.aopStrategy(), AopStrategy.class,
 				getDefaultAopStrategy());
-		Format format = BeanUtils.getBean(getApplicationContext(), trioCache.format(), Format.class, defaultFormat);
-		AbstractCacheModel cacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
 		String formatString = StringUtils.isEmpty(trioCache.keyModelString()) ? defaultKeyModelString
 				: trioCache.keyModelString();
+		CacheModel abstractCacheModel = getAnnotationConfigCacheModel(trioCache.cacheModel());
 
 		cacheBeanContext.setAopStrategy(aopStrategy);
-		cacheBeanContext.setFormat(format);
-		cacheBeanContext.setCacheModel(cacheModel);
 		cacheBeanContext.setCacheTime(trioCache.cacheTime());
 		cacheBeanContext.setTargetTimes(targetTime);
 		cacheBeanContext.setKeyModelString(formatString);
+		cacheBeanContext.setCacheModel(abstractCacheModel);
 
 		return cacheBeanContext;
 	}
 }
-

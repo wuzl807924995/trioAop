@@ -5,14 +5,14 @@ import java.util.Map;
 
 import org.springframework.util.CollectionUtils;
 
-import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
-import io.github.zh.cn.trio.aop.logger.face.AbstarctLoggerFace;
+import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
+import io.github.zh.cn.trio.aop.logger.face.LoggerFace;
 
 /**
  * 
  * 日志配置
  */
-public class LoggerBeanContext extends AbsContext {
+public class LoggerBeanContext extends AopUtilContext {
 
 	public static final String LEVEL_INFO = "INFO";
 	public static final String LEVEL_ERROR = "ERROR";
@@ -23,13 +23,13 @@ public class LoggerBeanContext extends AbsContext {
 	private Map<String, String> levelToNameMap;
 	private Map<String, String> nameToModelMap;
 
-	private AbstarctLoggerFace loggerFace;
+	private LoggerFace loggerFace;
 
-	public AbstarctLoggerFace getLoggerFace() {
+	public LoggerFace getLoggerFace() {
 		return loggerFace;
 	}
 
-	public void setLoggerFace(AbstarctLoggerFace loggerFace) {
+	public void setLoggerFace(LoggerFace loggerFace) {
 		this.loggerFace = loggerFace;
 	}
 
@@ -77,9 +77,4 @@ public class LoggerBeanContext extends AbsContext {
 		return map;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public AbstarctLoggerFace getBeanModel() {
-		return loggerFace;
-	}
 }

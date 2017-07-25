@@ -30,16 +30,21 @@ public interface CacheModel {
 	 */
 	public static final String REMOVE = "REMOVE";
 
+	public abstract String getModelName();
 
 	/**
-	 *前置执行 
-	 * @param cacheBeanContext 上下文
+	 * 前置执行
+	 * 
+	 * @param cacheBeanContext
+	 *            上下文
 	 */
 	void execBefore(CacheBeanContext cacheBeanContext);
 
 	/**
 	 * 后置执行
-	 *  @param cacheBeanContext 上下文
+	 * 
+	 * @param cacheBeanContext
+	 *            上下文
 	 */
 	void execAfter(CacheBeanContext cacheBeanContext);
 }

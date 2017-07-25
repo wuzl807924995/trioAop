@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import io.github.zh.cn.trio.aop.croe.utils.FormatConvertUtils;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
+import io.github.zh.cn.trio.aop.plug.format.Format;
 import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
 import io.github.zh.cn.trio.aop.plug.serialization.Serialization;
 
@@ -17,6 +18,9 @@ public class RedisCacheFaceImpl implements CacheFace {
 
 	@Autowired
 	private Serialization serialization;
+
+	@Autowired
+	private Format format;
 
 	public RedisStringOperation getRedisStringOperation() {
 		return redisStringOperation;
@@ -34,16 +38,24 @@ public class RedisCacheFaceImpl implements CacheFace {
 		this.serialization = serialization;
 	}
 
+	public Format getFormat() {
+		return format;
+	}
+
+	public void setFormat(Format format) {
+		this.format = format;
+	}
+
 	@Override
 	public boolean hasCache(CacheBeanContext cacheBeanConfig) {
-		String string = cacheBeanConfig.getFormat().format(FormatConvertUtils.convertContext(cacheBeanConfig),
+		String string = format.format(FormatConvertUtils.convertContext(cacheBeanConfig),
 				cacheBeanConfig.getKeyModelString());
 		return redisStringOperation.exists(string);
 	}
 
 	@Override
 	public Object getCache(CacheBeanContext cacheBeanConfig) {
-		String string = cacheBeanConfig.getFormat().format(FormatConvertUtils.convertContext(cacheBeanConfig),
+		String string = format.format(FormatConvertUtils.convertContext(cacheBeanConfig),
 				cacheBeanConfig.getKeyModelString());
 		String val = redisStringOperation.get(string);
 		Object object = serialization.forSerialization(val, cacheBeanConfig.getReturnClass());
@@ -52,7 +64,7 @@ public class RedisCacheFaceImpl implements CacheFace {
 
 	@Override
 	public boolean setCache(CacheBeanContext cacheBeanConfig) {
-		String string = cacheBeanConfig.getFormat().format(FormatConvertUtils.convertContext(cacheBeanConfig),
+		String string = format.format(FormatConvertUtils.convertContext(cacheBeanConfig),
 				cacheBeanConfig.getKeyModelString());
 		String val = serialization.serialization(cacheBeanConfig.getResultObject());
 		redisStringOperation.expireat(string, val, cacheBeanConfig.getCacheTime());
@@ -61,7 +73,7 @@ public class RedisCacheFaceImpl implements CacheFace {
 
 	@Override
 	public boolean removeCache(CacheBeanContext cacheBeanConfig) {
-		String string = cacheBeanConfig.getFormat().format(FormatConvertUtils.convertContext(cacheBeanConfig),
+		String string = format.format(FormatConvertUtils.convertContext(cacheBeanConfig),
 				cacheBeanConfig.getKeyModelString());
 		redisStringOperation.del(string);
 		return true;

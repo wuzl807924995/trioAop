@@ -14,13 +14,11 @@
 	<aop:aspectj-autoproxy proxy-target-class="true">
 	</aop:aspectj-autoproxy>
 
-	<bean id="trioCacheAnnotationAspect"
-		class="io.github.zh.cn.trio.aop.function.cache.aspect.TrioCacheAnnotationAspect">
-	</bean>
 
-	<bean id="cacheStrategy"
-		class="io.github.zh.cn.trio.aop.function.cache.strategy.CacheStrategy">
-	</bean>
+	<bean
+		class="io.github.zh.cn.trio.aop.validation.aspect.TrioBeanAnnotationAspect"></bean>
+
+	<bean id="errorValidation" class="test.demo.validation.ErrorValidation"></bean>
 
 
 	<bean id="face" class="test.demo.face.impl.FaceImpl">
