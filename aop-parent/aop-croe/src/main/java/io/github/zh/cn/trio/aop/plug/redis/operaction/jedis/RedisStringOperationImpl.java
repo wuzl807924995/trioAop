@@ -24,20 +24,20 @@ public class RedisStringOperationImpl implements RedisStringOperation {
 
 	@Override
 	public boolean exists(String key) {
-		Jedis jedis = jedisPool.getResource();
+		Jedis jedis = getJedisPool().getResource();
 		try {
 			return jedis.exists(key);
 		} catch (Exception e) {
 			logger.error("exists ", e);
 			return false;
 		} finally {
-			jedisPool.returnResource(jedis);
+			getJedisPool().returnResource(jedis);
 		}
 	}
 
 	@Override
 	public boolean expireat(String key, String val, int cacheTime) {
-		Jedis jedis = jedisPool.getResource();
+		Jedis jedis = getJedisPool().getResource();
 		try {
 			jedis.set(key, val);
 			if (cacheTime > 0) {
@@ -48,26 +48,26 @@ public class RedisStringOperationImpl implements RedisStringOperation {
 			logger.error("expireat ", e);
 			return false;
 		} finally {
-			jedisPool.returnResource(jedis);
+			getJedisPool().returnResource(jedis);
 		}
 	}
 
 	@Override
 	public String get(String key) {
-		Jedis jedis = jedisPool.getResource();
+		Jedis jedis = getJedisPool().getResource();
 		try {
 			return jedis.get(key);
 		} catch (Exception e) {
 			logger.error("get ", e);
 			return null;
 		} finally {
-			jedisPool.returnResource(jedis);
+			getJedisPool().returnResource(jedis);
 		}
 	}
 
 	@Override
 	public boolean del(String key) {
-		Jedis jedis = jedisPool.getResource();
+		Jedis jedis = getJedisPool().getResource();
 		try {
 			jedis.del(key);
 			return true;
@@ -75,7 +75,7 @@ public class RedisStringOperationImpl implements RedisStringOperation {
 			logger.error("del ", e);
 			return false;
 		} finally {
-			jedisPool.returnResource(jedis);
+			getJedisPool().returnResource(jedis);
 		}
 	}
 
