@@ -1,24 +1,26 @@
 package io.github.zh.cn.trio.aop.validation.face;
 
-import io.github.zh.cn.trio.aop.config.abs.context.AbsContext;
+import io.github.zh.cn.trio.aop.validation.context.ValidationBeanContext;
 import io.github.zh.cn.trio.aop.validation.result.IReturnResult;
 
-public abstract class AbstractArgsRepleseValidation<T> extends AbstractValidationFace {
+public abstract class AbstractArgsRepleseValidation implements ValidationFace {
 
 	@Override
-	public void beforeAop(AbsContext context) {
-		IReturnResult<T> iReturnResult = validation(context);
+	public void doValidation(ValidationBeanContext context) {
+		IReturnResult<?> iReturnResult = validation(context);
 		if (!iReturnResult.isSuccess()) {
-			Object[] objects = context.getTargetArgs();
-			if (objects != null && objects.length != 0) {
-				for (int i = 0; i < objects.length; i++) {
-					if (objects[i] != null && iReturnResult.getClass().equals(objects[i].getClass())) {
-						objects[i] = iReturnResult;
-					}
+			Class<?> cls = getErrorClass();
+			Object[] args = context.getTargetArgs();
+			for (int i = 0; i < context.getTargetArgs().length; i++) {
+				if (cls.equals(args[i].getClass())) {
+					args[i] = cls;
 				}
 			}
-
+			context.setTargetArgs(args);
 		}
 	}
 
+	public Class<?> getErrorClass() {
+		return IReturnResult.class;
+	}
 }

@@ -1,35 +1,27 @@
-package io.github.zh.cn.trio.aop.validation.bean.aspect;
+package io.github.zh.cn.trio.aop.validation.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.croe.utils.BeanUtils;
-import io.github.zh.cn.trio.aop.plug.format.Format;
-import io.github.zh.cn.trio.aop.validation.bean.annotation.TrioBeanValidation;
+import io.github.zh.cn.trio.aop.validation.annotation.TrioBeanValidation;
 import io.github.zh.cn.trio.aop.validation.context.ValidationBeanContext;
-import io.github.zh.cn.trio.aop.validation.face.AbstractValidationFace;
+import io.github.zh.cn.trio.aop.validation.face.ValidationFace;
 
+@Aspect
 public class TrioBeanAnnotationAspect extends AbstractAopAspect<ValidationBeanContext> {
 
-	@Autowired
-	private Format defaultFormat;
+	private static final String[] targetTime = new String[] { ValidationBeanContext.TIME_BEFORE };
 
 	@Autowired
+	@Qualifier("validationStrategy")
 	private AopStrategy defaultAopStrategy;
-
-	private AbstractValidationFace defaultValidationFace;
-
-	public Format getDefaultFormat() {
-		return defaultFormat;
-	}
-
-	public void setDefaultFormat(Format defaultFormat) {
-		this.defaultFormat = defaultFormat;
-	}
 
 	public AopStrategy getDefaultAopStrategy() {
 		return defaultAopStrategy;
@@ -39,15 +31,7 @@ public class TrioBeanAnnotationAspect extends AbstractAopAspect<ValidationBeanCo
 		this.defaultAopStrategy = defaultAopStrategy;
 	}
 
-	public AbstractValidationFace getDefaultValidationFace() {
-		return defaultValidationFace;
-	}
-
-	public void setDefaultValidationFace(AbstractValidationFace defaultValidationFace) {
-		this.defaultValidationFace = defaultValidationFace;
-	}
-
-	@Around("@annotation(io.github.zh.cn.trio.aop.validation.bean.annotation.TrioBeanValidation)")
+	@Around("@annotation(io.github.zh.cn.trio.aop.validation.annotation.TrioBeanValidation)")
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		return super.proxy(proceedingJoinPoint);
 	}
@@ -63,14 +47,13 @@ public class TrioBeanAnnotationAspect extends AbstractAopAspect<ValidationBeanCo
 
 		AopStrategy aopStrategy = BeanUtils.getBean(getApplicationContext(), trioBeanValidation.aopStrategy(),
 				AopStrategy.class, defaultAopStrategy);
-		Format format = BeanUtils.getBean(getApplicationContext(), trioBeanValidation.format(), Format.class,
-				defaultFormat);
-		AbstractValidationFace validationFace = BeanUtils.getBean(getApplicationContext(),
-				trioBeanValidation.beanName(), AbstractValidationFace.class, defaultValidationFace);
+
+		ValidationFace validationFace = BeanUtils.getBean(getApplicationContext(), trioBeanValidation.beanName(),
+				ValidationFace.class, null);
 
 		validationBeanContext.setAopStrategy(aopStrategy);
-		validationBeanContext.setFormat(format);
 		validationBeanContext.setValidationFace(validationFace);
+		validationBeanContext.setTargetTimes(targetTime);
 
 		return validationBeanContext;
 	}

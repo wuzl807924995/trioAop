@@ -34,4 +34,9 @@ public class User {
 		this.list = list;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", list=" + list + "]";
+	}
+
 }

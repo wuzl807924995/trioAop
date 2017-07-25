@@ -6,7 +6,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
 import io.github.zh.cn.trio.aop.logger.context.LoggerBeanContext;
 
-@Component
+@Component("LoggerStrategy")
 public class LoggerStrategy implements AopStrategy {
 
 	@Override

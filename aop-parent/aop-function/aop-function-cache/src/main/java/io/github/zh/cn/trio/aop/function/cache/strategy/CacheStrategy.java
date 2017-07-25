@@ -6,7 +6,7 @@ import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
 import io.github.zh.cn.trio.aop.croe.strategy.AbstractAopStrategy;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheBeanContext;
 
-@Component
+@Component("cacheStrategy")
 public class CacheStrategy extends AbstractAopStrategy{
 
 	

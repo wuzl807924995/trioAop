@@ -20,7 +20,7 @@ import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
 @Aspect
 public class TrioCacheAnnotationAspect extends AbstractAopAspect<CacheBeanContext> {
 
-	public static final String[] targetTime = new String[] { CacheBeanContext.TIME_BEFORE,
+	private static final String[] targetTime = new String[] { CacheBeanContext.TIME_BEFORE,
 			CacheBeanContext.TIME_AFTER };
 
 	@Autowired
