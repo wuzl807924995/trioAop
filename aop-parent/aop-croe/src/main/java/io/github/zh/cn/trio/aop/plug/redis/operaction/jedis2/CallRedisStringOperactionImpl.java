@@ -17,7 +17,7 @@ public class CallRedisStringOperactionImpl implements RedisStringOperation {
 				return (T) commands.exists(key);
 			}
 		}.call(jedisPool);
-		PoolThreadLocal.remove(jedisPool);
+		PoolThreadLocal.remove();
 		return exists;
 	}
 
@@ -34,7 +34,7 @@ public class CallRedisStringOperactionImpl implements RedisStringOperation {
 				return (T) Boolean.TRUE;
 			}
 		}.call(jedisPool);
-		PoolThreadLocal.remove(jedisPool);
+		PoolThreadLocal.remove();
 		return expireat;
 	}
 
@@ -47,7 +47,7 @@ public class CallRedisStringOperactionImpl implements RedisStringOperation {
 				return (T) commands.get(key);
 			}
 		}.call(jedisPool);
-		PoolThreadLocal.remove(jedisPool);
+		PoolThreadLocal.remove();
 		return val;
 	}
 
@@ -61,7 +61,7 @@ public class CallRedisStringOperactionImpl implements RedisStringOperation {
 				return (T) Boolean.TRUE;
 			}
 		}.call(jedisPool);
-		PoolThreadLocal.remove(jedisPool);
+		PoolThreadLocal.remove();
 		return del;
 	}
 

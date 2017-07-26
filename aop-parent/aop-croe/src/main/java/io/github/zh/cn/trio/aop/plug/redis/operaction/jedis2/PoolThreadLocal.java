@@ -14,7 +14,7 @@ public abstract class PoolThreadLocal {
 		return threadLocal.get();
 	}
 
-	public  static void remove(JedisPool jedisPool) {
+	public static void remove() {
 		threadLocal.remove();
 	}
 
