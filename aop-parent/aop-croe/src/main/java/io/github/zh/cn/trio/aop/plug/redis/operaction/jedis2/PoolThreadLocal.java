@@ -1,0 +1,21 @@
+package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis2;
+
+import redis.clients.jedis.JedisPool;
+
+public abstract class PoolThreadLocal {
+
+	private static final ThreadLocal<JedisPool> threadLocal = new ThreadLocal<>();
+
+	public static void setPool(JedisPool jedisPool) {
+		threadLocal.set(jedisPool);
+	}
+
+	public static JedisPool getPool() {
+		return threadLocal.get();
+	}
+
+	public  static void remove(JedisPool jedisPool) {
+		threadLocal.remove();
+	}
+
+}
