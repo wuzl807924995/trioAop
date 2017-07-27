@@ -2,32 +2,72 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
 
 	<import resource="db-config.xml" />
 
-	<context:component-scan base-package="io.github.zh.cn.trio.aop"
-		use-default-filters="true">
 
+	<context:component-scan base-package="io.github.zh.cn.trio.aop">
+		<context:exclude-filter type="annotation"
+			expression="org.aspectj.lang.annotation.Aspect" />
 	</context:component-scan>
 
 	<aop:aspectj-autoproxy proxy-target-class="true">
 	</aop:aspectj-autoproxy>
 
-	<bean id="trioLoggerAnnotationAspect"
-		class="io.github.zh.cn.trio.aop.logger.aspect.TrioLoggerAnnotationAspect">
-		<property name="defaultAopStrategy" ref="loggerStrategy"></property>
+
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="trioLoggerXmlAspect">
+			<aop:pointcut expression="execution(* test.demo.face.impl.*.*(..))"
+				id="xmlLogger" />
+			<aop:around method="proxy" pointcut-ref="xmlLogger" />
+		</aop:aspect>
+	</aop:config>
+
+
+	<!-- <bean id="trioLoggerAnnotationAspect"
+		class="io.github.zh.cn.trio.aop.function.logger.aspect.TrioLoggerAnnotationAspect">
+		<property name="defaultLoggerStrategy" ref="asynLoggerStrategy"></property>
 	</bean>
+ -->
+ 	<bean id="trioLoggerXmlAspect" class="io.github.zh.cn.trio.aop.function.logger.aspect.TrioLoggerXmlAspect">
+ 		<property name="defaultLoggerFace" ref="slf4jLoggerFaceImpl"></property>
+ 		<property name="defaultLoggerStrategy" ref="asynLoggerStrategy"></property>
+ 		<property name="trioLoggerConfig" ref="trioLoggerConfig"></property>
+ 	</bean>
 
 
-	<bean id="loggerStrategy" class="io.github.zh.cn.trio.aop.logger.strategy.LoggerStrategy"></bean>
+	<bean id="trioLoggerConfig" class="io.github.zh.cn.trio.aop.function.logger.config.TrioLoggerConfig">
+		<constructor-arg value="BEFORE"/>
+		<constructor-arg value="INFO"/>
+		<constructor-arg value=""/>
+		<constructor-arg value=""/>
+	</bean>
+ 
+ 	<bean id="slf4jLoggerFaceImpl" class="io.github.zh.cn.trio.aop.function.logger.face.slf4j.Slf4jLoggerFaceImpl"></bean>
+ 
+	<!-- <bean id="loggerStrategy" class="io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy"></bean> -->
+	<bean id="asynLoggerStrategy"
+		class="io.github.zh.cn.trio.aop.function.logger.strategy.asyn.AsynLoggerStrategy"></bean>
+
 
 	<bean id="face" class="test.demo.face.impl.FaceImpl">
 
 	</bean>
 
 
+	<!-- 缺省的异步任务线程池 -->
+	<task:annotation-driven executor="asyncExecutor"
+		proxy-target-class="true" />
+	<task:executor id="asyncExecutor" pool-size="100-10000"
+		queue-capacity="10" />
+
+	<!-- 处理log的线程池 -->
+	<task:executor id="logExecutor" pool-size="15-1000" 
+		queue-capacity="5" keep-alive="5" />
 
 </beans>

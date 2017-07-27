@@ -20,4 +20,11 @@ public abstract class BeanUtils {
 			}
 		}
 	}
+
+	public static <U> U getBean(U u1, U u2) {
+		if (u1 == null) {
+			return u2;
+		}
+		return u1;
+	}
 }

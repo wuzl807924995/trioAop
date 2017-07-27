@@ -20,7 +20,9 @@ public class T_logger {
 	public void testName1() throws Exception {
 		User u = new User();
 		u.setId(12);
-		iFace.test1(u);
+		User user = iFace.test1(u);
+		System.err.println(user+"over");
+		 Thread.sleep(3 * 1000);// 不让主进程过早结束
 	}
 
 }
