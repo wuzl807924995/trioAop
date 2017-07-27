@@ -15,7 +15,7 @@ import io.github.zh.cn.trio.aop.function.logger.face.LoggerFace;
 @Aspect
 public class TrioLoggerAnnotationAspect extends AbstractTrioLoggerAspect {
 
-	@Around("@annotation(io.github.zh.cn.trio.aop.logger.annotation.TrioLogger)")
+	@Around("@annotation(io.github.zh.cn.trio.aop.function.logger.annotation.TrioLogger)")
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		return super.proxy(proceedingJoinPoint);
 	}

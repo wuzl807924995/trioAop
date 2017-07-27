@@ -31,7 +31,7 @@ public class TrioBeanAnnotationAspect extends AbstractAopAspect<ValidationBeanCo
 		this.defaultAopStrategy = defaultAopStrategy;
 	}
 
-	@Around("@annotation(io.github.zh.cn.trio.aop.validation.annotation.TrioBeanValidation)")
+	@Around("@annotation(io.github.zh.cn.trio.aop.function.validation.annotation.TrioBeanValidation)")
 	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		return super.proxy(proceedingJoinPoint);
 	}
