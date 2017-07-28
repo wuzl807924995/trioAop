@@ -36,21 +36,35 @@
  -->
  	<bean id="trioLoggerXmlAspect" class="io.github.zh.cn.trio.aop.function.logger.aspect.TrioLoggerXmlAspect">
  		<property name="defaultLoggerFace" ref="slf4jLoggerFaceImpl"></property>
- 		<property name="defaultLoggerStrategy" ref="asynLoggerStrategy"></property>
- 		<property name="trioLoggerConfig" ref="trioLoggerConfig"></property>
+ 		<property name="defaultLoggerAopStrategy" ref="asynLoggerStrategy"></property>
+ 		<property name="trioLoggerConfig" ref="trioLoggerConfig2"></property>
  	</bean>
 
 
 	<bean id="trioLoggerConfig" class="io.github.zh.cn.trio.aop.function.logger.config.TrioLoggerConfig">
 		<constructor-arg value="BEFORE"/>
 		<constructor-arg value="INFO"/>
-		<constructor-arg value=""/>
-		<constructor-arg value=""/>
+	</bean>
+	
+	<bean id="trioLoggerConfig2" class="io.github.zh.cn.trio.aop.function.logger.config.TrioLoggerConfig">
+		<constructor-arg>
+			<array>
+				<value>BEFORE</value>
+				<value>AFTER</value>
+			</array>
+		</constructor-arg>
+		<constructor-arg>
+			<array>
+				<value>INFO</value>
+				<value>DEBUG</value>
+			</array>
+		</constructor-arg>
 	</bean>
  
  	<bean id="slf4jLoggerFaceImpl" class="io.github.zh.cn.trio.aop.function.logger.face.slf4j.Slf4jLoggerFaceImpl"></bean>
  
-	 <bean id="defaultLoggerStrategy" class="io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy"></bean> 
+	 <bean id="defaultLoggerAopStrategy" class="io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy"></bean> 
+	
 	<bean id="asynLoggerStrategy"
 		class="io.github.zh.cn.trio.aop.function.logger.strategy.asyn.AsynLoggerStrategy"></bean>
 
@@ -61,13 +75,13 @@
 
 
 	<!-- 缺省的异步任务线程池 -->
-	<task:annotation-driven executor="asyncExecutor"
+	<task:annotation-driven executor="asyncExecutor" 
 		proxy-target-class="true" />
 	<task:executor id="asyncExecutor" pool-size="100-10000"
 		queue-capacity="10" />
 
 	<!-- 处理log的线程池 -->
-	<task:executor id="logExecutor" pool-size="15-1000" 
-		queue-capacity="5" keep-alive="5" />
+	<task:executor id="trioLoggerAsyncExecutor" pool-size="15-1000"  rejection-policy="ABORT"
+		queue-capacity="5" keep-alive="5"  />
 
 </beans>

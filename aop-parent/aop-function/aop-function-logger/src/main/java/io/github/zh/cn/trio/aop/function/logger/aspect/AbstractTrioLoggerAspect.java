@@ -6,29 +6,30 @@ import org.springframework.util.StringUtils;
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.function.logger.context.LoggerBeanContext;
 import io.github.zh.cn.trio.aop.function.logger.face.LoggerFace;
-import io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy;
+import io.github.zh.cn.trio.aop.function.logger.strategy.LoggerAopStrategy;
 
 /**
  * 日志抽象aop
+ * 
  * @author wuzl
  *
  */
 public abstract class AbstractTrioLoggerAspect extends AbstractAopAspect<LoggerBeanContext> {
 
 	@Autowired
-	private LoggerStrategy defaultLoggerStrategy;
+	private LoggerAopStrategy defaultLoggerAopStrategy;
 
 	@Autowired
 	private LoggerFace defaultLoggerFace;
 
 	private String defaultKeyModelString = "'method:'+getTargetMethod()+':args:'+getTargetArgs().toString()";
 
-	public LoggerStrategy getDefaultLoggerStrategy() {
-		return defaultLoggerStrategy;
+	public LoggerAopStrategy getDefaultLoggerAopStrategy() {
+		return defaultLoggerAopStrategy;
 	}
 
-	public void setDefaultLoggerStrategy(LoggerStrategy defaultLoggerStrategy) {
-		this.defaultLoggerStrategy = defaultLoggerStrategy;
+	public void setDefaultLoggerAopStrategy(LoggerAopStrategy defaultLoggerAopStrategy) {
+		this.defaultLoggerAopStrategy = defaultLoggerAopStrategy;
 	}
 
 	public LoggerFace getDefaultLoggerFace() {

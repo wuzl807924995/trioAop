@@ -51,7 +51,7 @@ public class TrioLoggerXmlAspect extends AbstractTrioLoggerAspect {
 		loggerBeanContext.setMethodInvocationProceedingJoinPoint(methodInvocationProceedingJoinPoint);
 		loggerBeanContext.setApplicationContext(getApplicationContext());
 
-		AopStrategy aopStrategy = getDefaultLoggerStrategy();
+		AopStrategy aopStrategy = getDefaultLoggerAopStrategy();
 		
 		if (!init) {
 			init(loggerBeanContext);

@@ -57,6 +57,12 @@ public class TrioLoggerConfig {
 		getTimeToLevelMap().put(time, level);
 	}
 	
+	public TrioLoggerConfig(String[] time,String level[]) {
+		for (int i = 0; i < time.length; i++) {
+			getTimeToLevelMap().put(time[i], level[i]);
+		}
+	}
+	
 	public String[] getTargetTime() {
 		Set<String> set = getTimeToLevelMap().keySet();
 		String[] array=new String[set.size()];

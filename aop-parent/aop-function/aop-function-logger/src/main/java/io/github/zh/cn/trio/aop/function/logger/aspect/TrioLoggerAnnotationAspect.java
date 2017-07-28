@@ -30,7 +30,7 @@ public class TrioLoggerAnnotationAspect extends AbstractTrioLoggerAspect {
 		LoggerFace loggerFace = BeanUtils.getBean(getApplicationContext(), trioLogger.loggerFace(), LoggerFace.class,
 				getDefaultLoggerFace());
 		AopStrategy aopStrategy = BeanUtils.getBean(getApplicationContext(), trioLogger.aopStrategy(),
-				AopStrategy.class, getDefaultLoggerStrategy());
+				AopStrategy.class, getDefaultLoggerAopStrategy());
 
 		String targetName = getTargetName(loggerBeanContext, trioLogger.targetName());
 		String modelString = getModelString(trioLogger.modelString());
