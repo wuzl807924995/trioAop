@@ -10,7 +10,7 @@
 
 	<groupId>io.github.zh-cn-trio</groupId>
 	<artifactId>aop-parent</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 
@@ -95,6 +95,7 @@
 			<version>${jedis.version}</version>
 			<optional>true</optional>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -115,5 +116,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

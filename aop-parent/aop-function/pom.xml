@@ -3,7 +3,7 @@
   <parent>
     <groupId>io.github.zh-cn-trio</groupId>
     <artifactId>aop-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>aop-function</artifactId>
   <packaging>pom</packaging>
@@ -11,6 +11,7 @@
   	<module>aop-function-cache</module>
   	<module>aop-function-logger</module>
   	<module>aop-function-validation</module>
+  	<module>aop-function-dynamic</module>
   </modules>
     <dependencies>
 		<dependency>

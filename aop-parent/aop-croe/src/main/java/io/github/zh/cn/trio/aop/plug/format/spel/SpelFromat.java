@@ -5,11 +5,9 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.stereotype.Component;
 
 import io.github.zh.cn.trio.aop.plug.format.Format;
 
-@Component
 public class SpelFromat implements Format {
 
 	public Expression createExpression(String expressionString) {

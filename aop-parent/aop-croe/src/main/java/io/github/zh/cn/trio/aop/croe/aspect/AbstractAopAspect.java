@@ -68,7 +68,14 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 			if (hasRs(aopUtilContext)) {// 如果结果已经设置了，则直接读取结果
 				rs = aopUtilContext.getResultObject();
 			} else {// 没有结果则执行目标方法
-				rs = proceedingJoinPoint.proceed(aopUtilContext.getTargetArgs());
+				Object[] args;
+				//context 初始化可能会失败返回null
+				if (aopUtilContext==null) {
+					args=proceedingJoinPoint.getArgs();
+				}else {
+					args=aopUtilContext.getTargetArgs();
+				}
+				rs = proceedingJoinPoint.proceed(args);
 				aopUtilContext.setResultObject(rs);
 			}
 
@@ -129,8 +136,13 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 	 * @return 上下文
 	 */
 	public T createContext(ProceedingJoinPoint proceedingJoinPoint) {
-		MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
-		return initContext(methodInvocationProceedingJoinPoint);
+		try {
+			MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
+			return initContext(methodInvocationProceedingJoinPoint);
+		} catch (Exception e) {
+			logger.error("create contet has a exception",e);
+			return null;
+		}
 	}
 	
 	public abstract T initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint);
