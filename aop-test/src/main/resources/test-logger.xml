@@ -50,7 +50,7 @@
  
  	<bean id="slf4jLoggerFaceImpl" class="io.github.zh.cn.trio.aop.function.logger.face.slf4j.Slf4jLoggerFaceImpl"></bean>
  
-	<!-- <bean id="loggerStrategy" class="io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy"></bean> -->
+	 <bean id="defaultLoggerStrategy" class="io.github.zh.cn.trio.aop.function.logger.strategy.LoggerStrategy"></bean> 
 	<bean id="asynLoggerStrategy"
 		class="io.github.zh.cn.trio.aop.function.logger.strategy.asyn.AsynLoggerStrategy"></bean>
 
