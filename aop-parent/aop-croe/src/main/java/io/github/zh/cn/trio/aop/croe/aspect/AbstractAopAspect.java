@@ -63,7 +63,11 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 		try {
 			aopUtilContext = createContext(proceedingJoinPoint);// 初始化配置
 			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_BEFORE);// 前置通知
-
+			
+			//前置时间
+			if (aopUtilContext!=null) {
+				aopUtilContext.setAroundTimeStarat(System.currentTimeMillis());
+			}
 			Object rs = null;
 			if (hasRs(aopUtilContext)) {// 如果结果已经设置了，则直接读取结果
 				rs = aopUtilContext.getResultObject();
@@ -78,7 +82,12 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 				rs = proceedingJoinPoint.proceed(args);
 				aopUtilContext.setResultObject(rs);
 			}
-
+			
+			//后置时间
+			if (aopUtilContext!=null) {
+				aopUtilContext.setAroundTimeEnd(System.currentTimeMillis());
+			}
+			
 			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_AFTER);// 后置通知
 
 			return aopUtilContext.getResultObject();
@@ -97,6 +106,7 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 		}
 	}
 
+	
 	/**
 	 * 拦截目标的结果值是否已经设置过
 	 * 
