@@ -11,7 +11,7 @@ public class FormatBean {
 	private Object[] targetArgs;
 
 	private ApplicationContext applicationContext;
-	private Object[] extension;
+	private Object extension;
 
 	public Object getTarget() {
 		return target;
@@ -37,11 +37,11 @@ public class FormatBean {
 		this.targetArgs = targetArgs;
 	}
 
-	public Object[] getExtension() {
+	public Object getExtension() {
 		return extension;
 	}
 
-	public void setExtension(Object[] extension) {
+	public void setExtension(Object extension) {
 		this.extension = extension;
 	}
 
