@@ -45,13 +45,17 @@
 			<artifactId>aop-function-validation</artifactId>
 			<version>${test.validation.version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>4.1.6.RELEASE</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>com.17jee</groupId> <artifactId>e-core</artifactId> 
+			<version>3.0.1.10</version> </dependency> -->
+
 	</dependencies>
 
 
