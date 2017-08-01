@@ -1,0 +1,1 @@
+mvn clean deploy -Pwuzl_maven -X

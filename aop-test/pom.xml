@@ -16,9 +16,9 @@
 		<gson.json.version>2.8.0</gson.json.version>
 		<jedis.version>2.9.0</jedis.version>
 
-		<test.cache.version>1.0.2-SNAPSHOT</test.cache.version>
-		<test.logger.version>1.0.2-SNAPSHOT</test.logger.version>
-		<test.validation.version>1.0.2-SNAPSHOT</test.validation.version>
+		<test.cache.version>1.0.3-SNAPSHOT</test.cache.version>
+		<test.logger.version>1.0.3-SNAPSHOT</test.logger.version>
+		<test.validation.version>1.0.3-SNAPSHOT</test.validation.version>
 	</properties>
 
 	<dependencies>
@@ -45,13 +45,17 @@
 			<artifactId>aop-function-validation</artifactId>
 			<version>${test.validation.version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>4.1.6.RELEASE</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>com.17jee</groupId> <artifactId>e-core</artifactId> 
+			<version>3.0.1.10</version> </dependency> -->
+
 	</dependencies>
 
 

@@ -1,0 +1,1 @@
+mvn clean deploy -Psonatype-oss-release -X
