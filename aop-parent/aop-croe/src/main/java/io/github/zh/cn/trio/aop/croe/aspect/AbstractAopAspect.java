@@ -62,36 +62,28 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 		AopUtilContext aopUtilContext = null;// 初始化配置
 		try {
 			aopUtilContext = createContext(proceedingJoinPoint);// 初始化配置
-			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_BEFORE);// 前置通知
-			
-			//前置时间
-			if (aopUtilContext!=null) {
-				aopUtilContext.setAroundTimeStarat(System.currentTimeMillis());
+			if (aopUtilContext == null) {
+				// 上下文初始化失败 直接不拦截执行
+				return proceedingJoinPoint.proceed();
 			}
+			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_BEFORE);// 前置通知
+
+			// 前置时间
+			aopUtilContext.setAroundTimeStarat(System.currentTimeMillis()); 
 			Object rs = null;
 			if (hasRs(aopUtilContext)) {// 如果结果已经设置了，则直接读取结果
 				rs = aopUtilContext.getResultObject();
 			} else {// 没有结果则执行目标方法
-				Object[] args;
-				//context 初始化可能会失败返回null
-				if (aopUtilContext==null) {
-					args=proceedingJoinPoint.getArgs();
-				}else {
-					args=aopUtilContext.getTargetArgs();
-				}
+				Object[] args = aopUtilContext.getTargetArgs();
 				rs = proceedingJoinPoint.proceed(args);
 				aopUtilContext.setResultObject(rs);
 			}
-			
-			//后置时间
-			if (aopUtilContext!=null) {
-				aopUtilContext.setAroundTimeEnd(System.currentTimeMillis());
-			}
-			
+			// 后置时间
+			aopUtilContext.setAroundTimeEnd(System.currentTimeMillis());
+
 			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_AFTER);// 后置通知
 
 			return aopUtilContext.getResultObject();
-
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			try {
@@ -106,7 +98,6 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 		}
 	}
 
-	
 	/**
 	 * 拦截目标的结果值是否已经设置过
 	 * 
@@ -150,11 +141,11 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 			MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
 			return initContext(methodInvocationProceedingJoinPoint);
 		} catch (Exception e) {
-			logger.error("create contet has a exception",e);
+			logger.error("create contet has a exception", e);
 			return null;
 		}
 	}
-	
+
 	public abstract T initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint);
 
 }
