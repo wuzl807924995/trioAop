@@ -137,6 +137,9 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 	 * @return 上下文
 	 */
 	public T createContext(ProceedingJoinPoint proceedingJoinPoint) {
+		if (this.getApplicationContext()==null) {
+			return null;
+		}
 		try {
 			MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
 			return initContext(methodInvocationProceedingJoinPoint);
