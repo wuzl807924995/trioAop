@@ -1,0 +1,1 @@
+mvn clean deploy -Pjh_maven -X
