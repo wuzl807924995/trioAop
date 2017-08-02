@@ -97,6 +97,9 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 			try {
 				if (aopUtilContext != null) {
 					aopUtilContext.setThrowable(e);
+					if (aopUtilContext.getAroundTimeEnd()==0l) {
+						aopUtilContext.setAroundTimeEnd(System.currentTimeMillis());
+					}
 					warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_ERROR);// 异常通知
 				}
 			} catch (Exception e2) {
