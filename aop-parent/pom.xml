@@ -214,6 +214,31 @@
 				</repository>
 			</repositories>
 		</profile>
+		
+		
+		<profile>
+			<id>jh_maven</id>
+			<distributionManagement>
+				<repository>
+					<id>jh_maven</id>
+					<url>http://192.168.1.212:8081/nexus/content/repositories/releases/</url>
+				</repository>
+				<snapshotRepository>
+					<id>jh_maven</id>
+					<url>http://192.168.1.212:8081/nexus/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+
+			<repositories>
+				<repository>
+					<id>jh_maven</id>
+					<url>http://192.168.1.212:8081/nexus/content/groups/public/</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
 	</profiles>
 
 </project>
