@@ -3,21 +3,21 @@ package io.github.zh.cn.trio.aop.croe.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 
-import io.github.zh.cn.trio.aop.croe.context.AopUtilContext;
-import io.github.zh.cn.trio.aop.croe.strategy.AopStrategy;
+import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
+import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
+import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 
 /**
  * 抽象拦截aop接口
  *
  * 配置子类
  */
-public abstract class AbstractAopAspect<T extends AopUtilContext> implements ApplicationContextAware, Ordered {
+public abstract class AbstractAopAspect implements ApplicationContextAware, Ordered {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -59,54 +59,46 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 	 *             目标方法异常
 	 */
 	public final Object proxy(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		AopUtilContext aopUtilContext = null;// 初始化配置
+		RunTimeContext runTimeContext = null;
+		RunTimeConfig runTimeConfig = null;
+		// init
 		try {
-			aopUtilContext = createContext(proceedingJoinPoint);// 初始化配置
-			if (aopUtilContext == null) {
-				// 上下文初始化失败 直接不拦截执行
+			runTimeContext = initContext(proceedingJoinPoint);
+			runTimeConfig = initConfig(runTimeContext);
+		} catch (Exception e) {
+			logger.error("init context and config has a error ", e);
+			runTimeContext = null;
+			runTimeConfig = null;
+		}
+		
+		// doing 
+		try {
+			//check
+			if (runTimeContext == null || runTimeConfig == null) {
 				return proceedingJoinPoint.proceed();
 			}
-			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_BEFORE);// 前置通知
+			warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_BEFORE);
+			
+			// check result set
+			if (runTimeContext.isSetResult()) {
+				return runTimeContext.getResultObject();
+			} else {
+				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_STARAT);
+				Object rs = proceedingJoinPoint.proceed(runTimeContext.getTargetArgs());//invoke method
+				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_END);
 
-			// 前置时间
-			aopUtilContext.setAroundTimeStarat(System.currentTimeMillis()); 
-			Object rs = null;
-			if (hasRs(aopUtilContext)) {// 如果结果已经设置了，则直接读取结果
-				rs = aopUtilContext.getResultObject();
-			} else {// 没有结果则执行目标方法
-				Object[] args = aopUtilContext.getTargetArgs();
-				rs = proceedingJoinPoint.proceed(args);
-				aopUtilContext.setResultObject(rs);
+				runTimeContext.setResultObject(rs);
+				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AFTER);
+
+				return runTimeContext.getResultObject();
 			}
-			// 后置时间
-			aopUtilContext.setAroundTimeEnd(System.currentTimeMillis());
-
-			warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_AFTER);// 后置通知
-
-			return aopUtilContext.getResultObject();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			try {
-				if (aopUtilContext != null) {
-					aopUtilContext.setThrowable(e);
-					warpErrorOperAop(aopUtilContext, AopUtilContext.TIME_ERROR);// 异常通知
-				}
-			} catch (Exception e2) {
-				logger.error("aop around erorr has error", e2);
+		} catch (Throwable e) {
+			if (runTimeContext != null && runTimeConfig != null) {
+				runTimeContext.setThrowable(e);
+				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_BEFORE);
 			}
 			throw e;
 		}
-	}
-
-	/**
-	 * 拦截目标的结果值是否已经设置过
-	 * 
-	 * @param aopUtilContext
-	 *            配置上下文
-	 * @return 是否已经设置过返回值
-	 */
-	protected boolean hasRs(AopUtilContext aopUtilContext) {
-		return aopUtilContext != null && aopUtilContext.isSetResult();
 	}
 
 	/**
@@ -117,38 +109,22 @@ public abstract class AbstractAopAspect<T extends AopUtilContext> implements App
 	 * @param targetTime
 	 *            触发时间
 	 */
-	public void warpErrorOperAop(AopUtilContext aopUtilContext, String targetTime) {
+	public void warpErrorOperAop(RunTimeContext runTimeContext, RunTimeConfig runTimeConfig, String targetTime) {
 		try {
-			boolean enable = aopUtilContext.checkEnable(targetTime);
+			boolean enable = runTimeConfig.checkEnable(targetTime);
 			if (enable) {
-				AopStrategy aopStrategy = aopUtilContext.getAopStrategy();
-				aopStrategy.operAop(aopUtilContext, targetTime);
+				RunTimeAdapter runTimeAdapter = runTimeConfig.getRunTimeAdapter();
+				runTimeAdapter.operAop(runTimeContext, runTimeConfig, targetTime);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 	}
 
-	/**
-	 * 创建配置
-	 * 
-	 * @param proceedingJoinPoint
-	 *            切面
-	 * @return 上下文
-	 */
-	public T createContext(ProceedingJoinPoint proceedingJoinPoint) {
-		if (this.getApplicationContext()==null) {
-			return null;
-		}
-		try {
-			MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
-			return initContext(methodInvocationProceedingJoinPoint);
-		} catch (Exception e) {
-			logger.error("create contet has a exception", e);
-			return null;
-		}
+	public abstract <T extends RunTimeConfig> T initConfig(RunTimeContext runTimeContext);
+
+	public RunTimeContext initContext(ProceedingJoinPoint proceedingJoinPoint) {
+		RunTimeContext runTimeContext = new RunTimeContext(proceedingJoinPoint, this.getApplicationContext());
+		return runTimeContext;
 	}
-
-	public abstract T initContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint);
-
 }

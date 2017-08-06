@@ -53,8 +53,11 @@
 			<version>4.1.6.RELEASE</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>com.17jee</groupId> <artifactId>e-core</artifactId> 
-			<version>3.0.1.10</version> </dependency> -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 
 	</dependencies>
 
