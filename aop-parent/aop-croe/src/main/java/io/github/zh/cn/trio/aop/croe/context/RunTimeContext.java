@@ -1,5 +1,6 @@
 package io.github.zh.cn.trio.aop.croe.context;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,9 +9,9 @@ import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.context.ApplicationContext;
 
 public class RunTimeContext {
-	
+
 	private ApplicationContext applicationContext;
-	
+
 	/**
 	 * aop切面
 	 */
@@ -66,7 +67,7 @@ public class RunTimeContext {
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
-	
+
 	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
@@ -172,22 +173,26 @@ public class RunTimeContext {
 	public boolean isSetResult() {
 		return setResult;
 	}
-	
+
 	public RunTimeContext() {
 	}
 
 	public RunTimeContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint) {
 		this.methodInvocationProceedingJoinPoint = methodInvocationProceedingJoinPoint;
 	}
-	
+
 	public RunTimeContext(ProceedingJoinPoint proceedingJoinPoint) {
 		MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
-		this.methodInvocationProceedingJoinPoint=methodInvocationProceedingJoinPoint;
+		this.methodInvocationProceedingJoinPoint = methodInvocationProceedingJoinPoint;
 	}
-	
-	public  RunTimeContext(ProceedingJoinPoint proceedingJoinPoint,ApplicationContext applicationContext){
+
+	public RunTimeContext(ProceedingJoinPoint proceedingJoinPoint, ApplicationContext applicationContext) {
 		this(proceedingJoinPoint);
 		this.setApplicationContext(applicationContext);
+	}
+
+	public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
+		return getTargetMethod().getAnnotation(annotationClass);
 	}
 
 }

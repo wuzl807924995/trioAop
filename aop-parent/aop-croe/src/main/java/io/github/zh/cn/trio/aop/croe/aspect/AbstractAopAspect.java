@@ -70,21 +70,21 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 			runTimeContext = null;
 			runTimeConfig = null;
 		}
-		
-		// doing 
+
+		// doing
 		try {
-			//check
+			// check
 			if (runTimeContext == null || runTimeConfig == null) {
 				return proceedingJoinPoint.proceed();
 			}
 			warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_BEFORE);
-			
+
 			// check result set
 			if (runTimeContext.isSetResult()) {
 				return runTimeContext.getResultObject();
 			} else {
 				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_STARAT);
-				Object rs = proceedingJoinPoint.proceed(runTimeContext.getTargetArgs());//invoke method
+				Object rs = proceedingJoinPoint.proceed(runTimeContext.getTargetArgs());// invoke method
 				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_END);
 
 				runTimeContext.setResultObject(rs);
@@ -114,14 +114,14 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 			boolean enable = runTimeConfig.checkEnable(targetTime);
 			if (enable) {
 				RunTimeAdapter runTimeAdapter = runTimeConfig.getRunTimeAdapter();
-				runTimeAdapter.operAop(runTimeContext, runTimeConfig, targetTime);
+				runTimeAdapter.toAdapter(runTimeContext, runTimeConfig, targetTime);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 	}
 
-	public abstract <T extends RunTimeConfig> T initConfig(RunTimeContext runTimeContext);
+	public abstract RunTimeConfig initConfig(RunTimeContext runTimeContext);
 
 	public RunTimeContext initContext(ProceedingJoinPoint proceedingJoinPoint) {
 		RunTimeContext runTimeContext = new RunTimeContext(proceedingJoinPoint, this.getApplicationContext());
