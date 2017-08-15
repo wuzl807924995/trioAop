@@ -17,7 +17,10 @@
 
 
 
-	<bean class="io.github.zh.cn.trio.aop.plug.serialization.gson.GsonSerializationImpl"></bean>
-	<bean class="io.github.zh.cn.trio.aop.plug.format.spel.MapCacheSpelFromat" ></bean>
+	<bean
+		class="io.github.zh.cn.trio.aop.plug.serialization.gson.GsonSerializationImpl" />
+	<bean class="io.github.zh.cn.trio.aop.plug.format.spel.MapCacheSpelFromat" />
+
+	<bean id="face" class="test.demo.face.impl.FaceImpl" />
 
 </beans>

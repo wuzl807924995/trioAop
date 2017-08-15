@@ -1,5 +1,6 @@
 package io.github.zh.cn.trio.aop.function.logger.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
@@ -22,4 +23,13 @@ public class LoggerConfig extends RunTimeConfig {
 		this.loggerList = loggerList;
 	}
 
+	
+	public void addOne(LoggerOne loggerOne) {
+		if (loggerList==null) {
+			loggerList=new ArrayList<>();
+		}
+		loggerList.add(loggerOne);
+	}
+	
+	
 }

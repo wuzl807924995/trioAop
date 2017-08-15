@@ -6,7 +6,6 @@ public class LoggerOne {
 	private String level;
 	private String name;
 	private String info;
-	private Throwable e;
 
 	public String getTime() {
 		return time;
@@ -40,12 +39,14 @@ public class LoggerOne {
 		this.info = info;
 	}
 
-	public Throwable getE() {
-		return e;
+	public LoggerOne() {
 	}
 
-	public void setE(Throwable e) {
-		this.e = e;
+	public LoggerOne(String time, String level, String name, String info) {
+		this.time = time;
+		this.level = level;
+		this.name = name;
+		this.info = info;
 	}
 
 }

@@ -20,8 +20,8 @@ public class Sl4jLoggerImpl implements LoggerFace {
 		List<LoggerOne> list = loggerConfig.getLoggerList();
 		if (!CollectionUtils.isEmpty(list)) {
 			for (LoggerOne loggerOne : list) {
-				if (targetTime.equals(loggerOne.getLevel())) {
-					logger(loggerOne.getLevel(), loggerOne.getName(), loggerOne.getInfo(), loggerOne.getE());
+				if (targetTime.equals(loggerOne.getTime())) {
+					logger(loggerOne.getLevel(), loggerOne.getName(), loggerOne.getInfo(), runTimeContext.getThrowable());
 				}
 			}
 		}
