@@ -6,7 +6,10 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
+import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 import io.github.zh.cn.trio.aop.plug.format.Format;
+import io.github.zh.cn.trio.aop.plug.format.bean.FormatBean;
 
 public class SpelFromat implements Format {
 
@@ -31,6 +34,12 @@ public class SpelFromat implements Format {
 		// 解析
 		T value = (T) expression.getValue(context);
 		return value;
+	}
+
+	@Override
+	public <T> T format(RunTimeContext runTimeContext, RunTimeConfig runTimeConfig, String expressionString) {
+		FormatBean formatBean=new FormatBean(runTimeContext, runTimeConfig);
+		return format(formatBean, expressionString);
 	}
 
 }
