@@ -20,8 +20,7 @@ public class SpelFromat implements Format {
 	}
 
 	public EvaluationContext createContext(Object root) {
-		EvaluationContext context = new StandardEvaluationContext(root);
-		return context;
+		return new StandardEvaluationContext(root);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,13 +31,13 @@ public class SpelFromat implements Format {
 		// 构造上下文
 		EvaluationContext context = createContext(formatBean);
 		// 解析
-		T value = (T) expression.getValue(context);
-		return value;
+		return (T) expression.getValue(context);
 	}
 
 	@Override
-	public <T> T format(RunTimeContext runTimeContext, RunTimeConfig runTimeConfig, String expressionString) {
-		FormatBean formatBean=new FormatBean(runTimeContext, runTimeConfig);
+	public <T> T format(RunTimeContext runTimeContext,
+			RunTimeConfig runTimeConfig, String expressionString) {
+		FormatBean formatBean = new FormatBean(runTimeContext, runTimeConfig);
 		return format(formatBean, expressionString);
 	}
 

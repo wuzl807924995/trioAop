@@ -3,12 +3,12 @@ package io.github.zh.cn.trio.aop.function.cache.adapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
-import io.github.zh.cn.trio.aop.function.FunctionRuntimeAdapter;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
 
-public class CacheAdapter extends FunctionRuntimeAdapter {
+public class CacheAdapter implements RunTimeAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -18,10 +18,10 @@ public class CacheAdapter extends FunctionRuntimeAdapter {
 			CacheConfig cacheConfig = (CacheConfig) runTimeConfig;
 			switch (targetTime) {
 			case CacheConfig.TIME_BEFORE:
-				cacheConfig.getCacheModel().execBefore(runTimeContext, cacheConfig);
+				cacheConfig.getCacheFace().execBefore(runTimeContext, cacheConfig);
 				break;
 			case CacheConfig.TIME_AFTER:
-				cacheConfig.getCacheModel().execAfter(runTimeContext, cacheConfig);
+				cacheConfig.getCacheFace().execAfter(runTimeContext, cacheConfig);
 				break;
 			default:
 				logger.warn(targetTime + "is not in CacheConfig");

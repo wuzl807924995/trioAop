@@ -6,8 +6,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
 
 public abstract class BeanUtils {
+	
+	
 	private static Logger logger = LoggerFactory.getLogger(BeanUtils.class);
 
+	private BeanUtils(){
+		super();
+	}
+	
 	public static <U> U getBean(ApplicationContext applicationContext, String beanName, Class<U> tcls, U defaultBean) {
 		if (StringUtils.isEmpty(beanName)) {
 			return defaultBean;

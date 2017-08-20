@@ -8,6 +8,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * 运行上下文<br>
+ *	 主要是当期方法的 方法签名，参数，返回类型，等
+ */
 public class RunTimeContext {
 
 	private ApplicationContext applicationContext;
@@ -175,6 +179,7 @@ public class RunTimeContext {
 	}
 
 	public RunTimeContext() {
+		super();
 	}
 
 	public RunTimeContext(MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint) {
@@ -182,8 +187,7 @@ public class RunTimeContext {
 	}
 
 	public RunTimeContext(ProceedingJoinPoint proceedingJoinPoint) {
-		MethodInvocationProceedingJoinPoint methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
-		this.methodInvocationProceedingJoinPoint = methodInvocationProceedingJoinPoint;
+		this.methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
 	}
 
 	public RunTimeContext(ProceedingJoinPoint proceedingJoinPoint, ApplicationContext applicationContext) {

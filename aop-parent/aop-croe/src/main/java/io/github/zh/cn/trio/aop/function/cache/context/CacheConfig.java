@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.context;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
-import io.github.zh.cn.trio.aop.function.cache.model.CacheModel;
+import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
 
 public class CacheConfig extends RunTimeConfig{
 	/**
@@ -12,7 +12,7 @@ public class CacheConfig extends RunTimeConfig{
 	/**
 	 * @return 缓存模式
 	 */
-	private CacheModel cacheModel;
+	private CacheFace cacheFace;
 
 	/**
 	 * @return 缓存建 模板字符
@@ -27,14 +27,14 @@ public class CacheConfig extends RunTimeConfig{
 		this.cacheTime = cacheTime;
 	}
 
-	public CacheModel getCacheModel() {
-		return cacheModel;
+	public CacheFace getCacheFace() {
+		return cacheFace;
 	}
-
-	public void setCacheModel(CacheModel cacheModel) {
-		this.cacheModel = cacheModel;
+	
+	public void setCacheFace(CacheFace cacheFace) {
+		this.cacheFace = cacheFace;
 	}
-
+	
 	public String getKeyModelString() {
 		return keyModelString;
 	}

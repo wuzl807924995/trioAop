@@ -33,6 +33,7 @@ public class FormatBean {
 
 	
 	public FormatBean() {
+		super();
 	}
 
 	

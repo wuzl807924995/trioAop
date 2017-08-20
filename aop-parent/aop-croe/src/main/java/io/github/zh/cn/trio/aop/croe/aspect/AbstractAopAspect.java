@@ -15,7 +15,6 @@ import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 /**
  * 抽象拦截aop接口
  *
- * 配置子类
  */
 public abstract class AbstractAopAspect implements ApplicationContextAware, Ordered {
 
@@ -92,7 +91,7 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 
 				return runTimeContext.getResultObject();
 			}
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			if (runTimeContext != null && runTimeConfig != null) {
 				runTimeContext.setThrowable(e);
 				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_BEFORE);
@@ -114,16 +113,26 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 			boolean enable = runTimeConfig.checkEnable(targetTime);
 			if (enable) {
 				RunTimeAdapter runTimeAdapter = runTimeConfig.getRunTimeAdapter();
-				runTimeAdapter.toAdapter(runTimeContext, runTimeConfig, targetTime);
+				runTimeAdapter.adapterTo(runTimeContext, runTimeConfig, targetTime);
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 	}
 
+	/**
+	 * 
+	 * @param runTimeContext 上下文环境
+	 * @return 得到上下文配置
+	 */
 	public abstract RunTimeConfig initConfig(RunTimeContext runTimeContext);
 
-	public RunTimeContext initContext(ProceedingJoinPoint proceedingJoinPoint) {
+	/**
+	 * 
+	 * @param proceedingJoinPoint 拦截点
+	 * @return 得到上下文环境
+	 */
+	protected RunTimeContext initContext(ProceedingJoinPoint proceedingJoinPoint) {
 		RunTimeContext runTimeContext = new RunTimeContext(proceedingJoinPoint, this.getApplicationContext());
 		return runTimeContext;
 	}
