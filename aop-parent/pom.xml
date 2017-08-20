@@ -70,7 +70,7 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -111,6 +111,9 @@
 	<profiles>
 		<profile>
 			<id>sonatype-oss-release</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -209,8 +212,8 @@
 				</repository>
 			</repositories>
 		</profile>
-		
-		
+
+
 		<profile>
 			<id>jh_maven</id>
 			<distributionManagement>
