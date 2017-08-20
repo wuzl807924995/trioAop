@@ -3,8 +3,8 @@
   <parent>
     <groupId>io.github.zh-cn-trio</groupId>
     <artifactId>aop-parent</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
-  </parent>
+ 	<version>2.0.0</version>
+   </parent>
   <artifactId>aop-croe</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+ 
 </project>
