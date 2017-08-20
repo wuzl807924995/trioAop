@@ -5,7 +5,7 @@
 
 	<groupId>io.github.zh-cn-trio</groupId>
 	<artifactId>aop-parent</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>2.0.0</version>
 	<packaging>pom</packaging>
 
 
