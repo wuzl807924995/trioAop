@@ -1,25 +1,25 @@
-package io.github.zh.cn.trio.aop.function.cache.model;
+package io.github.zh.cn.trio.aop.function.cache.face;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
-import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
+import io.github.zh.cn.trio.aop.function.cache.face.decorate.CacheOperation;
 
-public abstract class AbstractCacheModel implements CacheModel {
+public abstract class AbstractCache implements CacheFace {
 
 	/**
 	 * 缓存实现接口
 	 */
 	@Autowired
-	private CacheFace cacheFace;
+	private CacheOperation cacheOperation;
 
-	public CacheFace getCacheFace() {
-		return cacheFace;
+	public CacheOperation getCacheFace() {
+		return cacheOperation;
 	}
 
-	public void setCacheFace(CacheFace cacheFace) {
-		this.cacheFace = cacheFace;
+	public void setCacheFace(CacheOperation cacheOperation) {
+		this.cacheOperation = cacheOperation;
 	}
 
 	@Override
@@ -39,15 +39,15 @@ public abstract class AbstractCacheModel implements CacheModel {
 	 *            上下文
 	 */
 	protected void getCacheResult(RunTimeContext runTimeContext,CacheConfig cacheConfig) {
-		boolean hasCache = cacheFace.hasCache(runTimeContext,cacheConfig);
+		boolean hasCache = cacheOperation.hasCache(runTimeContext,cacheConfig);
 		if (hasCache) {
-			runTimeContext.setResultObject(cacheFace.getCache(runTimeContext,cacheConfig));
+			runTimeContext.setResultObject(cacheOperation.getCache(runTimeContext,cacheConfig));
 		}
 	}
 
 	protected void setCacheResult(RunTimeContext runTimeContext,CacheConfig cacheConfig, boolean flush) {
-		if (flush || !cacheFace.hasCache(runTimeContext,cacheConfig)) {
-			cacheFace.setCache(runTimeContext,cacheConfig);
+		if (flush || !cacheOperation.hasCache(runTimeContext,cacheConfig)) {
+			cacheOperation.setCache(runTimeContext,cacheConfig);
 		}
 	}
 

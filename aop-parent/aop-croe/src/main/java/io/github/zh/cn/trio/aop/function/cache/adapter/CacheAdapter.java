@@ -18,10 +18,10 @@ public class CacheAdapter extends FunctionRuntimeAdapter {
 			CacheConfig cacheConfig = (CacheConfig) runTimeConfig;
 			switch (targetTime) {
 			case CacheConfig.TIME_BEFORE:
-				cacheConfig.getCacheModel().execBefore(runTimeContext, cacheConfig);
+				cacheConfig.getCacheFace().execBefore(runTimeContext, cacheConfig);
 				break;
 			case CacheConfig.TIME_AFTER:
-				cacheConfig.getCacheModel().execAfter(runTimeContext, cacheConfig);
+				cacheConfig.getCacheFace().execAfter(runTimeContext, cacheConfig);
 				break;
 			default:
 				logger.warn(targetTime + "is not in CacheConfig");
