@@ -4,6 +4,11 @@ import org.springframework.util.StringUtils;
 
 import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
 
+/**
+ *  上下文配置
+ *			<br>
+ *	主要是触发时间，运行适配器，其他自定义参数等
+ */
 public class RunTimeConfig {
 
 	/**

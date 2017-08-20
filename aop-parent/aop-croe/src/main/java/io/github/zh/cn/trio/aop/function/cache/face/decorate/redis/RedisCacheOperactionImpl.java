@@ -26,7 +26,8 @@ public class RedisCacheOperactionImpl implements CacheOperation {
 		return redisStringOperation;
 	}
 
-	public void setRedisStringOperation(RedisStringOperation redisStringOperation) {
+	public void setRedisStringOperation(
+			RedisStringOperation redisStringOperation) {
 		this.redisStringOperation = redisStringOperation;
 	}
 
@@ -47,36 +48,41 @@ public class RedisCacheOperactionImpl implements CacheOperation {
 	}
 
 	String getKey(RunTimeContext runTimeContext, CacheConfig cacheConfig) {
-		return		format.format(runTimeContext, cacheConfig, cacheConfig.getKeyModelString());
+		return format.format(runTimeContext, cacheConfig,
+				cacheConfig.getKeyModelString());
 	}
 
 	@Override
-	public boolean hasCache(RunTimeContext runTimeContext, CacheConfig cacheConfig) {
+	public boolean hasCache(RunTimeContext runTimeContext,
+			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
 		return redisStringOperation.exists(string);
 	}
 
 	@Override
-	public Object getCache(RunTimeContext runTimeContext, CacheConfig cacheConfig) {
+	public Object getCache(RunTimeContext runTimeContext,
+			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
 		String val = redisStringOperation.get(string);
-		Object object = serialization.forSerialization(val, runTimeContext.getReturnClass());
-		return object;
+		return serialization.forSerialization(val,
+				runTimeContext.getReturnClass());
 	}
 
 	@Override
-	public boolean setCache(RunTimeContext runTimeContext, CacheConfig cacheConfig) {
+	public boolean setCache(RunTimeContext runTimeContext,
+			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
-		String val = serialization.serialization(runTimeContext.getResultObject());
-		redisStringOperation.expireat(string, val, cacheConfig.getCacheTime());
-		return true;
+		String val = serialization.serialization(runTimeContext
+				.getResultObject());
+		return redisStringOperation.expireat(string, val,
+				cacheConfig.getCacheTime());
 	}
 
 	@Override
-	public boolean removeCache(RunTimeContext runTimeContext, CacheConfig cacheConfig) {
+	public boolean removeCache(RunTimeContext runTimeContext,
+			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
-		redisStringOperation.del(string);
-		return true;
+		return redisStringOperation.del(string);
 	}
 
 }

@@ -3,6 +3,10 @@ package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis2;
 import redis.clients.jedis.JedisPool;
 
 public abstract class PoolThreadLocal {
+	
+	private PoolThreadLocal(){
+		super();
+	}
 
 	private static final ThreadLocal<JedisPool> threadLocal = new ThreadLocal<>();
 

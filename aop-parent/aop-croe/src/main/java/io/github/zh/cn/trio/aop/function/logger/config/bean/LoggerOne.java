@@ -40,6 +40,7 @@ public class LoggerOne {
 	}
 
 	public LoggerOne() {
+		super();
 	}
 
 	public LoggerOne(String time, String level, String name, String info) {
