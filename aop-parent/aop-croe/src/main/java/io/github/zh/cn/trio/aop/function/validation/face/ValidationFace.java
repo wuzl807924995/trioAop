@@ -14,6 +14,7 @@ public interface ValidationFace {
 	 * 执行验证得到验证结果
 	 * @param context 环境
 	 * @param runTimeConfig 配置
+	 * @param <T> 任意类型
 	 * @return 验证结果
 	 */
 	<T> IReturnResult<T> validation(RunTimeContext context, RunTimeConfig runTimeConfig);

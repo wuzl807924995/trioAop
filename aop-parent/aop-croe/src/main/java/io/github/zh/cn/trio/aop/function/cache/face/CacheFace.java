@@ -35,17 +35,15 @@ public interface CacheFace {
 
 	/**
 	 * 前置执行
-	 * 
-	 *
-	 *            上下文
+	  * @param runTimeContext 上下文
+	 * @param cacheConfig 配置
 	 */
 	void execBefore(RunTimeContext runTimeContext,CacheConfig cacheConfig);
 
 	/**
 	 * 后置执行
-	 * 
-	 *
-	 *            上下文
+	 * @param runTimeContext 上下文
+	 * @param cacheConfig 配置
 	 */
 	void execAfter(RunTimeContext runTimeContext,CacheConfig cacheConfig);
 }

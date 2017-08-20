@@ -34,9 +34,8 @@ public abstract class AbstractCache implements CacheFace {
 
 	/**
 	 * 读缓存结果
-	 * 
-	 * @param cacheBeanContext
-	 *            上下文
+	 * @param runTimeContext 上下文
+	 * @param cacheConfig 配置
 	 */
 	protected void getCacheResult(RunTimeContext runTimeContext,CacheConfig cacheConfig) {
 		boolean hasCache = cacheOperation.hasCache(runTimeContext,cacheConfig);
@@ -44,7 +43,11 @@ public abstract class AbstractCache implements CacheFace {
 			runTimeContext.setResultObject(cacheOperation.getCache(runTimeContext,cacheConfig));
 		}
 	}
-
+	/**
+	 * 写入缓存结果
+	 * @param runTimeContext 上下文
+	 * @param cacheConfig 配置
+	 */
 	protected void setCacheResult(RunTimeContext runTimeContext,CacheConfig cacheConfig, boolean flush) {
 		if (flush || !cacheOperation.hasCache(runTimeContext,cacheConfig)) {
 			cacheOperation.setCache(runTimeContext,cacheConfig);

@@ -101,12 +101,10 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 	}
 
 	/**
-	 * 触发通知
-	 * 
-	 * @param aopUtilContext
-	 *            配置上下文
-	 * @param targetTime
-	 *            触发时间
+	 * 根据配置和上下文以及触发时间执行目标适配器
+	 * @param runTimeContext 上下文
+	 * @param runTimeConfig 配置
+	 * @param targetTime 触发时间
 	 */
 	public void warpErrorOperAop(RunTimeContext runTimeContext, RunTimeConfig runTimeConfig, String targetTime) {
 		try {
