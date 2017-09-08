@@ -17,8 +17,8 @@ public class TrioLoggerXmlAspect extends AbstractTrioLoggerAspect {
 	@Autowired
 	private TrioLoggerConfig trioLoggerConfig;
 	
-	private boolean init=false;
 
+	@Deprecated
 	public TrioLoggerConfig getTrioLoggerConfig() {
 		return trioLoggerConfig;
 	}
@@ -28,20 +28,27 @@ public class TrioLoggerXmlAspect extends AbstractTrioLoggerAspect {
 		
 	}
 	
+	public TrioLoggerConfig getTrioLoggerConfigCopy(){
+		TrioLoggerConfig trioLoggerConfig=new TrioLoggerConfig();
+		trioLoggerConfig.setLevelToNameMap(this.trioLoggerConfig.getLevelToNameMap());
+		trioLoggerConfig.setNameToModelMap(this.trioLoggerConfig.getNameToModelMap());
+		trioLoggerConfig.setTimeToLevelMap(this.trioLoggerConfig.getTimeToLevelMap());
+		return trioLoggerConfig;
+	}
+	
 	private void init(LoggerBeanContext loggerBeanContext) {
-		Collection<String> levels = getTrioLoggerConfig().getTimeToLevelMap().values();
-		Map<String, String> levelToNameMap = getTrioLoggerConfig().getLevelToNameMap();
+		Collection<String> levels =loggerBeanContext.getTrioLoggerConfig().getTimeToLevelMap().values();
+		Map<String, String> levelToNameMap = loggerBeanContext.getTrioLoggerConfig().getLevelToNameMap();
 		for (String level : levels) {
-			levelToNameMap.put(level, getTargetName(loggerBeanContext, levelToNameMap.get(level)));
+			levelToNameMap.put(level, getTargetName(loggerBeanContext,null));
 		}
-		getTrioLoggerConfig().setLevelToNameMap(levelToNameMap);
-		Map<String, String> nameToModelMap = getTrioLoggerConfig().getNameToModelMap();
+		loggerBeanContext.getTrioLoggerConfig().setLevelToNameMap(levelToNameMap);
+		Map<String, String> nameToModelMap = loggerBeanContext.getTrioLoggerConfig().getNameToModelMap();
 		Collection<String> targetNames = levelToNameMap.values();
 		for (String targetName : targetNames) {
 			nameToModelMap.put(targetName, getModelString(nameToModelMap.get(targetName)));
 		}
-		getTrioLoggerConfig().setNameToModelMap(nameToModelMap);
-		init=true;
+		loggerBeanContext.getTrioLoggerConfig().setNameToModelMap(nameToModelMap);
 	}
 	
 
@@ -53,14 +60,12 @@ public class TrioLoggerXmlAspect extends AbstractTrioLoggerAspect {
 
 		AopStrategy aopStrategy = getDefaultLoggerAopStrategy();
 		
-		if (!init) {
-			init(loggerBeanContext);
-		}
-		loggerBeanContext.setTrioLoggerConfig(getTrioLoggerConfig());
+		loggerBeanContext.setTrioLoggerConfig(getTrioLoggerConfigCopy());
+		init(loggerBeanContext);
 		loggerBeanContext.setLoggerFace(getDefaultLoggerFace());
 		loggerBeanContext.setAopStrategy(aopStrategy);
-		loggerBeanContext.setTargetTimes(getTrioLoggerConfig().getTargetTime());
-		loggerBeanContext.setTrioLoggerConfig(getTrioLoggerConfig());
+		loggerBeanContext.setTargetTimes(loggerBeanContext.getTrioLoggerConfig().getTargetTime());
+		loggerBeanContext.setTrioLoggerConfig(loggerBeanContext.getTrioLoggerConfig());
 		return loggerBeanContext;
 	}
 
