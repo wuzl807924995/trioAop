@@ -81,16 +81,15 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 			// check result set
 			if (runTimeContext.isSetResult()) {
 				return runTimeContext.getResultObject();
-			} else {
-				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_STARAT);
-				Object rs = proceedingJoinPoint.proceed(runTimeContext.getTargetArgs());// invoke method
-				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_END);
-
-				runTimeContext.setResultObject(rs);
-				warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AFTER);
-
-				return runTimeContext.getResultObject();
 			}
+			warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_STARAT);
+			Object rs = proceedingJoinPoint.proceed(runTimeContext.getTargetArgs());// invoke method
+			warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AROUND_END);
+
+			runTimeContext.setResultObject(rs);
+			warpErrorOperAop(runTimeContext, runTimeConfig, RunTimeConfig.TIME_AFTER);
+
+			return runTimeContext.getResultObject();
 		} catch (Exception e) {
 			if (runTimeContext != null && runTimeConfig != null) {
 				runTimeContext.setThrowable(e);

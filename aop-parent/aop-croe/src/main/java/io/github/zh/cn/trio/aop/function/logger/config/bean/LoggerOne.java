@@ -2,18 +2,9 @@ package io.github.zh.cn.trio.aop.function.logger.config.bean;
 
 public class LoggerOne {
 
-	private String time;
 	private String level;
 	private String name;
 	private String info;
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
 
 	public String getLevel() {
 		return level;
@@ -43,8 +34,7 @@ public class LoggerOne {
 		super();
 	}
 
-	public LoggerOne(String time, String level, String name, String info) {
-		this.time = time;
+	public LoggerOne(String level, String name, String info) {
 		this.level = level;
 		this.name = name;
 		this.info = info;

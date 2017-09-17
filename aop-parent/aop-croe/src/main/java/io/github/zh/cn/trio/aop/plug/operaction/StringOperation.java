@@ -1,11 +1,11 @@
-package io.github.zh.cn.trio.aop.plug.redis.operaction;
+package io.github.zh.cn.trio.aop.plug.operaction;
 
 /**
  * redis 操作
  * 
  *
  */
-public interface RedisStringOperation {
+public interface StringOperation {
 
 	/**
 	 * 

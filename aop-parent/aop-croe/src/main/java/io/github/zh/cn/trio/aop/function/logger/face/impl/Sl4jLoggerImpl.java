@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
@@ -12,7 +11,6 @@ import io.github.zh.cn.trio.aop.function.logger.config.LoggerConfig;
 import io.github.zh.cn.trio.aop.function.logger.config.bean.LoggerOne;
 import io.github.zh.cn.trio.aop.function.logger.face.LoggerFace;
 
-@Component
 public class Sl4jLoggerImpl implements LoggerFace {
 
 	@Override
@@ -20,9 +18,7 @@ public class Sl4jLoggerImpl implements LoggerFace {
 		List<LoggerOne> list = loggerConfig.getLoggerList();
 		if (!CollectionUtils.isEmpty(list)) {
 			for (LoggerOne loggerOne : list) {
-				if (targetTime.equals(loggerOne.getTime())) {
-					logger(loggerOne.getLevel(), loggerOne.getName(), loggerOne.getInfo(), runTimeContext.getThrowable());
-				}
+				logger(loggerOne.getLevel(), loggerOne.getName(), loggerOne.getInfo(), runTimeContext.getThrowable());
 			}
 		}
 	}

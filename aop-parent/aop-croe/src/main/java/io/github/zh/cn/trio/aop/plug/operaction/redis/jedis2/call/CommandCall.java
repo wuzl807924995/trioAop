@@ -1,4 +1,4 @@
-package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis2.call;
+package io.github.zh.cn.trio.aop.plug.operaction.redis.jedis2.call;
 
 import redis.clients.jedis.JedisPool;
 

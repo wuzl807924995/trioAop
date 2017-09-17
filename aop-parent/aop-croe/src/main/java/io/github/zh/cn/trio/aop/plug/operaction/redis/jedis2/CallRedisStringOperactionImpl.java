@@ -1,12 +1,12 @@
-package io.github.zh.cn.trio.aop.plug.redis.operaction.jedis2;
+package io.github.zh.cn.trio.aop.plug.operaction.redis.jedis2;
 
-import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
-import io.github.zh.cn.trio.aop.plug.redis.operaction.jedis2.call.AbstractCommandCall;
+import io.github.zh.cn.trio.aop.plug.operaction.StringOperation;
+import io.github.zh.cn.trio.aop.plug.operaction.redis.jedis2.call.AbstractCommandCall;
 import redis.clients.jedis.JedisCommands;
 import redis.clients.jedis.JedisPool;
 
 @SuppressWarnings("unchecked")
-public class CallRedisStringOperactionImpl implements RedisStringOperation {
+public class CallRedisStringOperactionImpl implements StringOperation {
 
 	@Override
 	public boolean exists(final String key) {

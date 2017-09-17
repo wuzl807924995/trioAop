@@ -1,34 +1,27 @@
-package io.github.zh.cn.trio.aop.function.cache.face.decorate.redis;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+package io.github.zh.cn.trio.aop.function.cache.face.decorate.impl;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
 import io.github.zh.cn.trio.aop.function.cache.face.decorate.CacheOperation;
 import io.github.zh.cn.trio.aop.plug.format.Format;
-import io.github.zh.cn.trio.aop.plug.redis.operaction.RedisStringOperation;
+import io.github.zh.cn.trio.aop.plug.operaction.StringOperation;
 import io.github.zh.cn.trio.aop.plug.serialization.Serialization;
 
-@Component
-public class RedisCacheOperactionImpl implements CacheOperation {
+public class CacheOperactionImpl implements CacheOperation {
 
-	@Autowired
-	private RedisStringOperation redisStringOperation;
+	private StringOperation stringOperation;
 
-	@Autowired
 	private Serialization serialization;
 
-	@Autowired
 	private Format format;
 
-	public RedisStringOperation getRedisStringOperation() {
-		return redisStringOperation;
+	public StringOperation getRedisStringOperation() {
+		return stringOperation;
 	}
 
 	public void setRedisStringOperation(
-			RedisStringOperation redisStringOperation) {
-		this.redisStringOperation = redisStringOperation;
+			StringOperation stringOperation) {
+		this.stringOperation = stringOperation;
 	}
 
 	public Serialization getSerialization() {
@@ -56,14 +49,14 @@ public class RedisCacheOperactionImpl implements CacheOperation {
 	public boolean hasCache(RunTimeContext runTimeContext,
 			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
-		return redisStringOperation.exists(string);
+		return stringOperation.exists(string);
 	}
 
 	@Override
 	public Object getCache(RunTimeContext runTimeContext,
 			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
-		String val = redisStringOperation.get(string);
+		String val = stringOperation.get(string);
 		return serialization.forSerialization(val,
 				runTimeContext.getReturnClass());
 	}
@@ -74,7 +67,7 @@ public class RedisCacheOperactionImpl implements CacheOperation {
 		String string = getKey(runTimeContext, cacheConfig);
 		String val = serialization.serialization(runTimeContext
 				.getResultObject());
-		return redisStringOperation.expireat(string, val,
+		return stringOperation.expireat(string, val,
 				cacheConfig.getCacheTime());
 	}
 
@@ -82,7 +75,7 @@ public class RedisCacheOperactionImpl implements CacheOperation {
 	public boolean removeCache(RunTimeContext runTimeContext,
 			CacheConfig cacheConfig) {
 		String string = getKey(runTimeContext, cacheConfig);
-		return redisStringOperation.del(string);
+		return stringOperation.del(string);
 	}
 
 }

@@ -50,6 +50,7 @@
 		<slf4j.version>1.7.6</slf4j.version>
 		<gson.json.version>2.8.0</gson.json.version>
 		<jedis.version>2.9.0</jedis.version>
+		<guava.version>20.0</guava.version>
 	</properties>
 
 	<dependencies>
@@ -90,6 +91,13 @@
 			<version>${jedis.version}</version>
 			<optional>true</optional>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>${guava.version}</version>
+		</dependency>
+		
 
 	</dependencies>
 
@@ -112,6 +120,20 @@
 		</plugins>
 	</build>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<profiles>
 		<profile>
