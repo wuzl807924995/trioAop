@@ -2,10 +2,13 @@ package io.github.zh.cn.trio.aop.function.enhance.aspect;
 
 import java.util.Map;
 
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 import io.github.zh.cn.trio.aop.croe.utils.SimpleNameUtils;
+import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
 import io.github.zh.cn.trio.aop.function.enhance.adapter.EnhanceAdapter;
 import io.github.zh.cn.trio.aop.function.enhance.annotation.TrioEnhanceResult;
 import io.github.zh.cn.trio.aop.function.enhance.config.EnhanceConfig;
@@ -15,6 +18,9 @@ import io.github.zh.cn.trio.aop.plug.format.Format;
 
 public class TrioEnhanceResultAnnotationAspect extends AbstractAopAspect{
 
+	private static final String[] TARGET_TIME = new String[] { CacheConfig.TIME_AFTER };
+
+	
 	private EnhanceAdapter enhanceAdapter;
 
 	private Format format;
@@ -61,6 +67,11 @@ public class TrioEnhanceResultAnnotationAspect extends AbstractAopAspect{
 	}
 	
 	
+	@Around("@annotation(io.github.zh.cn.trio.aop.function.enhance.annotation.TrioEnhanceResult)")
+	public Object proxyAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		return super.proxy(proceedingJoinPoint);
+	}
+	
 	@Override
 	public EnhanceConfig initConfig(RunTimeContext runTimeContext) {
 		TrioEnhanceResult trioEnhanceResult = runTimeContext.getAnnotation(TrioEnhanceResult.class);
@@ -76,6 +87,7 @@ public class TrioEnhanceResultAnnotationAspect extends AbstractAopAspect{
 		enhanceOne.setTarget(target);
 		
 		EnhanceConfig enhanceConfig=new EnhanceConfig();
+		enhanceConfig.setTargetTimes(TARGET_TIME);
 		enhanceConfig.setRunTimeAdapter(enhanceAdapter);
 		enhanceConfig.addOne(enhanceOne);
 		return enhanceConfig;

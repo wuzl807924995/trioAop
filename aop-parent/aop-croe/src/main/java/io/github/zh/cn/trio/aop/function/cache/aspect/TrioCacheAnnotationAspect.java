@@ -21,7 +21,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 
-	private static final String[] targetTime = new String[] { CacheConfig.TIME_BEFORE, CacheConfig.TIME_AFTER };
+	private static final String[] TARGET_TIME = new String[] { CacheConfig.TIME_BEFORE, CacheConfig.TIME_AFTER };
 
 	/**
 	 * 缓存规则适配器
@@ -91,7 +91,7 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 	public RunTimeConfig initConfig(RunTimeContext runTimeContext) {
 		TrioCache trioCache = runTimeContext.getAnnotation(TrioCache.class);
 		CacheConfig cacheConfig = new CacheConfig();
-		cacheConfig.setTargetTimes(targetTime);
+		cacheConfig.setTargetTimes(TARGET_TIME);
 		cacheConfig.setRunTimeAdapter(cacheAdapter);
 		cacheConfig
 				.setKeyModelString("".equals(trioCache.keyModelString()) ? keyModelString : trioCache.keyModelString());

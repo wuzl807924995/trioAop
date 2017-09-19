@@ -20,8 +20,17 @@ public class SimpleEnhanceFaceImpl implements EnhanceFace{
 		Object temp;
 		for (int i = 0; i < list.size(); i++) {
 			enhanceOne=list.get(i);
+			//执行增强结果
 			temp= enhanceOne.getEnhanceType().enhanceDecorate(enhanceOne);
-			enhanceOne.setEnhanceRs(temp);
+			if (enhanceOne.isMethodResult()) {
+				//是结果 写入到结果集
+				runTimeContext.setResultObject(temp);
+			}else {
+				//是参数 写入到参参数集
+				Object[] args = runTimeContext.getTargetArgs();
+				args[enhanceOne.getTargetIndex()]=temp;
+				runTimeContext.setTargetArgs(args);
+			}
 		}
 	}
 

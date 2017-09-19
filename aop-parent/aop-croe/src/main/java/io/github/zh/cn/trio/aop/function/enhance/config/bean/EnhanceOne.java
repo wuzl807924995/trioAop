@@ -28,10 +28,6 @@ public class EnhanceOne {
 	 */
 	private Object enhanceArgs;
 
-	/**
-	 * 增强结果
-	 */
-	private Object enhanceRs;
 
 	private EnhanceType enhanceType;
 
@@ -83,13 +79,6 @@ public class EnhanceOne {
 		this.enhanceArgs = enhanceArgs;
 	}
 
-	public Object getEnhanceRs() {
-		return enhanceRs;
-	}
-
-	public void setEnhanceRs(Object enhanceRs) {
-		this.enhanceRs = enhanceRs;
-	}
 
 	public EnhanceType getEnhanceType() {
 		return enhanceType;
