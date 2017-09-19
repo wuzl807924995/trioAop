@@ -1,7 +1,7 @@
 package io.github.zh.cn.trio.aop.function.validation.face;
 
-import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
+import io.github.zh.cn.trio.aop.function.validation.config.ValidationConfig;
 import io.github.zh.cn.trio.aop.function.validation.result.IReturnResult;
 
 public abstract class AbstractArgsRepleseValidation implements ValidationFace {
@@ -10,8 +10,8 @@ public abstract class AbstractArgsRepleseValidation implements ValidationFace {
 	 * 如果验证失败，并且验证返回信息和方法签名一直的话将会把验证结果替换第一个找的目标参数
 	 */
 	@Override
-	public void doValidation(RunTimeContext context, RunTimeConfig runTimeConfig) {
-		IReturnResult<?> iReturnResult = validation(context, runTimeConfig);
+	public void doValidation(RunTimeContext context,  ValidationConfig validationConfig) {
+		IReturnResult<?> iReturnResult = validation(context, validationConfig);
 		if (!iReturnResult.isSuccess()) {
 			Class<?> cls = getErrorClass();
 			Object[] args = context.getTargetArgs();

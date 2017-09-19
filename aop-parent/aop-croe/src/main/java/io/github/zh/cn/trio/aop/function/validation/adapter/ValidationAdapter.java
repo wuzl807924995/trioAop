@@ -3,6 +3,7 @@ package io.github.zh.cn.trio.aop.function.validation.adapter;
 import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
+import io.github.zh.cn.trio.aop.function.validation.config.ValidationConfig;
 import io.github.zh.cn.trio.aop.function.validation.face.ValidationFace;
 
 public class ValidationAdapter implements RunTimeAdapter{
@@ -19,7 +20,10 @@ public class ValidationAdapter implements RunTimeAdapter{
 
 	@Override
 	public void adapterTo(RunTimeContext runTimeContext, RunTimeConfig runTimeConfig, String targetTime) {
-		validationFace.doValidation(runTimeContext, runTimeConfig);
+		if (runTimeConfig instanceof ValidationConfig) {
+			ValidationConfig validationConfig = (ValidationConfig) runTimeConfig;
+		validationFace.doValidation(runTimeContext, validationConfig);
+		}	
 	}
 
 }
