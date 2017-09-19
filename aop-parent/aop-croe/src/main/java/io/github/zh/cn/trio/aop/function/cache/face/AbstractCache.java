@@ -1,7 +1,5 @@
 package io.github.zh.cn.trio.aop.function.cache.face;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
 import io.github.zh.cn.trio.aop.function.cache.face.decorate.CacheOperation;
@@ -11,7 +9,6 @@ public abstract class AbstractCache implements CacheFace {
 	/**
 	 * 缓存实现接口
 	 */
-	@Autowired
 	private CacheOperation cacheOperation;
 
 	public CacheOperation getCacheFace() {
