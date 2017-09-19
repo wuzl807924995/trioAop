@@ -3,7 +3,6 @@ package io.github.zh.cn.trio.aop.plug.format.bean;
 import java.lang.reflect.Method;
 
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
-import org.springframework.context.ApplicationContext;
 
 import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
@@ -44,9 +43,6 @@ public class FormatBean {
 		this.runTimeConfig = runTimeConfig;
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return runTimeContext.getApplicationContext();
-	}
 
 	public Object getTarget() {
 		return runTimeContext.getTarget();

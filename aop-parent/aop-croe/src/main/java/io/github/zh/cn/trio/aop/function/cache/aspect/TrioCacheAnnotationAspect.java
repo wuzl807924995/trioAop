@@ -3,14 +3,12 @@ package io.github.zh.cn.trio.aop.function.cache.aspect;
 import io.github.zh.cn.trio.aop.croe.aspect.AbstractAopAspect;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeConfig;
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
+import io.github.zh.cn.trio.aop.croe.utils.SimpleNameUtils;
 import io.github.zh.cn.trio.aop.function.cache.adapter.CacheAdapter;
 import io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
-import io.github.zh.cn.trio.aop.function.cache.exception.ModelNotFindException;
 import io.github.zh.cn.trio.aop.function.cache.face.CacheFace;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -43,7 +41,8 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 	/**
 	 * 支持的缓存模式
 	 */
-	private Map<String, CacheFace> cacheModelMap;
+	
+	private SimpleNameUtils simpleNameUtils;
 
 	public CacheAdapter getCacheAdapter() {
 		return cacheAdapter;
@@ -70,8 +69,13 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 	}
 
 	
-	public TrioCacheAnnotationAspect() {
-		cacheModelMap=new HashMap<>();
+	
+	public SimpleNameUtils getSimpleNameUtils() {
+		return simpleNameUtils;
+	}
+	
+	public void setSimpleNameUtils(SimpleNameUtils simpleNameUtils) {
+		this.simpleNameUtils = simpleNameUtils;
 	}
 	
 	@Around("@annotation(io.github.zh.cn.trio.aop.function.cache.annotation.TrioCache)")
@@ -80,21 +84,7 @@ public class TrioCacheAnnotationAspect extends AbstractAopAspect {
 	}
 
 	protected CacheFace getAnnotationConfigCacheModel(String cacheModel) {
-		CacheFace model = cacheModelMap.get(cacheModel);
-		if (model!=null) {
-			return model;
-		}
-		Map<String, CacheFace> map = getApplicationContext().getBeansOfType(CacheFace.class);
-		for (String beanName : map.keySet()) {
-			model = getApplicationContext().getBean(beanName, CacheFace.class);
-			if (model.getModelName().equals(cacheModel)) {
-				cacheModelMap.put(cacheModel, model);
-			}
-		}
-		if (model==null) {
-			throw new ModelNotFindException(cacheModel + " is not find by cacheModel");
-		}
-		return model;
+		return simpleNameUtils.getSipleBeanWithException(CacheFace.class, cacheModel);
 	}
 
 	@Override

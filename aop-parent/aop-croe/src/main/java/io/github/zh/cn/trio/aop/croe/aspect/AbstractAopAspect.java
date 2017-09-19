@@ -3,9 +3,6 @@ package io.github.zh.cn.trio.aop.croe.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 
 import io.github.zh.cn.trio.aop.croe.adapter.RunTimeAdapter;
@@ -16,28 +13,16 @@ import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
  * 抽象拦截aop接口
  *
  */
-public abstract class AbstractAopAspect implements ApplicationContextAware, Ordered {
+public abstract class AbstractAopAspect implements  Ordered {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	/**
-	 * 容器
-	 */
-	protected ApplicationContext applicationContext;
 
 	/**
 	 * 拦截排序
 	 */
 	protected int order;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
-
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
 
 	@Override
 	public int getOrder() {
@@ -130,7 +115,7 @@ public abstract class AbstractAopAspect implements ApplicationContextAware, Orde
 	 * @return 得到上下文环境
 	 */
 	protected RunTimeContext initContext(ProceedingJoinPoint proceedingJoinPoint) {
-		RunTimeContext runTimeContext = new RunTimeContext(proceedingJoinPoint, this.getApplicationContext());
+		RunTimeContext runTimeContext = new RunTimeContext(proceedingJoinPoint);
 		return runTimeContext;
 	}
 }

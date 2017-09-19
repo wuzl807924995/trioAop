@@ -1,6 +1,7 @@
 package io.github.zh.cn.trio.aop.function.cache.face;
 
 import io.github.zh.cn.trio.aop.croe.context.RunTimeContext;
+import io.github.zh.cn.trio.aop.croe.utils.face.SimpleName;
 import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
 
 /**
@@ -9,7 +10,7 @@ import io.github.zh.cn.trio.aop.function.cache.context.CacheConfig;
  * @author wuzl
  *
  */
-public interface CacheFace {
+public interface CacheFace extends SimpleName{
 
 	/**
 	 * 只读 如果有缓存则读缓存 没有缓存则执行目标方法 但是不缓存本次结果
@@ -31,7 +32,6 @@ public interface CacheFace {
 	 */
 	public static final String REMOVE = "REMOVE";
 
-	public abstract String getModelName();
 
 	/**
 	 * 前置执行

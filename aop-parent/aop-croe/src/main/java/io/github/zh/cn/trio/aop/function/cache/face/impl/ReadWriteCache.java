@@ -7,7 +7,7 @@ import io.github.zh.cn.trio.aop.function.cache.face.AbstractCache;
 public class ReadWriteCache extends AbstractCache {
 
 	@Override
-	public String getModelName() {
+	public String getSimpleName() {
 		return READ_WRITE;
 	}
 

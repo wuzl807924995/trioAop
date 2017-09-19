@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
-import org.springframework.context.ApplicationContext;
 
 /**
  * 运行上下文<br>
@@ -14,7 +13,6 @@ import org.springframework.context.ApplicationContext;
  */
 public class RunTimeContext {
 
-	private ApplicationContext applicationContext;
 
 	/**
 	 * aop切面
@@ -68,13 +66,6 @@ public class RunTimeContext {
 	 */
 	private boolean setResult;
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
-	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
 
 	public Object getTarget() {
 		if (target == null) {
@@ -190,10 +181,6 @@ public class RunTimeContext {
 		this.methodInvocationProceedingJoinPoint = (MethodInvocationProceedingJoinPoint) proceedingJoinPoint;
 	}
 
-	public RunTimeContext(ProceedingJoinPoint proceedingJoinPoint, ApplicationContext applicationContext) {
-		this(proceedingJoinPoint);
-		this.setApplicationContext(applicationContext);
-	}
 
 	public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
 		return getTargetMethod().getAnnotation(annotationClass);
